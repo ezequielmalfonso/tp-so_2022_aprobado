@@ -7,13 +7,12 @@
 
 #include "main.h"
 
-int main(int argc, char** argv[]){
-	int kernel_fd;
+int main(){
 	cargarConfiguracion();
-	//generar_conexion(&kernel_fd, configuracion);
+
 
 
 
 	limpiarConfiguracion();
-    return 0;
+	return 0;
 }
