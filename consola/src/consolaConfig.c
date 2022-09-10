@@ -7,6 +7,10 @@
 
 #include "consolaConfig.h"
 
+t_config_consola * configuracion;
+t_config * fd_configuracion;
+t_log * logger;
+
 int configValida(t_config* fd_configuracion) {
 	return (config_has_property(fd_configuracion, "IP_KERNEL")
 		&& config_has_property(fd_configuracion, "PUERTO_KERNEL")

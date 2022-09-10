@@ -21,6 +21,12 @@
 
 typedef enum {
     DEBUG = 69,
+	SET,
+	ADD,
+	MOV_IN,
+	MOV_OUT,
+	IO,
+	EXIT
 } op_code;
 
 bool send_debug(int fd);

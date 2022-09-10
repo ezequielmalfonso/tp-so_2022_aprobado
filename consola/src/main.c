@@ -8,12 +8,11 @@
 #include "main.h"
 
 int main(int argc, char** argv[]){
-	int kernel_fd;
+	//int kernel_fd;
 	cargarConfiguracion();
 	//generar_conexion(&kernel_fd, configuracion);
 
 
 
-	limpiarConfiguracion();
-    return 0;
+	//limpiarConfiguracion();
 }

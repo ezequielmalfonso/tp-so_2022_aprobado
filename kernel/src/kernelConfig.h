@@ -29,9 +29,9 @@ typedef struct {
 	uint32_t QUANTUM_RR;
 } t_config_kernel;
 
-t_config_kernel * configuracion;
-t_config * fd_configuracion;
-t_log * logger;
+extern t_config_kernel * configuracion;
+extern t_config * fd_configuracion;
+extern t_log * logger;
 
 int cargarConfiguracion();
 

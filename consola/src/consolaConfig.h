@@ -21,9 +21,9 @@ typedef struct {
 	t_list* SEGMENTOS;
 } t_config_consola;
 
-t_config_consola * configuracion;
-t_config * fd_configuracion;
-t_log * logger;
+extern t_config_consola * configuracion;
+extern t_config * fd_configuracion;
+extern t_log * logger;
 
 int cargarConfiguracion();
 
