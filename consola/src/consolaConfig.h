@@ -27,4 +27,6 @@ extern t_log * logger;
 
 int cargarConfiguracion();
 
+
+
 #endif /* SRC_CONSOLACONFIG_H_ */
