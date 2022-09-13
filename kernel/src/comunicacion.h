@@ -1,7 +1,7 @@
 /*
  * comunicacion.h
  *
- *  Created on: Sep 6, 2022
+ *  Created on: Sep 12, 2022
  *      Author: utnso
  */
 
@@ -14,10 +14,12 @@
 #include <inttypes.h>
 #include <commons/log.h>
 #include <commons/config.h>
+#include "main.h"
 #include "protocolo.h"
 #include "socket.h"
-#include "consolaConfig.h"
+#include "kernelConfig.h"
 
-int generar_conexion(int* kernel_fd, t_config_consola* configuracion);
+//SERVIDOR
+int server_escuchar(char* server_name, int server_socket);
 
 #endif /* SRC_COMUNICACION_H_ */

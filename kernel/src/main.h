@@ -16,4 +16,6 @@
 #include "kernelConfig.h"
 //#include "comunicacion.h"
 
+extern int kernelServer;
+
 #endif /* SRC_MAIN_H_ */

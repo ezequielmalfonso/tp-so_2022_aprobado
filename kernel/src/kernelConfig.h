@@ -24,8 +24,8 @@ typedef struct {
 	uint32_t PUERTO_ESCUCHA;
 	char* ALGORITMO_PLANIFICACION;
 	uint32_t GRADO_MAX_MULTIPROGRAMACION;
-	t_list* DISPOSITIVOS_IO;
-	t_list* TIEMPOS_IO;
+	char** DISPOSITIVOS_IO;
+	char** TIEMPOS_IO;
 	uint32_t QUANTUM_RR;
 } t_config_kernel;
 

@@ -17,13 +17,14 @@ int configValida(t_config* fd_configuracion) {
 		&& config_has_property(fd_configuracion, "SEGMENTOS"));
 }
 
-int cargarConfiguracion() {
+int cargarConfiguracion(char* path) {
+	int i=0;
 	logger = log_create("LogConsola.log", "Consola", 1, LOG_LEVEL_INFO);
 	configuracion = malloc(sizeof(t_config_consola));
 
-	fd_configuracion = config_create("consola.conf");
+	fd_configuracion = config_create(path);
 	if (fd_configuracion == NULL) {
-		fd_configuracion = config_create("consola.conf");
+		fd_configuracion = config_create(path);
 	}
 
 	if (fd_configuracion == NULL || !configValida(fd_configuracion)) {
@@ -33,14 +34,19 @@ int cargarConfiguracion() {
 
 	configuracion->IP_KERNEL = config_get_string_value(fd_configuracion, "IP_KERNEL");
 	configuracion->PUERTO_KERNEL = config_get_int_value(fd_configuracion, "PUERTO_KERNEL");
-	configuracion->SEGMENTOS = config_get_array_value(fd_configuracion, "PUERTO_KERNEL");
+	configuracion->SEGMENTOS = config_get_array_value(fd_configuracion, "SEGMENTOS");
 
 
 	log_info(logger,
 		"\nIP_KERNEL: %s\n"
-		"PUERTO_KERNEL: %d\n",
+		"PUERTO_KERNEL: %d",
 		configuracion->IP_KERNEL,
 		configuracion->PUERTO_KERNEL); /*DESPUES HAY QUE ADAPTARLO PARA LOGGEAR LOS SEGMENTOS*/
+
+	while(configuracion->SEGMENTOS[i]!=NULL){
+		log_info(logger,"SEGMENTO: %s",configuracion->SEGMENTOS[i]);
+		i++;
+	}
 	return 0;
 }
 

@@ -18,7 +18,7 @@
 typedef struct {
 	char* IP_KERNEL;
 	uint32_t PUERTO_KERNEL;
-	t_list* SEGMENTOS;
+	char** SEGMENTOS;
 } t_config_consola;
 
 extern t_config_consola * configuracion;

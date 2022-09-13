@@ -8,7 +8,7 @@
 #include "comunicacion.h"
 
 int generar_conexion(int* kernel_fd, t_config_consola* configuracion) {
-    char* port_kernel = string_itoa(configuracion->PUERTO_KERNEL);
+    char* port_kernel = string_itoa(configuracion->PUERTO_KERNEL); //ACA TIRA CANT ACCESS MEMORY AT ADRESS, NO LO DEJA ENTRAR A CONFIGURACION
 
     *kernel_fd = crear_conexion(
             logger,

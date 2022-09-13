@@ -8,13 +8,15 @@
 #include "main.h"
 
 int main(int argc, char** argv){
-	//int kernel_fd;
-	//cargarConfiguracion();
-	//generar_conexion(&kernel_fd, configuracion);
-
 	// ESTO NO VA ES SOLO PARA PROBAR
-	argv[1] = "/home/utnso/tp-2022-2c-Grupo-54/consola/instrucciones.txt";
-	argv[2] = "/home/utnso/tp-2022-2c-Grupo-54/consola/consola.conf";
+	argv[1] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/instrucciones.txt";
+	argv[2] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/consola.conf";
+
+	int kernel_fd;
+	cargarConfiguracion(argv[2]);
+	generar_conexion(&kernel_fd, configuracion);
+
+
 	//printf("Path: %s \n", argv[2]);
 	// Parseo del archivo y armado de lista
 	t_list* listaInstrucciones = list_create();
@@ -22,18 +24,10 @@ int main(int argc, char** argv){
 	// argv[1] es el path de la primera posicion que recibe el main
 	parseo_instrucciones(argv[1],listaInstrucciones);
 
-	t_link_element* aux = listaInstrucciones->head;
+	send_debug(kernel_fd);
 
-	/*	printf("Verificamos la lista a enviar:\n");
-		while( aux!=NULL )
-		{
-			INSTRUCCION* aux2 = aux->data;
-			printf("Comando: %s | Par1: %s | Par2: %s \n\n", aux2->comando, aux2->parametro, aux2->parametro2 );
-			aux = aux->next;
-		}
-	 */
 
-	//limpiarConfiguracion();
+	limpiarConfiguracion();
 }
 
 
@@ -42,7 +36,7 @@ void parseo_instrucciones(char* path_instrucciones,t_list* listaInstrucciones){
 	int i=0;
 
 		FILE* pseudocode;
-		printf("Path: %s \n", path_instrucciones);
+		//printf("Path: %s \n", path_instrucciones);
 		//printf("Parametro a envia con LISTA: %d \n", atoi(argv[2]));
 
 		pseudocode = fopen(path_instrucciones,"r");   		  // ABRO MODO Lectura
