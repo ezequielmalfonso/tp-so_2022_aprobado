@@ -19,10 +19,10 @@ int main(int argc, char** argv){
 
 	//printf("Path: %s \n", argv[2]);
 	// Parseo del archivo y armado de lista
-	t_list* listaInstrucciones = list_create();
+	//t_list* listaInstrucciones = list_create();
 
 	// argv[1] es el path de la primera posicion que recibe el main
-	parseo_instrucciones(argv[1],listaInstrucciones);
+	//parseo_instrucciones(argv[1],listaInstrucciones);
 
 	send_debug(kernel_fd);
 

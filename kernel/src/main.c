@@ -11,7 +11,7 @@
 
 int main(){
 	cargarConfiguracion();
-	char* puerto = string_itoa(configuracion->PUERTO_ESCUCHA); //ACA TIRA CANT ACCESS MEMORY AT ADRESS, NO LO DEJA ENTRAR A CONFIGURACION
+	char* puerto = string_itoa(configuracion->PUERTO_ESCUCHA);
 
 
 

@@ -14,6 +14,7 @@
 #include <inttypes.h>
 #include <commons/log.h>
 #include <commons/config.h>
+#include <commons/string.h>
 #include "main.h"
 #include "protocolo.h"
 #include "socket.h"
