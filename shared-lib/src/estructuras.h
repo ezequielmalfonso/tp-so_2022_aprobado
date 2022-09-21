@@ -12,4 +12,4 @@ typedef struct instruccion{
 	char comando[10];
 	char parametro[10];
 	char parametro2[5];
-}INSTRUCCION;
+} INSTRUCCION;

@@ -17,7 +17,7 @@
 #include "socket.h"
 #include "protocolo.h"
 #include "consolaConfig.h"
-#include "estructuras.h"
+
 
 
 #define LONGITUD_MAXIMA_LINEA 30   // Para el archivo a leer

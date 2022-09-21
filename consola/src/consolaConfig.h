@@ -26,7 +26,7 @@ extern t_config * fd_configuracion;
 extern t_log * logger;
 
 int cargarConfiguracion();
-
+void limpiarConfiguracion();
 
 
 #endif /* SRC_CONSOLACONFIG_H_ */
