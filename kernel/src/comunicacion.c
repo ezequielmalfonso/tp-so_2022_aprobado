@@ -20,13 +20,14 @@ static void procesar_conexion(void* void_args) {
 
 	t_instrucciones* mensaje=malloc(sizeof(t_instrucciones));
 	mensaje=recibir_instrucciones(cliente_socket);
+	//printf("Segmento % \n", &mensaje->segmentos[0]);
 	log_info(logger, "La consola se desconecto de %s server", server_name);
 	//pcb=crear_pcb(mensaje);
 	//AGREGAR A COLA DE NEWS
 	//enviar_pcb(dispatch_fd, pcb);
 	//log_info(logger,"llegue");
 
-	liberar_conexion(cliente_socket);
+	//liberar_conexion(cliente_socket);
 
 	return;
 }

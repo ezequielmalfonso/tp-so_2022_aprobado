@@ -18,11 +18,11 @@ bool send_debug(int fd) {
 }
 
 //INSTRUCCIONES CONSOLA A KERNEL
-void enviar_instrucciones(int socket_fd, t_list* lista){
+void enviar_instrucciones(int socket_fd, t_list* lista, char* segmentos){
 
 	uint32_t size = calcular_instrucciones_buffer_size(lista);
 	uint32_t sizeBuffer=size+ sizeof(int);
-	void* stream = serializar_instrucciones_tam(size, lista);
+	void* stream = serializar_instrucciones_tam(size, lista, segmentos);
 	t_buffer* buffer=malloc(sizeBuffer);
 	buffer->size=size;
 	buffer->stream=stream;
@@ -33,6 +33,8 @@ void enviar_instrucciones(int socket_fd, t_list* lista){
 	memcpy(a_enviar + offset, &(buffer->size), sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 	memcpy(a_enviar + offset, buffer->stream, buffer->size);
+
+
 
 	send(socket_fd, a_enviar,buffer->size+sizeof(uint32_t) ,0);
 
@@ -58,7 +60,7 @@ t_instrucciones* recibir_instrucciones(int socket_fd)
 	return mensaje;
 }
 
-void* serializar_instrucciones_tam(uint32_t size, t_list* lista) {
+void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmentos) {
 
     INSTRUCCION* aux;
 
@@ -87,6 +89,9 @@ void* serializar_instrucciones_tam(uint32_t size, t_list* lista) {
 		offset += sizeof(aux->parametro2);
 		aux1 = aux1->next;
 	}
+
+   	memcpy(stream + offset, &segmentos, sizeof(int));
+
     free(aux);
     return stream;
 }
@@ -115,6 +120,8 @@ t_instrucciones* deserializar_instrucciones(t_buffer* buffer){
 	    list_add(mensaje->listaInstrucciones,aux);
 	    i++;
 	}
+
+	memcpy(&(mensaje->segmentos), stream, sizeof(char));
 
 	free(buffer);
 

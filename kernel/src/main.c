@@ -7,7 +7,6 @@
 
 #include "main.h"
 
-//t_config_kernel* configuracion;
 
 int main(){
 	cargarConfiguracion();

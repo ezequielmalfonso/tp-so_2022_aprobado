@@ -33,6 +33,7 @@ typedef enum {
 typedef struct{
 	int elementosLista;
 	t_list* listaInstrucciones;
+    char* segmentos[4];
 } t_instrucciones;
 
 typedef struct {
@@ -43,9 +44,9 @@ typedef struct {
 bool send_debug(int fd);
 
 //INSTRUCCIONES CONSOLA-KERNEL
-void* serializar_instrucciones_tam(uint32_t size, t_list* lista);
+void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmento);
 t_instrucciones* deserializar_instrucciones(t_buffer* buffer);
-void enviar_instrucciones(int socket_fd, t_list* lista);
+void enviar_instrucciones(int socket_fd, t_list* lista, char* segmentos);
 t_instrucciones* recibir_instrucciones(int socket_fd);
 uint32_t calcular_instrucciones_buffer_size(t_list* lista);
 
