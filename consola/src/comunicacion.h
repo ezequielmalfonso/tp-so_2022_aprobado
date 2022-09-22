@@ -13,7 +13,6 @@
 #include <pthread.h>
 #include <inttypes.h>
 #include <commons/log.h>
-#include <commons/string.h>
 #include <commons/config.h>
 #include "protocolo.h"
 #include "socket.h"

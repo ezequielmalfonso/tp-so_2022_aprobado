@@ -9,8 +9,8 @@
 
 int main(int argc, char** argv){
 	// ESTO NO VA ES SOLO PARA PROBAR
-	//argv[1] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/instrucciones.txt";
-	//argv[2] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/consola.conf";
+	argv[1] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/instrucciones.txt";
+	argv[2] = "/home/utnso/Desktop/TP 2do cuatri 2022/tp-2022-2c-Grupo-54/consola/consola.conf";
 
 	int kernel_fd;
 	cargarConfiguracion(argv[2]);

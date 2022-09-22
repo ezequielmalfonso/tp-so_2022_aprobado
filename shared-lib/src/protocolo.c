@@ -18,9 +18,9 @@ bool send_debug(int fd) {
 }
 
 //INSTRUCCIONES CONSOLA A KERNEL
-void enviar_instrucciones(int socket_fd, t_list* lista, char* segmentos){
+void enviar_instrucciones(int socket_fd, t_list* lista, char** segmentos){
 
-	uint32_t size = calcular_instrucciones_buffer_size(lista);
+	uint32_t size = calcular_instrucciones_buffer_size(lista,segmentos);
 	uint32_t sizeBuffer=size+ sizeof(int);
 	void* stream = serializar_instrucciones_tam(size, lista, segmentos);
 	t_buffer* buffer=malloc(sizeBuffer);
@@ -60,12 +60,14 @@ t_instrucciones* recibir_instrucciones(int socket_fd)
 	return mensaje;
 }
 
-void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmentos) {
+void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char** segmentos) {
 
     INSTRUCCION* aux;
 
     aux = list_get(lista,0);
     uint32_t elementosLista= list_size(lista);
+
+    uint32_t cantSegmentos= string_array_size(segmentos);
 
     uint32_t offset = 0;
     void* stream = malloc(size);
@@ -75,7 +77,7 @@ void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmentos
 
     t_link_element* aux1 = lista->head;
 
-   while( aux1!=NULL )
+    while( aux1!=NULL )
 	{
 		INSTRUCCION* auxl2 = aux1->data;
 		printf("Verificamos la lista:\n");
@@ -90,23 +92,33 @@ void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmentos
 		aux1 = aux1->next;
 	}
 
-   	memcpy(stream + offset, &segmentos, sizeof(int));
+    memcpy(stream + offset, &cantSegmentos, sizeof(uint32_t));
+    offset+= sizeof(uint32_t);
+
+    int i=0;
+    while(i<cantSegmentos){
+    	uint32_t tamSegmento=atoi(segmentos[i]);
+    	memcpy(stream + offset, &tamSegmento, sizeof(uint32_t));
+    	offset += sizeof(uint32_t);
+    	i++;
+    }
 
     free(aux);
     return stream;
 }
 
 t_instrucciones* deserializar_instrucciones(t_buffer* buffer){
-    int i=0;
+    int i=0, c=0;
 	t_instrucciones* mensaje=malloc(sizeof(t_instrucciones));
 
 
 	void* stream = buffer->stream;
 
-	memcpy(&(mensaje->elementosLista), stream, sizeof(int));
-	stream += sizeof(int);
+	memcpy(&(mensaje->elementosLista), stream, sizeof(uint32_t));
+	stream += sizeof(uint32_t);
 
 	mensaje->listaInstrucciones=list_create();
+	mensaje->listaTamSegmentos=list_create();
 	while(i!=mensaje->elementosLista)
 	{
 		INSTRUCCION* aux=malloc(sizeof(INSTRUCCION));
@@ -121,16 +133,28 @@ t_instrucciones* deserializar_instrucciones(t_buffer* buffer){
 	    i++;
 	}
 
-	memcpy(&(mensaje->segmentos), stream, sizeof(char));
+	memcpy(&(mensaje->cantSegmentos), stream, sizeof(uint32_t));
+    stream += sizeof(uint32_t);
+
+    while (c<mensaje->cantSegmentos)
+    {
+    	uint32_t aux=0;
+    	memcpy(&aux, stream, sizeof(uint32_t));
+    	stream += sizeof(uint32_t);
+
+    	list_add(mensaje->listaTamSegmentos,aux);
+    	c++;
+    }
 
 	free(buffer);
 
 	return mensaje;
 }
 
-uint32_t calcular_instrucciones_buffer_size(t_list* lista){
+uint32_t calcular_instrucciones_buffer_size(t_list* lista, char** segmentos){
 	uint32_t size=0;
 	int i=0;
+	uint32_t cantSegmentos= string_array_size(segmentos);
 	//t_list_iterator* listaIns = list_iterator_create(lista);
 	//INSTRUCCIONES* aux = list_get(lista, 0);
 
@@ -140,7 +164,7 @@ uint32_t calcular_instrucciones_buffer_size(t_list* lista){
 		//aux = list_iterator_next(listaIns);
 		//list_iterator_next(listaIns);
 	}
-	size += sizeof(uint32_t);
+	size += (cantSegmentos+2)*sizeof(uint32_t);
 	//free(listaIns);
 	//free(aux);
 	return size;

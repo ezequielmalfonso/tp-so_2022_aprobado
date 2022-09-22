@@ -17,6 +17,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <commons/collections/list.h>
+#include <commons/string.h>
 #include "estructuras.h"
 
 
@@ -31,9 +32,10 @@ typedef enum {
 } op_code;
 
 typedef struct{
-	int elementosLista;
+	uint32_t elementosLista;
 	t_list* listaInstrucciones;
-    char* segmentos[4];
+    uint32_t cantSegmentos;
+    t_list* listaTamSegmentos;
 } t_instrucciones;
 
 typedef struct {
@@ -44,10 +46,10 @@ typedef struct {
 bool send_debug(int fd);
 
 //INSTRUCCIONES CONSOLA-KERNEL
-void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char* segmento);
+void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char** segmento);
 t_instrucciones* deserializar_instrucciones(t_buffer* buffer);
-void enviar_instrucciones(int socket_fd, t_list* lista, char* segmentos);
+void enviar_instrucciones(int socket_fd, t_list* lista, char** segmentos);
 t_instrucciones* recibir_instrucciones(int socket_fd);
-uint32_t calcular_instrucciones_buffer_size(t_list* lista);
+uint32_t calcular_instrucciones_buffer_size(t_list* lista, char** segmentos);
 
 #endif /* SRC_PROTOCOLO_H_ */
