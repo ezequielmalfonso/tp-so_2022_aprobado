@@ -85,3 +85,95 @@ PUERTO_KERNEL: 8000
 [ERROR] 00:12:03:987 Consola/(8707:8707): Archivo de configuración inválido.
 [ERROR] 00:12:03:987 Consola/(8707:8707): Error al conectar (a KERNEL)
 
+[ERROR] 22:09:01:644 Consola/(4229:4229): Archivo de configuración inválido.
+[ERROR] 22:09:01:646 Consola/(4229:4229): Error al conectar (a KERNEL)
+
+[ERROR] 22:09:06:157 Consola/(4234:4234): Archivo de configuración inválido.
+[ERROR] 22:09:06:160 Consola/(4234:4234): Error al conectar (a KERNEL)
+
+[INFO] 22:10:16:164 Consola/(4287:4287): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:10:16:168 Consola/(4287:4287): SEGMENTO: 64
+[INFO] 22:10:16:168 Consola/(4287:4287): SEGMENTO: 256
+[INFO] 22:10:16:168 Consola/(4287:4287): SEGMENTO: 128
+[INFO] 22:10:16:168 Consola/(4287:4287): SEGMENTO: 32
+[INFO] 22:10:16:169 Consola/(4287:4287): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:10:16:171 Consola/(4287:4287): Se realizo el envio se desconecto del kernel
+[INFO] 22:10:45:644 Consola/(4295:4295): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:10:45:647 Consola/(4295:4295): SEGMENTO: 64
+[INFO] 22:10:45:647 Consola/(4295:4295): SEGMENTO: 256
+[INFO] 22:10:45:647 Consola/(4295:4295): SEGMENTO: 128
+[INFO] 22:10:45:647 Consola/(4295:4295): SEGMENTO: 32
+[INFO] 22:10:45:647 Consola/(4295:4295): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:10:45:649 Consola/(4295:4295): Se realizo el envio se desconecto del kernel
+[INFO] 22:11:37:973 Consola/(4307:4307): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:11:37:974 Consola/(4307:4307): SEGMENTO: 64
+[INFO] 22:11:37:974 Consola/(4307:4307): SEGMENTO: 256
+[INFO] 22:11:37:974 Consola/(4307:4307): SEGMENTO: 128
+[INFO] 22:11:37:974 Consola/(4307:4307): SEGMENTO: 32
+[INFO] 22:11:37:975 Consola/(4307:4307): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:11:37:977 Consola/(4307:4307): Se realizo el envio se desconecto del kernel
+[INFO] 22:12:13:252 Consola/(4331:4331): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:12:13:254 Consola/(4331:4331): SEGMENTO: 64
+[INFO] 22:12:13:254 Consola/(4331:4331): SEGMENTO: 256
+[INFO] 22:12:13:255 Consola/(4331:4331): SEGMENTO: 128
+[INFO] 22:12:13:255 Consola/(4331:4331): SEGMENTO: 32
+[INFO] 22:12:13:255 Consola/(4331:4331): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:12:13:257 Consola/(4331:4331): Se realizo el envio se desconecto del kernel
+[INFO] 22:14:01:236 Consola/(4346:4346): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:14:01:236 Consola/(4346:4346): SEGMENTO: 64
+[INFO] 22:14:01:236 Consola/(4346:4346): SEGMENTO: 256
+[INFO] 22:14:01:237 Consola/(4346:4346): SEGMENTO: 128
+[INFO] 22:14:01:237 Consola/(4346:4346): SEGMENTO: 32
+[INFO] 22:14:01:237 Consola/(4346:4346): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:14:01:239 Consola/(4346:4346): Se realizo el envio se desconecto del kernel
+[ERROR] 22:14:30:219 Consola/(4357:4357): Archivo de configuración inválido.
+[ERROR] 22:14:30:220 Consola/(4357:4357): Error al conectar (a KERNEL)
+
+[ERROR] 22:15:05:701 Consola/(4366:4366): Archivo de configuración inválido.
+[ERROR] 22:15:05:702 Consola/(4366:4366): Error al conectar (a KERNEL)
+
+[INFO] 22:16:13:507 Consola/(4374:4374): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:16:13:508 Consola/(4374:4374): SEGMENTO: 64
+[INFO] 22:16:13:508 Consola/(4374:4374): SEGMENTO: 256
+[INFO] 22:16:13:508 Consola/(4374:4374): SEGMENTO: 128
+[INFO] 22:16:13:508 Consola/(4374:4374): SEGMENTO: 32
+[INFO] 22:16:13:509 Consola/(4374:4374): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:16:13:510 Consola/(4374:4374): Se realizo el envio se desconecto del kernel
+[INFO] 22:16:51:212 Consola/(4385:4385): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:16:51:213 Consola/(4385:4385): SEGMENTO: 64
+[INFO] 22:16:51:213 Consola/(4385:4385): SEGMENTO: 256
+[INFO] 22:16:51:213 Consola/(4385:4385): SEGMENTO: 128
+[INFO] 22:16:51:214 Consola/(4385:4385): SEGMENTO: 32
+[INFO] 22:16:51:214 Consola/(4385:4385): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:16:51:216 Consola/(4385:4385): Se realizo el envio se desconecto del kernel
+[INFO] 22:18:15:316 Consola/(4399:4399): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:18:15:316 Consola/(4399:4399): SEGMENTO: 64
+[INFO] 22:18:15:317 Consola/(4399:4399): SEGMENTO: 256
+[INFO] 22:18:15:317 Consola/(4399:4399): SEGMENTO: 128
+[INFO] 22:18:15:317 Consola/(4399:4399): SEGMENTO: 32
+[INFO] 22:18:15:317 Consola/(4399:4399): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:18:15:319 Consola/(4399:4399): Se realizo el envio se desconecto del kernel

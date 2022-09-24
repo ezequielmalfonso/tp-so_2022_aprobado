@@ -6,6 +6,7 @@
  */
 
 #include "comunicacion.h"
+#include "pcb.h"
 
 typedef struct {
     int fd;
@@ -21,7 +22,17 @@ static void procesar_conexion(void* void_args) {
 	t_instrucciones* mensaje=malloc(sizeof(t_instrucciones));
 	mensaje=recibir_instrucciones(cliente_socket);
 	//printf("Segmento % \n", &mensaje->segmentos[0]);
+
 	log_info(logger, "La consola se desconecto de %s server", server_name);
+
+
+	PCB_t* proceso = pcb_create();
+
+	//TODO pasarle los valores de inicializacion al PCB
+	//pcb_set(proceso, pid_actual, mensaje,      0,  registro_cpu,  tabla_segmentos);
+	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
+
+
 	//pcb=crear_pcb(mensaje);
 	//AGREGAR A COLA DE NEWS
 	//enviar_pcb(dispatch_fd, pcb);
