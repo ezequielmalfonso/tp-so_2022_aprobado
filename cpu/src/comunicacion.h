@@ -1,7 +1,7 @@
 /*
  * comunicacion.h
  *
- *  Created on: Sep 12, 2022
+ *  Created on: Sep 27, 2022
  *      Author: utnso
  */
 
@@ -15,15 +15,16 @@
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/string.h>
-#include "main.h"
 #include "protocolo.h"
 #include "socket.h"
-#include "kernelConfig.h"
+#include "cpuConfig.h"
+#include <semaphore.h>
 
-//SERVIDOR
+//sem_t sem;
+
+int servers_escuchar(char* server_name, int server_socket, char* server_dispatch_name, int server_dispatch_socket);
 int server_escuchar(char* server_name, int server_socket);
-//CLIENTE
-int generar_conexiones(int* interrupt_fd, int* dispatch_fd, t_config_kernel* configuracion);
-int generar_conexion_memoria(int* memoria_fd, t_config_kernel* configuracion);
+
+extern int cliente_socket;
 
 #endif /* SRC_COMUNICACION_H_ */

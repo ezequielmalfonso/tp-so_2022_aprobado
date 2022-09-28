@@ -28,7 +28,9 @@ typedef enum {
 	MOV_IN,
 	MOV_OUT,
 	IO,
-	EXIT
+	EXIT,
+	DISPATCH,
+	INTERRUPT
 } op_code;
 
 typedef struct{
