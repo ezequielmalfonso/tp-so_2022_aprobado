@@ -20,21 +20,21 @@ typedef struct {
 }REG_USO_GRAL_CPU;
 
 typedef struct{
-  uint32_t tamSegmentos;
+  uint32_t tamSegmento;
   uint32_t id_tabla_pagina;
-}TABLA_SEGMENTOS;
+}TABLA_SEGMENTO;
 
 typedef struct {
 	uint16_t pid;
 	t_list* instrucciones;
 	uint32_t pc;
 	REG_USO_GRAL_CPU registro_cpu;
-	TABLA_SEGMENTOS tabla_segmentos;
+	t_list* segmentos;
 }PCB_t;
 
 PCB_t* pcb_create();
 
-void pcb_set(PCB_t* pcb, uint32_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, TABLA_SEGMENTOS tabla_segmentos);
+void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, t_list* segmentos);
 
 int pcb_find_index(t_list* lista, uint16_t pid);
 

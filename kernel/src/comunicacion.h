@@ -19,6 +19,8 @@
 #include "protocolo.h"
 #include "socket.h"
 #include "kernelConfig.h"
+#include "pcb.h"
+#include "planificacion.h"
 
 //SERVIDOR
 int server_escuchar(char* server_name, int server_socket);

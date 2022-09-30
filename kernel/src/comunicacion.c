@@ -26,15 +26,43 @@ static void procesar_conexion(void* void_args) {
 	log_info(logger, "La consola se desconecto de %s server", server_name);
 
 
+	t_list* segmentos=malloc(sizeof(TABLA_SEGMENTO));
+	int c=0;
+	while(c<list_size(mensaje->listaTamSegmentos)){
+		TABLA_SEGMENTO* aux=malloc(sizeof(TABLA_SEGMENTO));
+		aux->tamSegmento=list_get(mensaje->listaTamSegmentos,c);//habria que probar esto
+		list_add(segmentos,aux);
+		c++;
+	}
+
 	PCB_t* proceso = pcb_create();
+	uint16_t pid=1;
 
 	//TODO pasarle los valores de inicializacion al PCB
-	//pcb_set(proceso, pid_actual, mensaje,      0,  registro_cpu,  tabla_segmentos);
+	//pcb_set(proceso, pid_actual, mensaje,      0,  registro_cpu,  segmentos);
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
+	pid++;
 
 
-	//pcb=crear_pcb(mensaje);
-	//AGREGAR A COLA DE NEWS
+    queue_push(cola_new,proceso);
+    pthread_mutex_lock(&mx_log);
+    log_info(logger,"Se crea el proceso <PID> en NEW", proceso->pid);
+    pthread_mutex_unlock(&mx_log);
+    sem_wait(&s_multiprogramacion_actual);
+    pthread_mutex_lock(&mx_cola_new);
+	proceso=queue_pop(cola_new);
+    pthread_mutex_unlock(&mx_cola_new);
+    //solicitar_tabla_de_segmentos();
+    pthread_mutex_lock(&mx_cola_new);
+    //quitar de la cola news
+    pthread_mutex_unlock(&mx_cola_new);
+    pthread_mutex_lock(&mx_lista_ready);
+    //agregar a cola ready
+    pthread_mutex_unlock(&mx_lista_ready);
+    pthread_mutex_lock(&mx_log);
+    log_info(logger,"“PID: %d - Estado Anterior: NEW - Estado Actual: EXECUTE", proceso->pid);
+    pthread_mutex_unlock(&mx_log);
+    //y todo el log de que algo entro a ready y lo tira como lista
 	//enviar_pcb(dispatch_fd, pcb);
 	//log_info(logger,"llegue");
 

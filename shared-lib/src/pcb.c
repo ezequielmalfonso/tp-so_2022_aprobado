@@ -7,22 +7,24 @@
 
 #include "pcb.h"
 
+
 PCB_t* pcb_create(){
 	PCB_t* pcb = malloc(sizeof(PCB_t));
 	pcb->instrucciones = list_create();
+	pcb->segmentos=list_create();
 	//TODO ver como iniciar los valores de REG_USO_GRAL_CPU y TABLA_SEGMENTOS
 	return pcb;
 }
 
-void pcb_set(PCB_t* pcb, uint32_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, TABLA_SEGMENTOS tabla_segmentos){
+void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, t_list* segmentos){
 
-	pcb->pid = pid;
-	pcb->instrucciones = instrucciones;
+	list_add_all(pcb->instrucciones,instrucciones);
+	pcb->pid=pid;
 	pcb->pc = pc;
 	//antes de cambiar de puntero, destruyo toda existencia de la anterior
 	list_destroy_and_destroy_elements(pcb->instrucciones,free);
 	pcb->registro_cpu = registro_cpu;
-	pcb->tabla_segmentos = tabla_segmentos;
+    list_add_all(pcb->segmentos,segmentos);
 }
 
 
