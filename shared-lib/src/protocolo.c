@@ -1,7 +1,7 @@
 /*
  * protocolo.c
  *
- *  Created on: Sep 6, 2022
+ *  Created on: p 6, 2022
  *      Author: utnso
  */
 
@@ -170,3 +170,137 @@ uint32_t calcular_instrucciones_buffer_size(t_list* lista, char** segmentos){
 	return size;
 }
 
+//ENVIAR PCB KERNEL->CPU_DISPATCH
+
+bool send_proceso(int fd, PCB_t *proceso) {
+    size_t size;
+    void* stream = serializar_proceso(&size, proceso);
+    if (send(fd, stream, size, 0) != size) {
+        free(stream);
+        return false;
+    }
+    free(stream);
+    return true;
+}
+
+
+static void* serializar_proceso(size_t* size, PCB_t *proceso) {
+	INSTRUCCION* aux;
+
+	aux = list_get(proceso->instrucciones,0);
+	uint32_t elementosLista= list_size(proceso->instrucciones);
+
+	uint32_t cantSegmentos= list_size(proceso->segmentos);
+
+	*size= sizeof(size_t)+ //SIZE PAYLOAD
+		   sizeof(uint32_t)+ //SIZE PID
+		   sizeof(uint32_t)+ //SIZE PC
+		   ((3*sizeof(char))*elementosLista)+ //SIZE LISTA INSTRUCCIONES
+		   sizeof(uint32_t)*cantSegmentos; //SIZE SEGMENTOS SIN LOS ID
+	size_t size_payload=*size-sizeof(size_t);
+	uint32_t offset = 0;
+	void* stream = malloc(size);
+
+	memcpy(stream + offset, &size_payload, sizeof(size_t));
+	offset+= sizeof(size_t);
+	memcpy(stream + offset, &proceso->pid, sizeof(uint16_t));
+	offset+= sizeof(uint16_t);
+	memcpy(stream + offset, &proceso->pc, sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+
+	memcpy(stream + offset, &elementosLista, sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+
+	t_link_element* aux1 = proceso->instrucciones->head;
+
+	while( aux1!=NULL )
+	{
+		INSTRUCCION* auxl2 = aux1->data;
+		printf("Verificamos la lista:\n");
+		printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
+
+		memcpy(stream + offset, &auxl2->comando, sizeof(aux->comando));
+		offset += sizeof(aux->comando);
+		memcpy(stream + offset, &auxl2->parametro, sizeof(aux->parametro));
+		offset += sizeof(aux->parametro);
+		memcpy(stream + offset, &auxl2->parametro2, sizeof(aux->parametro2));
+		offset += sizeof(aux->parametro2);
+		aux1 = aux1->next;
+	}
+
+	memcpy(stream + offset, &cantSegmentos, sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+
+	int i=0;
+	while(i<cantSegmentos){
+		uint32_t auxSeg=list_get(proceso->segmentos,i);
+		memcpy(stream + offset, &auxSeg, sizeof(uint32_t));
+		offset += sizeof(uint32_t);
+		//FALTA ID SEGMENTO
+		i++;
+	}
+
+	free(aux);
+	return stream;
+}
+
+//Recepcion y deserializacion
+bool recv_proceso(int fd, PCB_t* proceso) {
+    size_t size_payload;
+    if (recv(fd, &size_payload, sizeof(size_t), 0) != sizeof(size_t))
+        return false;
+    void* stream = malloc(size_payload);
+    if (recv(fd, stream, size_payload, 0) != size_payload) {
+        free(stream);
+        return false;
+    }
+    deserializar_proceso(stream, proceso);
+    free(stream);
+    return true;
+}
+
+static void deserializar_proceso(void* stream, PCB_t* proceso) {
+	int i=0,c=0;
+
+	uint32_t elementosLista, cantSegmentos;
+
+	memcpy(&(proceso->pid), stream, sizeof(uint16_t));
+	stream+=sizeof(uint16_t);
+
+	memcpy(&(proceso->pc), stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
+
+	memcpy(&elementosLista, stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
+
+	proceso->instrucciones=list_create();
+	proceso->segmentos=list_create();
+	while(i!=elementosLista)
+		{
+			INSTRUCCION* aux=malloc(sizeof(INSTRUCCION));
+			memcpy(&(aux->comando), stream, sizeof(aux->comando));
+		    stream += sizeof(aux->comando);
+		    memcpy(&(aux->parametro),stream , sizeof(aux->parametro));
+		    stream += sizeof(aux->parametro);
+		    memcpy(&(aux->parametro2), stream, sizeof(aux->parametro2));
+		    stream += sizeof(aux->parametro2);
+
+		    list_add(proceso->segmentos,aux);
+		    i++;
+		}
+
+		memcpy(&(cantSegmentos), stream, sizeof(uint32_t));
+	    stream += sizeof(uint32_t);
+
+	    while (c<cantSegmentos)
+	    {
+	    	uint32_t aux=0;
+	    	memcpy(&aux, stream, sizeof(uint32_t));
+	    	stream += sizeof(uint32_t);
+
+	    	list_add(proceso->segmentos,aux);
+	    	c++;
+	    }
+
+
+}

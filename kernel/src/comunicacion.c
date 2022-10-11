@@ -7,7 +7,7 @@
 
 #include "comunicacion.h"
 #include "pcb.h"
-
+	uint16_t pid=1;
 typedef struct {
     int fd;
     char* server_name;
@@ -34,9 +34,10 @@ static void procesar_conexion(void* void_args) {
 		list_add(segmentos,aux);
 		c++;
 	}
+    PCB_t* proceso = malloc(sizeof(PCB_t));
+	proceso = pcb_create();
 
-	PCB_t* proceso = pcb_create();
-	uint16_t pid=1;
+
 
 	//TODO pasarle los valores de inicializacion al PCB
 	//pcb_set(proceso, pid_actual, mensaje,      0,  registro_cpu,  segmentos);
@@ -53,9 +54,6 @@ static void procesar_conexion(void* void_args) {
 	proceso=queue_pop(cola_new);
     pthread_mutex_unlock(&mx_cola_new);
     //solicitar_tabla_de_segmentos();
-    pthread_mutex_lock(&mx_cola_new);
-    //quitar de la cola news
-    pthread_mutex_unlock(&mx_cola_new);
     pthread_mutex_lock(&mx_lista_ready);
     //agregar a cola ready
     pthread_mutex_unlock(&mx_lista_ready);

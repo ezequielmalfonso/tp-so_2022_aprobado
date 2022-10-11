@@ -14,13 +14,9 @@ typedef struct instruccion{
 	char parametro2[5];
 } INSTRUCCION;
 
-typedef struct pcb{
-	int id_pcb;
-	t_list* instrucciones;
-	int program_counter;
-	int registros_cpu;
-	int tabla_segmentos;
-	//float estimacion_rafaga;  --> NO esta en la docuemntacion pero podria servir en la palanificacion
-}PCB;
+typedef struct segmento{
+	uint32_t id_segmento;
+	uint32_t tamSegmento;
+}SEGMENTO;
 
 

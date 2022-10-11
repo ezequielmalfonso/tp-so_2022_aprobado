@@ -19,6 +19,7 @@
 #include <commons/collections/list.h>
 #include <commons/string.h>
 #include "estructuras.h"
+#include "pcb.h"
 
 
 typedef enum {
@@ -53,5 +54,11 @@ t_instrucciones* deserializar_instrucciones(t_buffer* buffer);
 void enviar_instrucciones(int socket_fd, t_list* lista, char** segmentos);
 t_instrucciones* recibir_instrucciones(int socket_fd);
 uint32_t calcular_instrucciones_buffer_size(t_list* lista, char** segmentos);
+
+//ENVIO PROCESO KERNEL CPU
+bool send_proceso(int fd, PCB_t *proceso);
+static void* serializar_proceso(size_t* size, PCB_t *proceso);
+bool recv_proceso(int fd, PCB_t* proceso);
+static void deserializar_proceso(void* stream, PCB_t* proceso);
 
 #endif /* SRC_PROTOCOLO_H_ */
