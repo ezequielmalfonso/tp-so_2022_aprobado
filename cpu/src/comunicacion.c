@@ -33,8 +33,8 @@ static void procesar_conexion(void* void_args) {
  log_info(logger, "debug");
  break;
  case DISPATCH: {
-	 //PCB* pcb= malloc(sizeof(PCB));
-	 //pcb=recibir_pcb(cliente_socket);
+	 PCB_t* proceso= pcb_create();
+	 recv_proceso(cliente_socket,proceso);
 	 log_info(logger,"recibi pcb");
 	 break;
  }

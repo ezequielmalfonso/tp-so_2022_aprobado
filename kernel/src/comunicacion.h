@@ -15,11 +15,7 @@
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/string.h>
-#include "main.h"
-#include "protocolo.h"
 #include "socket.h"
-#include "kernelConfig.h"
-#include "pcb.h"
 #include "planificacion.h"
 
 //SERVIDOR

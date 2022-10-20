@@ -6,7 +6,7 @@
  */
 
 #include "comunicacion.h"
-#include "pcb.h"
+
 	uint16_t pid=1;
 typedef struct {
     int fd;
@@ -47,7 +47,7 @@ static void procesar_conexion(void* void_args) {
 
     queue_push(cola_new,proceso);
     pthread_mutex_lock(&mx_log);
-    log_info(logger,"Se crea el proceso <PID> en NEW", proceso->pid);
+    log_info(logger,"Se crea el proceso %d en NEW", proceso->pid);
     pthread_mutex_unlock(&mx_log);
     sem_wait(&s_multiprogramacion_actual);
     pthread_mutex_lock(&mx_cola_new);
@@ -60,9 +60,9 @@ static void procesar_conexion(void* void_args) {
     pthread_mutex_lock(&mx_log);
     log_info(logger,"“PID: %d - Estado Anterior: NEW - Estado Actual: EXECUTE", proceso->pid);
     pthread_mutex_unlock(&mx_log);
+    send_proceso(dispatch_fd, proceso);
+    log_info(logger, "se envio proceso a cpu");
     //y todo el log de que algo entro a ready y lo tira como lista
-	//enviar_pcb(dispatch_fd, pcb);
-	//log_info(logger,"llegue");
 
 	//liberar_conexion(cliente_socket);
 

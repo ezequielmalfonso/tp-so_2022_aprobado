@@ -21,6 +21,7 @@ t_queue* cola_new;
 t_queue* cola_ready;
 t_queue* cola_blocked;
 
+t_list* lista_ready;
 bool cpu_desocupado;
 
 void fifo_ready_execute(){
@@ -44,14 +45,14 @@ void fifo_ready_execute(){
 //si, es robable xd
 //esta funcion capaz es mas en cuando esperamos respuesta de CPU, igual pero seria el planificador de largo plazo cuando finiquita un proceso esto
 //si, es de cuando recibe la respuesta del cpu y ya cerro todo
-void execute_a_exit(){
 
-    pthread_mutex_lock(/*mx_log*/);
-    log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: EXIT", proceso->pid);
+void execute_a_exit(PCB_t* pcb){
+	pthread_mutex_lock(&mx_log);
+    log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: EXIT", pcb->pid);
     pthread_mutex_unlock(&mx_log);
     sem_post(&s_multiprogramacion_actual);//cuando se finaliza
     //liberar_espacio_de_memoria(PCB); Liberamos las estructructuras de memoria
-    //pcb_destroy(PCB);
+    pcb_destroy(pcb);
     //avisar_consola_finalizacion(); Funcion que le avisa a la consola que se finalizo correctamente
 }
 
@@ -65,7 +66,7 @@ void inicializarPlanificacion(){
 	pthread_t corto_plazo;
 	pthread_create(&corto_plazo, NULL, (void*) fifo_ready_execute, NULL);
 	pthread_t espera_CPU;
-	pthread_create(&espera_CPU, NULL, (void*) esperar_cpu NULL);
+	pthread_create(&espera_CPU, NULL, (void*) esperar_cpu, NULL);
 }
 
 
@@ -76,14 +77,14 @@ void esperar_cpu(){
 	while(1){
 		sem_wait(&s_esperar_cpu);
 		op_code cop;
-		if (recv(conexion_cpu_dispatch, &cop, sizeof(op_code), 0) <= 0) {
+		if (recv(dispatch_fd, &cop, sizeof(op_code), 0) <= 0) {
 			pthread_mutex_lock(&mx_log);
 			log_error(logger,"DISCONNECT FAILURE!");
 			pthread_mutex_unlock(&mx_log);
 			exit(-1);
 		}
 		PCB_t* pcb = pcb_create();
-		if (!recv_proceso(conexion_cpu_dispatch, pcb)) {
+		if (!recv_proceso(dispatch_fd, pcb)) {
 			pthread_mutex_lock(&mx_log);
 			log_error(logger,"Fallo recibiendo PROGRAMA");
 			pthread_mutex_unlock(&mx_log);
@@ -94,7 +95,7 @@ void esperar_cpu(){
 		pthread_mutex_unlock(&mx_cpu_desocupado);
 		switch (cop) {
 			case EXIT:{
-				execute_a_exit();
+				execute_a_exit(pcb);
 				sem_post(&s_cpu_desocupado);
 				sem_post(&s_ready_execute);
 
@@ -107,8 +108,8 @@ void esperar_cpu(){
 				pthread_mutex_unlock(&mx_hay_interrupcion); NOse que carajo significa pero tiene sentido*/
 				break;
 			}
-			case INTERRUPTION:
-				log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: READY", proceso->pid);
+			/*case INTERRUPTION:
+				log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: READY", pcb->pid);
 				pthread_mutex_lock(&mx_lista_ready);
 				push_queue(cola_ready, pcb);
 				pthread_mutex_unlock(&mx_lista_ready);
@@ -124,7 +125,7 @@ void esperar_cpu(){
 				//pthread_t hilo_suspendido;
 				//pthread_create(&hilo_suspendido,NULL,(void*)suspendiendo,pcb);
 				//pthread_detach(hilo_suspendido);
-				log_info(logger, "PID: %d - Estado Anterior: EXECUTE - Estado Actual: BLOCKED", proceso->pid);
+				log_info(logger, "PID: %d - Estado Anterior: EXECUTE - Estado Actual: BLOCKED", pcb->pid);
 				sem_post(&s_blocked);
 				sem_post(&s_cpu_desocupado);
 				sem_post(&s_ready_execute);
@@ -135,12 +136,13 @@ void esperar_cpu(){
 					//pthread_mutex_unlock(&mx_hay_interrupcion);
 					sem_post(&s_pcb_desalojado);
 				}
-				pthread_mutex_unlock(&mx_hay_interrupcion); idem que el caso de exit, tiene sentido pero ni idea*/
+				pthread_mutex_unlock(&mx_hay_interrupcion); idem que el caso de exit, tiene sentido pero ni idea
 				break;
 
 				case PAGEFAULT:
 				//hay que implementar
 					break;
+					*/
 			default:
 				log_error(logger, "AAAlgo anduvo mal en el server del kernel\n Cop: %d",cop);
 		}

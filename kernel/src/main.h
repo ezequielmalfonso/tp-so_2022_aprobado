@@ -18,4 +18,6 @@
 
 extern int kernelServer;
 
+extern int interrupt_fd, dispatch_fd, memoria_fd;
+
 #endif /* SRC_MAIN_H_ */
