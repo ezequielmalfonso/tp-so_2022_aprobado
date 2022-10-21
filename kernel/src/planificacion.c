@@ -9,7 +9,7 @@
 
 
 pthread_mutex_t mx_cola_new = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mx_lista_ready = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_cola_ready = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_lista_block = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_lista_new = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_log = PTHREAD_MUTEX_INITIALIZER;
@@ -22,7 +22,6 @@ t_queue* cola_new;
 t_queue* cola_ready;
 t_queue* cola_blocked;
 
-t_list* lista_ready;
 bool cpu_desocupado;
 
 void fifo_ready_execute(){
@@ -30,11 +29,10 @@ void fifo_ready_execute(){
 		sem_wait(&s_ready_execute);
 		sem_wait(&s_cpu_desocupado); // Para que no ejecute cada vez que un proceso llega a ready
 		sem_wait(&s_cont_ready); // Para que no intente ejecutar si la lista de ready esta vacia
-		pthread_mutex_lock(&mx_lista_ready);
-		PCB_t* proceso = list_remove(lista_ready, 0);
-		pthread_mutex_unlock(&mx_lista_ready);
+		pthread_mutex_lock(&mx_cola_ready);
+		PCB_t* proceso = queue_pop(cola_ready, 0);
+		pthread_mutex_unlock(&mx_cola_ready);
 		pthread_mutex_lock(&mx_log);
-		//log_info(logger,(/*mx_log*/,);
 		log_info(logger,"logger_cambio_de_estado","PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
 		//send_proceso(conexion_cpu_dispatch, proceso); HAY QUE PROBAR ESTO
@@ -57,6 +55,8 @@ void execute_a_exit(PCB_t* pcb){
     //avisar_consola_finalizacion(); Funcion que le avisa a la consola que se finalizo correctamente
 }
 
+
+}
 //Para terminar el pcb hay una de destroy en pcb.c.
 void inicializarPlanificacion(){
 	cola_new=queue_create();
@@ -70,6 +70,10 @@ void inicializarPlanificacion(){
 	//pthread_create(&espera_CPU, NULL, (void*) esperar_cpu, NULL);
 }
 
+void bloqueando(PCB_t* pcb){
+	sem_wait(&mx_IOS[]);
+	ejecutar_IO(pcb);
+}
 
 /****Hilo NEW -> READY */
 
@@ -109,23 +113,23 @@ void esperar_cpu(){
 				pthread_mutex_unlock(&mx_hay_interrupcion); NOse que carajo significa pero tiene sentido*/
 				break;
 			}
-			/*case INTERRUPTION:
+			case INTERRUPT:
 				log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: READY", pcb->pid);
-				pthread_mutex_lock(&mx_lista_ready);
+				pthread_mutex_lock(&mx_cola_ready);
 				push_queue(cola_ready, pcb);
-				pthread_mutex_unlock(&mx_lista_ready);
+				pthread_mutex_unlock(&mx_cola_ready);
 				sem_post(&s_cont_ready);
 				sem_post(&s_pcb_desalojado);
 					break;
 
-			case BLOCKED:
+			case IO:
 				pthread_mutex_lock(&mx_cola_blocked);
 				push_queue(cola_blocked,pcb);
 				pthread_mutex_unlock(&mx_cola_blocked);
-				//ver como carajo lo bloqueamos
-				//pthread_t hilo_suspendido;
-				//pthread_create(&hilo_suspendido,NULL,(void*)suspendiendo,pcb);
-				//pthread_detach(hilo_suspendido);
+				//Creamos el hilo aparte que lo bloquee y se encargue de su io
+				pthread_t hilo_bloqueado;
+				pthread_create(&hilo_bloqueado,NULL,(void*)bloqueando,pcb);
+				pthread_detach(hilo_bloqueado);
 				log_info(logger, "PID: %d - Estado Anterior: EXECUTE - Estado Actual: BLOCKED", pcb->pid);
 				sem_post(&s_blocked);
 				sem_post(&s_cpu_desocupado);
@@ -138,14 +142,54 @@ void esperar_cpu(){
 					sem_post(&s_pcb_desalojado);
 				}
 				pthread_mutex_unlock(&mx_hay_interrupcion); idem que el caso de exit, tiene sentido pero ni idea
+				*/
 				break;
 
 				case PAGEFAULT:
 				//hay que implementar
 					break;
-					*/
+
 			default:
 				log_error(logger, "AAAlgo anduvo mal en el server del kernel\n Cop: %d",cop);
 		}
+	}
+}
+
+
+void ejecutar_io(PCB_t* pcb) {
+	// No va a ir el while, porque este hilo va a ejecutarse para cada io por separado while(1) {
+		sem_wait(&s_blocked);
+		pthread_mutex_lock(&mx_cola_blocked);
+		if (list_size(cola_blocked) == 0){
+			pthread_mutex_lock(&mx_log);
+			log_error(logger,"Blocked ejecutó sin un proceso bloqueado");
+			pthread_mutex_unlock(&mx_log);
+		}
+		PCB_t* proceso = list_get(cola_blocked,0);
+		pthread_mutex_unlock(&mx_cola_blocked);
+		INSTRUCCION* inst = list_get(proceso->instrucciones, proceso->pc - 1); //-1 porque ya se incremento el PC
+		int32_t tiempo =atoi(inst->parametro2);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " PID: %d - Bloqueado por: %s", proceso->pid, inst->parametro);
+		pthread_mutex_unlock(&mx_log);
+		usleep(tiempo * 1000);
+		pthread_mutex_lock(&mx_cola_blocked);
+		list_remove(cola_blocked,0);
+		pthread_mutex_unlock(&mx_cola_blocked);
+		/*char* key = string_itoa(proceso->pid);
+		pthread_mutex_lock(&mx_iteracion_blocked);
+		int iteracion_actual = (int) dictionary_get(iteracion_blocked, key);
+		dictionary_put(iteracion_blocked, key,(int *) iteracion_actual + 1);
+		free(key);
+		pthread_mutex_unlock(&mx_iteracion_blocked); NO tengo la menor idea que es eso*/
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, "PID: %d - Estado Anterior: BLOCKED - Estado Actual: READY", pcb->pid);
+		pthread_mutex_unlock(&mx_log);
+		pthread_mutex_lock(&mx_cola_ready);
+		queue_push(cola_ready, proceso);
+		pthread_mutex_unlock(&mx_cola_ready);
+		sem_post(&s_ready_execute);
+		sem_post(&s_cont_ready);
+
 	}
 }

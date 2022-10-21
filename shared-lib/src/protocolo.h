@@ -31,8 +31,9 @@ typedef enum {
 	IO,
 	EXIT,
 	DISPATCH,
-	INTERRUPT
-} op_code;
+	INTERRUPT,
+	PAGEFAULT
+	}op_code;
 
 typedef struct{
 	uint32_t elementosLista;
