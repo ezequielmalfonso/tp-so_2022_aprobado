@@ -16,14 +16,15 @@ PCB_t* pcb_create(){
 	return pcb;
 }
 
-void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, t_list* segmentos){
+void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU* registro_cpu, t_list* segmentos){
 
+	//list_destroy_and_destroy_elements(pcb->instrucciones,free);
 	list_add_all(pcb->instrucciones,instrucciones);
 	pcb->pid=pid;
 	pcb->pc = pc;
 	//antes de cambiar de puntero, destruyo toda existencia de la anterior
-	list_destroy_and_destroy_elements(pcb->instrucciones,free);
 	pcb->registro_cpu = registro_cpu;
+	//list_destroy_and_destroy_elements(pcb->segmentos,free);
     list_add_all(pcb->segmentos,segmentos);
 }
 

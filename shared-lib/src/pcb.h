@@ -28,13 +28,13 @@ typedef struct {
 	uint16_t pid;
 	t_list* instrucciones;
 	uint32_t pc;
-	REG_USO_GRAL_CPU registro_cpu;
+	REG_USO_GRAL_CPU* registro_cpu;
 	t_list* segmentos;
 }PCB_t;
 
 PCB_t* pcb_create();
 
-void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU registro_cpu, t_list* segmentos);
+void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU* registro_cpu, t_list* segmentos);
 
 int pcb_find_index(t_list* lista, uint16_t pid);
 

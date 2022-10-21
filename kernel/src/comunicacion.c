@@ -7,6 +7,7 @@
 
 #include "comunicacion.h"
 
+
 	uint16_t pid=1;
 typedef struct {
     int fd;
@@ -40,7 +41,9 @@ static void procesar_conexion(void* void_args) {
 
 
 	//TODO pasarle los valores de inicializacion al PCB
-	//pcb_set(proceso, pid_actual, mensaje,      0,  registro_cpu,  segmentos);
+	REG_USO_GRAL_CPU* registros;
+
+	pcb_set(proceso, pid, mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos);
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
 	pid++;
 

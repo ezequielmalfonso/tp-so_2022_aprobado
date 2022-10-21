@@ -7,9 +7,10 @@
 
 #include "main.h"
 
+int interrupt_fd, dispatch_fd, memoria_fd;
 
 int main(){
-	int interrupt_fd, dispatch_fd, memoria_fd;
+
 	cargarConfiguracion();
 	inicializarPlanificacion();
 	char* puerto = string_itoa(configuracion->PUERTO_ESCUCHA);

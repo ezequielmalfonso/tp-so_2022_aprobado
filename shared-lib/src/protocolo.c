@@ -199,7 +199,7 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso) {
 		   sizeof(uint32_t)*cantSegmentos; //SIZE SEGMENTOS SIN LOS ID
 	size_t size_payload=*size-sizeof(size_t);
 	uint32_t offset = 0;
-	void* stream = malloc(size);
+	void* stream = malloc(*size);
 
 	memcpy(stream + offset, &size_payload, sizeof(size_t));
 	offset+= sizeof(size_t);

@@ -7,6 +7,7 @@
 
 #include "planificacion.h"
 
+
 pthread_mutex_t mx_cola_new = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_lista_ready = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_lista_block = PTHREAD_MUTEX_INITIALIZER;
@@ -66,7 +67,7 @@ void inicializarPlanificacion(){
 	pthread_t corto_plazo;
 	pthread_create(&corto_plazo, NULL, (void*) fifo_ready_execute, NULL);
 	pthread_t espera_CPU;
-	pthread_create(&espera_CPU, NULL, (void*) esperar_cpu, NULL);
+	//pthread_create(&espera_CPU, NULL, (void*) esperar_cpu, NULL);
 }
 
 
