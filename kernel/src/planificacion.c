@@ -20,7 +20,7 @@ sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multipro
 
 t_queue* cola_new;
 t_queue* cola_ready;
-t_queue* cola_blocked;
+t_list* cola_blocked;
 
 bool cpu_desocupado;
 
@@ -30,10 +30,10 @@ void fifo_ready_execute(){
 		sem_wait(&s_cpu_desocupado); // Para que no ejecute cada vez que un proceso llega a ready
 		sem_wait(&s_cont_ready); // Para que no intente ejecutar si la lista de ready esta vacia
 		pthread_mutex_lock(&mx_cola_ready);
-		PCB_t* proceso = queue_pop(cola_ready, 0);
+		PCB_t* proceso = queue_pop(cola_ready);
 		pthread_mutex_unlock(&mx_cola_ready);
 		pthread_mutex_lock(&mx_log);
-		log_info(logger,"logger_cambio_de_estado","PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
+		log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
 		//send_proceso(conexion_cpu_dispatch, proceso); HAY QUE PROBAR ESTO
 		pcb_destroy(proceso);
@@ -56,7 +56,7 @@ void execute_a_exit(PCB_t* pcb){
 }
 
 
-}
+
 //Para terminar el pcb hay una de destroy en pcb.c.
 void inicializarPlanificacion(){
 	cola_new=queue_create();
@@ -192,4 +192,4 @@ void ejecutar_io(PCB_t* pcb) {
 		sem_post(&s_cont_ready);
 
 	}
-}
+

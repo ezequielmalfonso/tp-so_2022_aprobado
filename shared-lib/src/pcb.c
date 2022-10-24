@@ -11,6 +11,10 @@
 PCB_t* pcb_create(){
 	PCB_t* pcb = malloc(sizeof(PCB_t));
 	pcb->instrucciones = list_create();
+	strcpy(pcb->registro_cpu->registros[0],"AX");
+	strcpy(pcb->registro_cpu->registros[1],"BX");
+	strcpy(pcb->registro_cpu->registros[2],"CX");
+	strcpy(pcb->registro_cpu->registros[3],"DX");
 	pcb->segmentos=list_create();
 	//TODO ver como iniciar los valores de REG_USO_GRAL_CPU y TABLA_SEGMENTOS
 	return pcb;

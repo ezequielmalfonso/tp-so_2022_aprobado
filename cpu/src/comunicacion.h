@@ -19,7 +19,6 @@
 #include "socket.h"
 #include "cpuConfig.h"
 #include <semaphore.h>
-#include "pcb.h"
 
 //sem_t sem;
 

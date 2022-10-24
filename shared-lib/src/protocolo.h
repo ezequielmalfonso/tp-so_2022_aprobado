@@ -32,7 +32,10 @@ typedef enum {
 	EXIT,
 	DISPATCH,
 	INTERRUPT,
-	PAGEFAULT
+	PAGEFAULT,
+	CONTINUE,
+	INTERRUPTION,
+	BLOCKED
 	}op_code;
 
 typedef struct{

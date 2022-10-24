@@ -8,15 +8,14 @@
 #ifndef SRC_PCB_H_
 #define SRC_PCB_H_
 
+#include<string.h>
 #include<stdlib.h>
 #include<stdint.h>
 #include<commons/collections/list.h>
 
 typedef struct {
-	 uint32_t AX;
-	 uint32_t BX;
-	 uint32_t CX;
-	 uint32_t DX;
+	 char registros[4][2];
+	 uint32_t valores[4];
 }REG_USO_GRAL_CPU;
 
 typedef struct{

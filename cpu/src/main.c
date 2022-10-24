@@ -7,8 +7,13 @@
 
 #include "main.h"
 
+pthread_mutex_t mx_hay_interrupcion = PTHREAD_MUTEX_INITIALIZER;
+
+bool hay_interrupcion;
+
 int main(){
 	cargarConfiguracion();
+	hay_interrupcion=false;
 	//sem_init(&sem,0,1);
 
 	//CLIENTE
@@ -65,5 +70,103 @@ void interruptCpu() {
 	//free(puertoInterrupt);
 
 	while(server_escuchar("INTERRUPT_SV",cpuServerInterrupt));
+}
+
+//EJECUCION DE INSTRUCCIONES
+op_code iniciar_ciclo_instruccion(PCB_t* pcb){
+	op_code estado = CONTINUE;
+	while (estado == CONTINUE){ // Solo sale si hay una interrupcion, un pedido de I/O, o fin de ejecucion
+		INSTRUCCION* instruccion_ejecutar = fetch(pcb->instrucciones, pcb->pc);
+
+		if(decode(instruccion_ejecutar)){
+			log_info(logger,"En CPU");
+			sleep(configuracion->RETARDO_INSTRUCCION);
+
+		}
+		estado = execute(instruccion_ejecutar,pcb->registro_cpu);
+		if(estado == CONTINUE){
+			estado = check_interrupt();
+		}
+		pcb->pc++;
+	}
+	return estado;
+}
+
+INSTRUCCION* fetch(t_list* instrucciones, uint32_t pc){
+	return list_get(instrucciones,pc);
+}
+
+int decode(INSTRUCCION* instruccion_ejecutar ){
+	return (strcmp(instruccion_ejecutar->comando,"SET")|| strcmp(instruccion_ejecutar->comando,"ADD"));
+}
+
+int check_interrupt(){
+	pthread_mutex_lock(&mx_hay_interrupcion);
+	if (hay_interrupcion){
+		hay_interrupcion = false;
+		pthread_mutex_unlock(&mx_hay_interrupcion);
+		return INTERRUPTION;
+	}
+	pthread_mutex_unlock(&mx_hay_interrupcion);
+	return CONTINUE;
+}
+
+void interrupcion(){
+	//cambia hay_interrupcion a true
+	while(1){
+		op_code opcode;
+		recv(cpuServerInterrupt, &opcode, sizeof(op_code), 0);
+//		log_info(logger, "Interrupcion recibida");
+		pthread_mutex_lock(&mx_hay_interrupcion);
+		hay_interrupcion = true;
+		pthread_mutex_unlock(&mx_hay_interrupcion);
+	}
+}
+
+int execute(INSTRUCCION* instruccion_ejecutar,REG_USO_GRAL_CPU* registros){
+
+	if(strcmp(instruccion_ejecutar->comando,"SET")){
+		log_info(logger,"Ejecutando SET");
+		int i=0;
+		uint32_t valor= atoi(instruccion_ejecutar->parametro2);
+		while (i<4){
+			if(strcmp(instruccion_ejecutar->parametro,registros->registros[i])){
+				registros->valores[i]=valor;
+			}
+			i++;
+		}
+	}else if(strcmp(instruccion_ejecutar->comando,"ADD")){
+		log_info(logger,"Ejecutando ADD");
+		int i=0, destino, origen;
+		while (i<4){
+			if(strcmp(instruccion_ejecutar->parametro,registros->registros[i])){
+				destino=i;
+			}
+			if(strcmp(instruccion_ejecutar->parametro2,registros->registros[i])){
+				origen=i;
+			}
+			i++;
+		}
+		registros->valores[destino]+=registros->valores[origen];
+
+	}else if(strcmp(instruccion_ejecutar->comando,"MOV_OUT")){
+		log_info(logger,"Ejecutando MOV_OUT");
+
+		//log_info(logger,"Valor leido %d",ejecutarRead(instruccion_ejecutar->arg1,tabla_paginas));
+
+	}else if(strcmp(instruccion_ejecutar->comando,"MOV_IN")){
+		log_info(logger,"Ejecutando MOV_IN");
+		//ejecutarWrite(instruccion_ejecutar->arg1,instruccion_ejecutar->arg2,tabla_paginas);
+	}else if(strcmp(instruccion_ejecutar->comando,"IO")){
+		log_info(logger,"Ejecutando IO");
+		return BLOCKED;
+	}else if(strcmp(instruccion_ejecutar->comando,"EXIT")){
+		log_info(logger,"Ejecutando EXIT");
+		return EXIT;
+	}else{
+		log_error(logger,"Hubo un error en el ciclo de instruccion");
+	}
+
+	return CONTINUE;
 }
 

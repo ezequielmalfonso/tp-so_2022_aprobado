@@ -18,9 +18,7 @@
 #include<commons/collections/list.h>
 #include<commons/collections/dictionary.h>
 #include "protocolo.h"
-#include "pcb.h"
 #include "main.h"
-#include "estructuras.h"
 
 extern pthread_mutex_t mx_cola_new;
 extern pthread_mutex_t mx_lista_ready;
@@ -32,7 +30,7 @@ extern sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_m
 
 extern t_queue* cola_new;
 extern t_list* lista_ready;
-extern t_queue* cola_blocked;
+extern t_list* cola_blocked;
 //t_dictionary* iteracion_blocked; no se que chota es
 
 void esperar_cpu();
