@@ -11,23 +11,26 @@
 PCB_t* pcb_create(){
 	PCB_t* pcb = malloc(sizeof(PCB_t));
 	pcb->instrucciones = list_create();
-	strcpy(pcb->registro_cpu->registros[0],"AX");
-	strcpy(pcb->registro_cpu->registros[1],"BX");
-	strcpy(pcb->registro_cpu->registros[2],"CX");
-	strcpy(pcb->registro_cpu->registros[3],"DX");
 	pcb->segmentos=list_create();
+	/*pcb->registro_cpu->valores[0]=0;
+	pcb->registro_cpu->valores[1]=0;
+	pcb->registro_cpu->valores[2]=0;
+	pcb->registro_cpu->valores[3]=0;*/
 	//TODO ver como iniciar los valores de REG_USO_GRAL_CPU y TABLA_SEGMENTOS
 	return pcb;
 }
 
-void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU* registro_cpu, t_list* segmentos){
+void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos){
 
 	//list_destroy_and_destroy_elements(pcb->instrucciones,free);
 	list_add_all(pcb->instrucciones,instrucciones);
 	pcb->pid=pid;
 	pcb->pc = pc;
 	//antes de cambiar de puntero, destruyo toda existencia de la anterior
-	pcb->registro_cpu = registro_cpu;
+	pcb->registro_cpu[0] = registro_cpu[0];
+	pcb->registro_cpu[1] = registro_cpu[1];
+	pcb->registro_cpu[2] = registro_cpu[2];
+	pcb->registro_cpu[3] = registro_cpu[3];
 	//list_destroy_and_destroy_elements(pcb->segmentos,free);
     list_add_all(pcb->segmentos,segmentos);
 }
@@ -43,7 +46,8 @@ int pcb_find_index(t_list* lista, uint16_t pid){
 }
 
 void pcb_destroy(PCB_t* pcb){
-	list_destroy_and_destroy_elements(pcb->instrucciones,free);
+	list_destroy_and_destroy_elements(pcb->instrucciones,free); //ROMPE ESTO
+	list_destroy_and_destroy_elements(pcb->segmentos,free);
 	free(pcb);
 }
 

@@ -7,6 +7,7 @@
 
 #include "main.h"
 
+int cpuServerDispatch, cpuServerInterrupt;
 pthread_mutex_t mx_hay_interrupcion = PTHREAD_MUTEX_INITIALIZER;
 
 bool hay_interrupcion;
@@ -80,7 +81,7 @@ op_code iniciar_ciclo_instruccion(PCB_t* pcb){
 
 		if(decode(instruccion_ejecutar)){
 			log_info(logger,"En CPU");
-			sleep(configuracion->RETARDO_INSTRUCCION);
+			//usleep(configuracion->RETARDO_INSTRUCCION);
 
 		}
 		estado = execute(instruccion_ejecutar,pcb->registro_cpu);
@@ -97,7 +98,7 @@ INSTRUCCION* fetch(t_list* instrucciones, uint32_t pc){
 }
 
 int decode(INSTRUCCION* instruccion_ejecutar ){
-	return (strcmp(instruccion_ejecutar->comando,"SET")|| strcmp(instruccion_ejecutar->comando,"ADD"));
+	return (!strcmp(instruccion_ejecutar->comando,"SET")|| !strcmp(instruccion_ejecutar->comando,"ADD"));
 }
 
 int check_interrupt(){
@@ -123,44 +124,71 @@ void interrupcion(){
 	}
 }
 
-int execute(INSTRUCCION* instruccion_ejecutar,REG_USO_GRAL_CPU* registros){
+int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 
-	if(strcmp(instruccion_ejecutar->comando,"SET")){
+	if(!strcmp(instruccion_ejecutar->comando,"SET")){
 		log_info(logger,"Ejecutando SET");
 		int i=0;
 		uint32_t valor= atoi(instruccion_ejecutar->parametro2);
-		while (i<4){
-			if(strcmp(instruccion_ejecutar->parametro,registros->registros[i])){
-				registros->valores[i]=valor;
-			}
-			i++;
+		switch(instruccion_ejecutar->parametro[0]){
+		case 'A':
+			registros[0]=valor;
+			break;
+		case 'B':
+			registros[1]=valor;
+			break;
+		case 'C':
+			registros[2]=valor;
+			break;
+		case 'D':
+			registros[3]=valor;
+			break;
 		}
-	}else if(strcmp(instruccion_ejecutar->comando,"ADD")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"ADD")){
 		log_info(logger,"Ejecutando ADD");
 		int i=0, destino, origen;
-		while (i<4){
-			if(strcmp(instruccion_ejecutar->parametro,registros->registros[i])){
-				destino=i;
-			}
-			if(strcmp(instruccion_ejecutar->parametro2,registros->registros[i])){
-				origen=i;
-			}
-			i++;
+		switch(instruccion_ejecutar->parametro[0]){
+		case 'A':
+			destino=0;
+			break;
+		case 'B':
+			destino=1;
+			break;
+		case 'C':
+			destino=2;
+			break;
+		case 'D':
+			destino=3;
+			break;
 		}
-		registros->valores[destino]+=registros->valores[origen];
+		switch(instruccion_ejecutar->parametro2[0]){
+		case 'A':
+			origen=0;
+			break;
+		case 'B':
+			origen=1;
+			break;
+		case 'C':
+			origen=2;
+			break;
+		case 'D':
+			origen=3;
+			break;
+		}
+		registros[destino]+=registros[origen];
 
-	}else if(strcmp(instruccion_ejecutar->comando,"MOV_OUT")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"MOV_OUT")){
 		log_info(logger,"Ejecutando MOV_OUT");
 
 		//log_info(logger,"Valor leido %d",ejecutarRead(instruccion_ejecutar->arg1,tabla_paginas));
 
-	}else if(strcmp(instruccion_ejecutar->comando,"MOV_IN")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"MOV_IN")){
 		log_info(logger,"Ejecutando MOV_IN");
 		//ejecutarWrite(instruccion_ejecutar->arg1,instruccion_ejecutar->arg2,tabla_paginas);
-	}else if(strcmp(instruccion_ejecutar->comando,"IO")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"IO")){
 		log_info(logger,"Ejecutando IO");
 		return BLOCKED;
-	}else if(strcmp(instruccion_ejecutar->comando,"EXIT")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"EXIT")){
 		log_info(logger,"Ejecutando EXIT");
 		return EXIT;
 	}else{

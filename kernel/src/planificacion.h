@@ -21,18 +21,21 @@
 #include "main.h"
 
 extern pthread_mutex_t mx_cola_new;
-extern pthread_mutex_t mx_lista_ready;
+extern pthread_mutex_t mx_cola_ready;
 extern pthread_mutex_t mx_lista_block;
-extern pthread_mutex_t mx_lista_new;
 extern pthread_mutex_t mx_log;
+extern pthread_mutex_t mx_cpu_desocupado;
 
-extern sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual;
-
+extern sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked;
+extern sem_t s_ios[10];
 extern t_queue* cola_new;
-extern t_list* lista_ready;
-extern t_list* cola_blocked;
+extern t_queue* cola_ready;
+extern t_list* lista_blocked;
 //t_dictionary* iteracion_blocked; no se que chota es
 
 void esperar_cpu();
-
+void bloqueando(PCB_t*);
+void inicializarPlanificacion();
+void execute_a_exit(PCB_t*);
+void ejecutar_io(PCB_t*);
 #endif /* SRC_PLANIFICACION_H_ */

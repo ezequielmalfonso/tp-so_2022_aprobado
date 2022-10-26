@@ -16,8 +16,8 @@
 #include "cpuConfig.h"
 #include "comunicacion.h"
 
-int cpuServerInterrupt;
-int cpuServerDispatch;
+extern int cpuServerInterrupt;
+extern int cpuServerDispatch;
 
 void dispatchCpu();
 void interruptCpu ();
@@ -27,7 +27,7 @@ INSTRUCCION* fetch(t_list* instrucciones, uint32_t pc);
 int decode(INSTRUCCION* instruccion_ejecutar );
 int check_interrupt();
 void interrupcion();
-int execute(INSTRUCCION* instruccion_ejecutar,REG_USO_GRAL_CPU* registros);
+int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]);
 
 
 #endif /* SRC_MAIN_H_ */

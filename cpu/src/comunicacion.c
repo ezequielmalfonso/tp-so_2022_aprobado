@@ -36,6 +36,8 @@ static void procesar_conexion(void* void_args) {
 	 PCB_t* proceso= pcb_create();
 	 recv_proceso(cliente_socket,proceso);
 	 log_info(logger,"recibi pcb");
+	 op_code codigo=iniciar_ciclo_instruccion(proceso);
+	 send_proceso(cliente_socket,proceso,codigo);
 	 break;
  }
  // Errores

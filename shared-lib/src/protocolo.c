@@ -172,9 +172,9 @@ uint32_t calcular_instrucciones_buffer_size(t_list* lista, char** segmentos){
 
 //ENVIAR PCB KERNEL->CPU_DISPATCH
 
-bool send_proceso(int fd, PCB_t *proceso) {
+bool send_proceso(int fd, PCB_t *proceso,op_code codigo) {
     size_t size;
-    void* stream = serializar_proceso(&size, proceso);
+    void* stream = serializar_proceso(&size, proceso,codigo);
     if (send(fd, stream, size, 0) != size) {
         free(stream);
         return false;
@@ -184,7 +184,7 @@ bool send_proceso(int fd, PCB_t *proceso) {
 }
 
 
-static void* serializar_proceso(size_t* size, PCB_t *proceso) {
+static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 	INSTRUCCION* aux;
 
 	aux = list_get(proceso->instrucciones,0);
@@ -192,15 +192,22 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso) {
 
 	uint32_t cantSegmentos= list_size(proceso->segmentos);
 
-	*size= sizeof(size_t)+ //SIZE PAYLOAD
-		   sizeof(uint32_t)+ //SIZE PID
+	*size= sizeof(op_code)+   // 4
+		   sizeof(size_t)+ //SIZE PAYLOAD
+		   sizeof(uint16_t)+ //SIZE PID
 		   sizeof(uint32_t)+ //SIZE PC
-		   sizeof(char[4][2])+sizeof(uint32_t[4])+ //SIZE REGISTROS
+		   (sizeof(uint32_t)*4)+ //SIZE REGISTROS
+		   sizeof(uint32_t)+ //SIZE elementosLista
 		   ((3*sizeof(char))*elementosLista)+ //SIZE LISTA INSTRUCCIONES
+		   sizeof(uint32_t)+//SIZE cantSegmentos
 		   sizeof(uint32_t)*cantSegmentos; //SIZE SEGMENTOS SIN LOS ID
-	size_t size_payload=*size-sizeof(size_t);
+	size_t size_payload=*size- sizeof(op_code) -sizeof(size_t);
 	uint32_t offset = 0;
 	void* stream = malloc(*size);
+
+	op_code cop = codigo;
+	memcpy(stream + offset, &cop, sizeof(op_code));
+	offset+= sizeof(op_code);
 
 	memcpy(stream + offset, &size_payload, sizeof(size_t));
 	offset+= sizeof(size_t);
@@ -209,11 +216,15 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso) {
 	memcpy(stream + offset, &proceso->pc, sizeof(uint32_t));
 	offset+= sizeof(uint32_t);
 
-	memcpy(stream + offset, &proceso->registro_cpu->registros, sizeof(char[4][2]));
-	offset+= sizeof(char[4][2]);
-	memcpy(stream + offset, &proceso->registro_cpu->valores, sizeof(uint32_t[4]));
-	offset+= sizeof(uint32_t[4]);
-	//CHEQUEAR
+	memcpy(stream + offset, &proceso->registro_cpu[0], sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+	memcpy(stream + offset, &proceso->registro_cpu[1], sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+	memcpy(stream + offset, &proceso->registro_cpu[2], sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+	memcpy(stream + offset, &proceso->registro_cpu[3], sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
+
 	memcpy(stream + offset, &elementosLista, sizeof(uint32_t));
 	offset+= sizeof(uint32_t);
 
@@ -276,10 +287,14 @@ static void deserializar_proceso(void* stream, PCB_t* proceso) {
 	memcpy(&(proceso->pc), stream, sizeof(uint32_t));
 	stream+=sizeof(uint32_t);
 
-	memcpy(&(proceso->registro_cpu->registros),stream, sizeof(char[4][2]));
-	stream+=sizeof(char[4][2]);
-	memcpy(&(proceso->registro_cpu->valores),stream, sizeof(uint32_t[4]));
-	stream+=sizeof(uint32_t[4]);
+	memcpy(&(proceso->registro_cpu[0]),stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
+	memcpy(&(proceso->registro_cpu[1]),stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
+	memcpy(&(proceso->registro_cpu[2]),stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
+	memcpy(&(proceso->registro_cpu[3]),stream, sizeof(uint32_t));
+	stream+=sizeof(uint32_t);
 	//CHEQUEAR
 
 	memcpy(&elementosLista, stream, sizeof(uint32_t));

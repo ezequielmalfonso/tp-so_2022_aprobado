@@ -8,7 +8,6 @@
 #include "comunicacion.h"
 
 
-	uint16_t pid=1;
 typedef struct {
     int fd;
     char* server_name;
@@ -41,11 +40,15 @@ static void procesar_conexion(void* void_args) {
 
 
 	//TODO pasarle los valores de inicializacion al PCB
-	REG_USO_GRAL_CPU* registros;
+	uint32_t registros[4];
+	registros[0]=0;
+	registros[1]=0;
+	registros[2]=0;
+	registros[3]=0;
 
-	pcb_set(proceso, pid, mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos);
+	pcb_set(proceso, process_get_thread_id(), mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos);
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
-	pid++;
+
 
 
     queue_push(cola_new,proceso);
@@ -57,14 +60,16 @@ static void procesar_conexion(void* void_args) {
 	proceso=queue_pop(cola_new);
     pthread_mutex_unlock(&mx_cola_new);
     //solicitar_tabla_de_segmentos();
-    pthread_mutex_lock(&mx_lista_ready);
-    //agregar a cola ready
-    pthread_mutex_unlock(&mx_lista_ready);
+    pthread_mutex_lock(&mx_cola_ready);
+    queue_push(cola_ready,proceso);
+    pthread_mutex_unlock(&mx_cola_ready);
     pthread_mutex_lock(&mx_log);
-    log_info(logger,"“PID: %d - Estado Anterior: NEW - Estado Actual: EXECUTE", proceso->pid);
+    log_info(logger,"“PID: %d - Estado Anterior: NEW - Estado Actual: READY", proceso->pid);
     pthread_mutex_unlock(&mx_log);
-    send_proceso(dispatch_fd, proceso);
-    log_info(logger, "se envio proceso a cpu");
+    sem_post(&s_cont_ready);
+    sem_post(&s_ready_execute);
+
+  //  log_info(logger, "se envio proceso a cpu");
     //y todo el log de que algo entro a ready y lo tira como lista
 
 	//liberar_conexion(cliente_socket);

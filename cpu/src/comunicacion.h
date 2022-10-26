@@ -18,6 +18,7 @@
 #include "protocolo.h"
 #include "socket.h"
 #include "cpuConfig.h"
+#include "main.h"
 #include <semaphore.h>
 
 //sem_t sem;

@@ -13,11 +13,6 @@
 #include<stdint.h>
 #include<commons/collections/list.h>
 
-typedef struct {
-	 char registros[4][2];
-	 uint32_t valores[4];
-}REG_USO_GRAL_CPU;
-
 typedef struct{
   uint32_t tamSegmento;
   uint32_t id_tabla_pagina;
@@ -27,13 +22,13 @@ typedef struct {
 	uint16_t pid;
 	t_list* instrucciones;
 	uint32_t pc;
-	REG_USO_GRAL_CPU* registro_cpu;
+	uint32_t registro_cpu[4];
 	t_list* segmentos;
 }PCB_t;
 
 PCB_t* pcb_create();
 
-void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, REG_USO_GRAL_CPU* registro_cpu, t_list* segmentos);
+void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos);
 
 int pcb_find_index(t_list* lista, uint16_t pid);
 
