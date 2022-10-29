@@ -185,9 +185,8 @@ bool send_proceso(int fd, PCB_t *proceso,op_code codigo) {
 
 
 static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
-	INSTRUCCION* aux;
 
-	aux = list_get(proceso->instrucciones,0);
+
 	uint32_t elementosLista= list_size(proceso->instrucciones);
 
 	uint32_t cantSegmentos= list_size(proceso->segmentos);
@@ -198,7 +197,7 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		   sizeof(uint32_t)+ //SIZE PC
 		   (sizeof(uint32_t)*4)+ //SIZE REGISTROS
 		   sizeof(uint32_t)+ //SIZE elementosLista
-		   ((3*sizeof(char))*elementosLista)+ //SIZE LISTA INSTRUCCIONES
+		   ((3*25)*elementosLista)+ //SIZE LISTA INSTRUCCIONES
 		   sizeof(uint32_t)+//SIZE cantSegmentos
 		   sizeof(uint32_t)*cantSegmentos; //SIZE SEGMENTOS SIN LOS ID
 	size_t size_payload=*size- sizeof(op_code) -sizeof(size_t);
@@ -236,12 +235,12 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		printf("Verificamos la lista:\n");
 		printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
 
-		memcpy(stream + offset, &auxl2->comando, sizeof(aux->comando));
-		offset += sizeof(aux->comando);
-		memcpy(stream + offset, &auxl2->parametro, sizeof(aux->parametro));
-		offset += sizeof(aux->parametro);
-		memcpy(stream + offset, &auxl2->parametro2, sizeof(aux->parametro2));
-		offset += sizeof(aux->parametro2);
+		memcpy(stream + offset, &auxl2->comando, sizeof(auxl2->comando));
+		offset += sizeof(auxl2->comando);
+		memcpy(stream + offset, &auxl2->parametro, sizeof(auxl2->parametro));
+		offset += sizeof(auxl2->parametro);
+		memcpy(stream + offset, &auxl2->parametro2, sizeof(auxl2->parametro2));
+		offset += sizeof(auxl2->parametro2);
 		aux1 = aux1->next;
 	}
 
@@ -257,7 +256,7 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		i++;
 	}
 
-	free(aux);
+	//free(aux);
 	return stream;
 }
 
@@ -279,7 +278,7 @@ bool recv_proceso(int fd, PCB_t* proceso) {
 static void deserializar_proceso(void* stream, PCB_t* proceso) {
 	int i=0,c=0;
 
-	uint32_t elementosLista, cantSegmentos;
+	uint32_t elementosLista=0, cantSegmentos=0;
 
 	memcpy(&(proceso->pid), stream, sizeof(uint16_t));
 	stream+=sizeof(uint16_t);
@@ -316,10 +315,10 @@ static void deserializar_proceso(void* stream, PCB_t* proceso) {
 		    i++;
 		}
 
-		memcpy(&(cantSegmentos), stream, sizeof(uint32_t));
-	    stream += sizeof(uint32_t);
+	memcpy(&cantSegmentos, stream, sizeof(uint32_t));
+	stream += sizeof(uint32_t);
 
-	    while (c<cantSegmentos)
+	while (c<cantSegmentos)
 	    {
 	    	uint32_t aux=0;
 	    	memcpy(&aux, stream, sizeof(uint32_t));

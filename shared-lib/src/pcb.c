@@ -47,7 +47,7 @@ int pcb_find_index(t_list* lista, uint16_t pid){
 
 void pcb_destroy(PCB_t* pcb){
 	list_destroy_and_destroy_elements(pcb->instrucciones,free); //ROMPE ESTO
-	list_destroy_and_destroy_elements(pcb->segmentos,free);
+	list_destroy(pcb->segmentos);
 	free(pcb);
 }
 
