@@ -34,9 +34,12 @@ int main(){
 
 	pthread_t dispatch_id;
 	pthread_t interrupt_id;
+	pthread_t hilo_interrupciones;
+
 
 	pthread_create(&dispatch_id,NULL,(void*) dispatchCpu,NULL);
 	pthread_create(&interrupt_id,NULL,(void*) interruptCpu,NULL);
+	pthread_create(&hilo_interrupciones,NULL,(void*)interrupcion,NULL);
 
 	pthread_join(interrupt_id,0);
 	pthread_join(dispatch_id,0);
@@ -70,6 +73,7 @@ void interruptCpu() {
 
 	//free(puertoInterrupt);
 
+
 	while(server_escuchar("INTERRUPT_SV",cpuServerInterrupt));
 }
 
@@ -81,7 +85,7 @@ op_code iniciar_ciclo_instruccion(PCB_t* pcb){
 
 		if(decode(instruccion_ejecutar)){
 			log_info(logger,"En CPU");
-			//usleep(configuracion->RETARDO_INSTRUCCION);
+			usleep(configuracion->RETARDO_INSTRUCCION);
 
 		}
 		estado = execute(instruccion_ejecutar,pcb->registro_cpu);
@@ -106,7 +110,7 @@ int check_interrupt(){
 	if (hay_interrupcion){
 		hay_interrupcion = false;
 		pthread_mutex_unlock(&mx_hay_interrupcion);
-		return INTERRUPTION;
+		return INTERRUPT;
 	}
 	pthread_mutex_unlock(&mx_hay_interrupcion);
 	return CONTINUE;
@@ -118,9 +122,11 @@ void interrupcion(){
 		op_code opcode;
 		recv(cpuServerInterrupt, &opcode, sizeof(op_code), 0);
 //		log_info(logger, "Interrupcion recibida");
+		if(opcode==INTERRUPT){
 		pthread_mutex_lock(&mx_hay_interrupcion);
 		hay_interrupcion = true;
 		pthread_mutex_unlock(&mx_hay_interrupcion);
+		}
 	}
 }
 
@@ -185,10 +191,12 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 	}else if(!strcmp(instruccion_ejecutar->comando,"MOV_IN")){
 		log_info(logger,"Ejecutando MOV_IN");
 		//ejecutarWrite(instruccion_ejecutar->arg1,instruccion_ejecutar->arg2,tabla_paginas);
-	}else if(!strcmp(instruccion_ejecutar->comando,"IO")){
+	}else if(!strcmp(instruccion_ejecutar->comando,"I/O")){
 		log_info(logger,"Ejecutando IO");
-		return BLOCKED;
+		return IO;
 	}else if(!strcmp(instruccion_ejecutar->comando,"EXIT")){
+		log_info(logger, "a dormir");
+		sleep(5);
 		log_info(logger,"Ejecutando EXIT");
 		return EXIT;
 	}else{

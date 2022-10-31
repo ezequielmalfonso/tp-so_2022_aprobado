@@ -34,7 +34,6 @@ typedef enum {
 	INTERRUPT,
 	PAGEFAULT,
 	CONTINUE,
-	INTERRUPTION,
 	BLOCKED
 	}op_code;
 

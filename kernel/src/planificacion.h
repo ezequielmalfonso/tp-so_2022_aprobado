@@ -30,7 +30,8 @@ extern sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_m
 extern sem_t s_ios[10];
 extern t_queue* cola_new;
 extern t_queue* cola_ready;
-extern t_list* lista_blocked;
+extern t_queue* cola_ready_sec;
+extern t_list* list_blocked;
 //t_dictionary* iteracion_blocked; no se que chota es
 
 void esperar_cpu();
