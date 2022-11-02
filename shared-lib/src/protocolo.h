@@ -34,7 +34,9 @@ typedef enum {
 	INTERRUPT,
 	PAGEFAULT,
 	CONTINUE,
-	BLOCKED
+	BLOCKED,
+	PANTALLA,
+	TECLADO
 	}op_code;
 
 typedef struct{

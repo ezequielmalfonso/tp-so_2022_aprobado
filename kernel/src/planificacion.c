@@ -18,7 +18,7 @@ pthread_mutex_t mx_log = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cola_blocked = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cpu_desocupado = PTHREAD_MUTEX_INITIALIZER;
 
-sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked;
+sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked,s_io;
 sem_t s_ios[10];
 t_queue* cola_new;
 t_queue* cola_ready;
@@ -58,7 +58,9 @@ void rr_ready_execute(){
 		pthread_mutex_unlock(&mx_log);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
 		pcb_destroy(proceso);
+		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado=false;
+		pthread_mutex_unlock(&mx_cpu_desocupado);
 		sem_post(&s_esperar_cpu);
 		usleep(configuracion->QUANTUM_RR*1000);
 		if(!cpu_desocupado){
@@ -126,7 +128,8 @@ void inicializarPlanificacion(){
 	sem_init(&s_cpu_desocupado, 0, 1);
 	sem_init(&s_esperar_cpu, 0, 0);
 	sem_init(&s_cont_ready,0,0);
-	for(int i=0;i==10;i++){
+	sem_init(&s_io, 0, 1);
+	for(int i=0;i<10;i++){
 		sem_init(&s_ios[i], 0, 1);
 	}
 	sem_init(&s_multiprogramacion_actual, 0, configuracion->GRADO_MAX_MULTIPROGRAMACION);
@@ -155,15 +158,7 @@ void inicializarPlanificacion(){
 
 
 
-void bloqueando(PCB_t* pcb){
-	INSTRUCCION* inst = list_get(pcb->instrucciones, pcb->pc - 1);
-	for(int i=0;i<10;i++){
-	if(!strcmp(inst->parametro,configuracion->DISPOSITIVOS_IO[i])){ // HAY QUE VER COMO METERSE EN ESE CHAR ** DISPOSITIVOS IO PARA QUE HAGA EL STRCMP
-	sem_wait(&s_ios[i]);
-	ejecutar_io(pcb);
-		}
-	}
-}
+
 //int  string_array_size(char** array);
 /****Hilo NEW -> READY */
 
@@ -189,20 +184,20 @@ void esperar_cpu(){
 		cpu_desocupado = true;
 		pthread_mutex_unlock(&mx_cpu_desocupado);
 		switch (cop) {
-			case EXIT:{
+			case EXIT:
+				send(pcb->cliente_fd,&cop,sizeof(op_code),0);
 				execute_a_exit(pcb);
 				sem_post(&s_cpu_desocupado);
 				sem_post(&s_ready_execute);
 
-			/*	//Por si la interrupcion se mando cuando se estaba procesando la instruccion EXIT
-				pthread_mutex_lock(&mx_hay_interrupcion);
+	/*			pthread_mutex_lock(&mx_hay_interrupcion);
 				if(hay_interrupcion){
-					//pthread_mutex_unlock(&mx_hay_interrupcion);
+
 					sem_post(&s_pcb_desalojado);
 				}
-				pthread_mutex_unlock(&mx_hay_interrupcion); NOse que carajo significa pero tiene sentido*/
+				pthread_mutex_unlock(&mx_hay_interrupcion); */
 				break;
-			}
+
 			case INTERRUPT:
 				log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: READY", pcb->pid);
 				if(!strcmp(configuracion->ALGORITMO_PLANIFICACION,"RR")){
@@ -217,7 +212,7 @@ void esperar_cpu(){
 					pthread_mutex_unlock(&mx_cola_ready_sec);
 				}
 				sem_post(&s_cont_ready);
-				//sem_post(&s_pcb_desalojado);
+		//		sem_post(&s_pcb_desalojado);
 				sem_post(&s_ready_execute);
 				sem_post(&s_cpu_desocupado);
 					break;
@@ -228,10 +223,11 @@ void esperar_cpu(){
 				pthread_mutex_unlock(&mx_cola_blocked);
 				//Creamos el hilo aparte que lo bloquee y se encargue de su io
 				pthread_t hilo_bloqueado;
+				sem_post(&s_blocked);
 				pthread_create(&hilo_bloqueado,NULL,(void*)bloqueando,pcb);
 				pthread_detach(hilo_bloqueado);
 				log_info(logger, "PID: %d - Estado Anterior: EXECUTE - Estado Actual: BLOCKED", pcb->pid);
-				sem_post(&s_blocked);
+
 				sem_post(&s_cpu_desocupado);
 
 			/* 	//Por si la interrupcion se mando cuando se estaba procesando la instruccion IO
@@ -254,31 +250,77 @@ void esperar_cpu(){
 }
 
 
-void ejecutar_io(PCB_t* pcb) {
-		sem_wait(&s_blocked);
-		//pthread_mutex_lock(&mx_cola_blocked);
-		/*if (list_size(cola_blocked) == 0){
-			pthread_mutex_lock(&mx_log);
-			log_error(logger,"Blocked ejecutó sin un proceso bloqueado");
-			pthread_mutex_unlock(&mx_log);
-		}*/
-	//	PCB_t* proceso = list_get(list_blocked,0);
-	//	pthread_mutex_unlock(&mx_cola_blocked);
-		INSTRUCCION* inst = list_get(pcb->instrucciones, pcb->pc - 1); //-1 porque ya se incremento el PC
-		uint32_t tiempo = atoi(inst->parametro2);
+void bloqueando(PCB_t* pcb){
+	int i = 0;
+	op_code cop;
+	INSTRUCCION* inst = list_get(pcb->instrucciones, pcb->pc - 1);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, "instruccion numer %d",(pcb->pc-1));
+		pthread_mutex_unlock(&mx_log);
+	if(!strcmp(inst->parametro,"TECLADO")){
+		cop=TECLADO;
+		uint16_t registro=0;
+		uint32_t valor=0;
 		pthread_mutex_lock(&mx_log);
 		log_info(logger, " PID: %d - Bloqueado por: %s", pcb->pid, inst->parametro);
 		pthread_mutex_unlock(&mx_log);
-		usleep(tiempo * 1000);
-		//pthread_mutex_lock(&mx_cola_blocked);
-		//list_remove(list_blocked,0);
-		//pthread_mutex_unlock(&mx_cola_blocked);
-		/*char* key = string_itoa(proceso->pid);
-		pthread_mutex_lock(&mx_iteracion_blocked);
-		int iteracion_actual = (int) dictionary_get(iteracion_blocked, key);
-		dictionary_put(iteracion_blocked, key,(int *) iteracion_actual + 1);
-		free(key);
-		pthread_mutex_unlock(&mx_iteracion_blocked); NO tengo la menor idea que es eso*/
+		send(pcb->cliente_fd,&cop,sizeof(op_code),0);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " lo mande");
+		pthread_mutex_unlock(&mx_log);
+		recv(pcb->cliente_fd,&valor,sizeof(uint32_t),0);
+		switch(inst->parametro2[1]){
+			case 'A':
+				registro=0;
+				break;
+			case 'B':
+				registro=1;
+			break;
+			case 'C':
+				registro=2;
+			break;
+			case 'D':
+				registro=3;
+			break;
+			}
+		pcb->registro_cpu[registro]=valor;
+
+
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, "PID: %d - Estado Anterior: BLOCKED - Estado Actual: READY", pcb->pid);
+		pthread_mutex_unlock(&mx_log);
+		pthread_mutex_lock(&mx_cola_ready);
+		queue_push(cola_ready, pcb);
+		pthread_mutex_unlock(&mx_cola_ready);
+		sem_post(&s_ready_execute);
+		sem_post(&s_cont_ready);
+	}
+	else if(!strcmp(inst->parametro,"PANTALLA")){
+		uint16_t registro = 0;
+		op_code op = PANTALLA;
+		send(pcb->cliente_fd,&op,sizeof(op_code),0);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " lo mande");
+		pthread_mutex_unlock(&mx_log);
+		switch(inst->parametro2[1]){
+			case 'A':
+				registro=0;
+				break;
+			case 'B':
+				registro=1;
+			break;
+			case 'C':
+				registro=2;
+			break;
+			case 'D':
+				registro=3;
+			break;
+			}
+		send(pcb->cliente_fd,&pcb->registro_cpu[registro],sizeof(uint32_t),0);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " PID: %d - Bloqueado por: %s", pcb->pid, inst->parametro);
+		pthread_mutex_unlock(&mx_log);
+		recv(pcb->cliente_fd,&op,sizeof(op_code),0);
 		pthread_mutex_lock(&mx_log);
 		log_info(logger, "PID: %d - Estado Anterior: BLOCKED - Estado Actual: READY", pcb->pid);
 		pthread_mutex_unlock(&mx_log);
@@ -288,5 +330,48 @@ void ejecutar_io(PCB_t* pcb) {
 		sem_post(&s_ready_execute);
 		sem_post(&s_cont_ready);
 
+	}
+	else{
+		while(strcmp(inst->parametro,configuracion->DISPOSITIVOS_IO[i])){
+			i++;}
+		if(!strcmp(inst->parametro,configuracion->DISPOSITIVOS_IO[i])){ // HAY QUE VER COMO METERSE EN ESE CHAR ** DISPOSITIVOS IO PARA QUE HAGA EL STRCMP
+			pthread_mutex_lock(&mx_log);
+			log_info(logger, " me meti al if");
+			pthread_mutex_unlock(&mx_log);
+			sem_wait(&s_ios[i]);
+			ejecutar_io(pcb,i);
+			}
+		}
+	}
+
+
+void ejecutar_io(PCB_t* pcb,int numero) {
+		sem_wait(&s_blocked);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " ejecutar io");
+		pthread_mutex_unlock(&mx_log);
+
+		//pthread_mutex_lock(&mx_cola_blocked);
+		/*if (list_size(cola_blocked) == 0){
+			pthread_mutex_lock(&mx_log);
+			log_error(logger,"Blocked ejecutó sin un proceso bloqueado");
+			pthread_mutex_unlock(&mx_log);
+		}*/
+
+		INSTRUCCION* inst = list_get(pcb->instrucciones, pcb->pc - 1); //-1 porque ya se incremento el PC
+		uint32_t tiempo = atoi(inst->parametro2);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, " PID: %d - Bloqueado por: %s", pcb->pid, inst->parametro);
+		pthread_mutex_unlock(&mx_log);
+		usleep(tiempo * 1000);
+		pthread_mutex_lock(&mx_log);
+		log_info(logger, "PID: %d - Estado Anterior: BLOCKED - Estado Actual: READY", pcb->pid);
+		pthread_mutex_unlock(&mx_log);
+		pthread_mutex_lock(&mx_cola_ready);
+		queue_push(cola_ready, pcb);
+		pthread_mutex_unlock(&mx_cola_ready);
+		sem_post(&s_ready_execute);
+		sem_post(&s_cont_ready);
+		sem_post(&s_ios[numero]);
 	}
 

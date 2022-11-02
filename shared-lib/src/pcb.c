@@ -20,7 +20,7 @@ PCB_t* pcb_create(){
 	return pcb;
 }
 
-void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos){
+void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos,int cliente){
 
 	//list_destroy_and_destroy_elements(pcb->instrucciones,free);
 	list_add_all(pcb->instrucciones,instrucciones);
@@ -33,6 +33,7 @@ void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, uint3
 	pcb->registro_cpu[3] = registro_cpu[3];
 	//list_destroy_and_destroy_elements(pcb->segmentos,free);
     list_add_all(pcb->segmentos,segmentos);
+    pcb->cliente_fd=cliente;
 }
 
 

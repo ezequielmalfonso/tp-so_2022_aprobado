@@ -14,7 +14,8 @@ t_log * logger;
 int configValida(t_config* fd_configuracion) {
 	return (config_has_property(fd_configuracion, "IP_KERNEL")
 		&& config_has_property(fd_configuracion, "PUERTO_KERNEL")
-		&& config_has_property(fd_configuracion, "SEGMENTOS"));
+		&& config_has_property(fd_configuracion, "SEGMENTOS")
+		&& config_has_property(fd_configuracion, "TIEMPO_PANTALLA"));
 }
 
 int cargarConfiguracion(char* path) {
@@ -35,6 +36,7 @@ int cargarConfiguracion(char* path) {
 	configuracion->IP_KERNEL = config_get_string_value(fd_configuracion, "IP_KERNEL");
 	configuracion->PUERTO_KERNEL = config_get_int_value(fd_configuracion, "PUERTO_KERNEL");
 	configuracion->SEGMENTOS = config_get_array_value(fd_configuracion, "SEGMENTOS");
+	configuracion->TIEMPO_PANTALLA = config_get_int_value(fd_configuracion, "TIEMPO_PANTALLA");
 
 
 	log_info(logger,

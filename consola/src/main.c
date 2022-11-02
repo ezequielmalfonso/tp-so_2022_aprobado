@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 	int kernel_fd;
 	cargarConfiguracion(argv[2]);
 	generar_conexion(&kernel_fd, configuracion);
-
+	uint32_t valor=0;
 
 	/*int i = 0;
 	while(segmentos[i]!=NULL){
@@ -32,9 +32,31 @@ int main(int argc, char** argv){
 
 	enviar_instrucciones(kernel_fd, listaInstrucciones, configuracion->SEGMENTOS);
 
-	log_info(logger, "Se realizo el envio se desconecto del kernel");
-
-	limpiarConfiguracion();
+	while(1){
+		op_code cod,cop_aux;
+		recv(kernel_fd,&cod,sizeof(op_code),MSG_WAITALL);
+		switch(cod){
+			case PANTALLA:
+				cop_aux = PANTALLA;
+				recv(kernel_fd,&valor,sizeof(uint32_t),0);
+				log_info(logger,"valor registro:%d",valor);
+				usleep(configuracion->TIEMPO_PANTALLA*1000);
+				send(kernel_fd,&cop_aux,sizeof(op_code),0);
+			break;
+			case TECLADO:
+				log_info(logger,"Ingrese valor:");
+				scanf("%d",&valor);
+				send(kernel_fd,&valor,sizeof(uint32_t),0);
+			break;
+			case EXIT:
+				log_info(logger, "Se realizo el envio se desconecto del kernel");
+				limpiarConfiguracion();
+				exit(-1);
+			break;
+			default:
+				break;
+		}
+	}
 }
 
 

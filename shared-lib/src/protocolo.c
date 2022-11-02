@@ -199,7 +199,9 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		   sizeof(uint32_t)+ //SIZE elementosLista
 		   ((3*25)*elementosLista)+ //SIZE LISTA INSTRUCCIONES
 		   sizeof(uint32_t)+//SIZE cantSegmentos
-		   sizeof(uint32_t)*cantSegmentos; //SIZE SEGMENTOS SIN LOS ID
+		   sizeof(uint32_t)*cantSegmentos + //SIZE SEGMENTOS SIN LOS ID
+		   sizeof(int); //SIZE CONSOLA FD
+
 	size_t size_payload=*size- sizeof(op_code) -sizeof(size_t);
 	uint32_t offset = 0;
 	void* stream = malloc(*size);
@@ -255,6 +257,8 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		//FALTA ID SEGMENTO
 		i++;
 	}
+
+	memcpy(stream + offset, &proceso->cliente_fd, sizeof(int));
 
 	//free(aux);
 	return stream;
@@ -327,6 +331,8 @@ static void deserializar_proceso(void* stream, PCB_t* proceso) {
 	    	list_add(proceso->segmentos,aux);
 	    	c++;
 	    }
+
+	memcpy(&proceso->cliente_fd, stream, sizeof(int));
 
 
 }

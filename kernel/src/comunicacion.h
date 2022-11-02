@@ -18,6 +18,8 @@
 #include "socket.h"
 #include "planificacion.h"
 
+extern int cliente_socket;
+
 //SERVIDOR
 int server_escuchar(char* server_name, int server_socket);
 //CLIENTE

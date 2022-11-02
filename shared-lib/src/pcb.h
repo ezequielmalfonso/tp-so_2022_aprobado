@@ -24,11 +24,12 @@ typedef struct {
 	uint32_t pc;
 	uint32_t registro_cpu[4];
 	t_list* segmentos;
+	int cliente_fd;
 }PCB_t;
 
 PCB_t* pcb_create();
 
-void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos);
+void pcb_set(PCB_t* pcb,uint16_t pid, t_list* instrucciones, uint32_t pc, uint32_t registro_cpu[4], t_list* segmentos, int cliente);
 
 int pcb_find_index(t_list* lista, uint16_t pid);
 

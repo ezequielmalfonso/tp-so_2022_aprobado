@@ -13,6 +13,8 @@ typedef struct {
     char* server_name;
 } t_procesar_conexion_args;
 
+int cliente_socket;
+
 static void procesar_conexion(void* void_args) {
 	t_procesar_conexion_args* args = (t_procesar_conexion_args*) void_args;
 	int cliente_socket = args->fd;
@@ -46,7 +48,7 @@ static void procesar_conexion(void* void_args) {
 	registros[2]=0;
 	registros[3]=0;
 
-	pcb_set(proceso, process_get_thread_id(), mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos);
+	pcb_set(proceso, process_get_thread_id(), mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos,cliente_socket);
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
 
 
@@ -78,7 +80,7 @@ static void procesar_conexion(void* void_args) {
 }
 
 int server_escuchar(char* server_name, int server_socket) {
-    int cliente_socket = esperar_cliente(logger, server_name, server_socket);
+    cliente_socket = esperar_cliente(logger, server_name, server_socket);
 
 
     if (cliente_socket != -1) {
