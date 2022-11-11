@@ -6,13 +6,14 @@
  */
 
 #include "comunicacion.h"
+
 //PROCESAR CONEXIONES SEPARADAS
 typedef struct {
 	int fd;
 	char* server_name;
 } t_procesar_conexion_args;
 
-int cliente_socket;
+int cliente_socket, segmento, pagina;
 
 static void procesar_conexion(void* void_args) {
  t_procesar_conexion_args* args = (t_procesar_conexion_args*) void_args;
@@ -36,8 +37,15 @@ static void procesar_conexion(void* void_args) {
 	 PCB_t* proceso= pcb_create();
 	 recv_proceso(cliente_socket,proceso);
 	 log_info(logger,"recibi pcb");
+	 limpiar_tlb();
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
+	 if(codigo==PAGEFAULT){
+	   send(cliente_socket, &segmento, sizeof(int),0);
+	   send(cliente_socket, &pagina, sizeof(int),0);
+	   segmento=0;
+	   pagina=0;
+	 }
 	 break;
  }
  // Errores

@@ -240,8 +240,13 @@ void esperar_cpu(){
 				break;
 
 				case PAGEFAULT:
-				//hay que implementar
-					break;
+					int segmento=0;
+					int pagina=0;
+					recv(dispatch_fd,&segmento,sizeof(int),0);
+					recv(dispatch_fd,&pagina,sizeof(int),0);
+					log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
+
+				break;
 
 			default:
 				log_error(logger, "AAAlgo anduvo mal en el server del kernel\n Cop: %d",cop);

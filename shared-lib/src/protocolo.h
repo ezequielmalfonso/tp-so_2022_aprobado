@@ -36,7 +36,8 @@ typedef enum {
 	CONTINUE,
 	BLOCKED,
 	PANTALLA,
-	TECLADO
+	TECLADO,
+	SOLICITUD_NRO_MARCO
 	}op_code;
 
 typedef struct{
