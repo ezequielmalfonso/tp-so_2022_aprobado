@@ -48,6 +48,11 @@ int main(int argc, char** argv){
 				scanf("%d",&valor);
 				send(kernel_fd,&valor,sizeof(uint32_t),0);
 			break;
+			case SIGSEGV:
+				log_info(logger, "Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV");
+			    limpiarConfiguracion();
+				exit(-1);
+			break;
 			case EXIT:
 				log_info(logger, "Se realizo el envio se desconecto del kernel");
 				limpiarConfiguracion();

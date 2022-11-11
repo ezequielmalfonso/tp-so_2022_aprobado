@@ -238,6 +238,13 @@ void esperar_cpu(){
 				}
 				pthread_mutex_unlock(&mx_hay_interrupcion);*/
 				break;
+			case SIGSEGV:
+				send(pcb->cliente_fd,&cop,sizeof(op_code),0);
+				log_error(logger,"Error: Segmentation Fault (SIGSEGV).");
+				execute_a_exit(pcb);
+				sem_post(&s_cpu_desocupado);
+				sem_post(&s_ready_execute);
+				break;
 
 				case PAGEFAULT:
 					int segmento=0;
@@ -245,6 +252,7 @@ void esperar_cpu(){
 					recv(dispatch_fd,&segmento,sizeof(int),0);
 					recv(dispatch_fd,&pagina,sizeof(int),0);
 					log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
+					//falta manejo
 
 				break;
 

@@ -41,6 +41,7 @@ static void procesar_conexion(void* void_args) {
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
 	 if(codigo==PAGEFAULT){
+	   log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",proceso->pid,segmento,pagina);
 	   send(cliente_socket, &segmento, sizeof(int),0);
 	   send(cliente_socket, &pagina, sizeof(int),0);
 	   segmento=0;

@@ -20,6 +20,7 @@ extern int cpuServerInterrupt;
 extern int cpuServerDispatch;
 
 typedef struct{
+	uint16_t nro_entrada;
 	uint16_t pid;
 	uint32_t segmento;
 	uint32_t pagina;
@@ -28,8 +29,8 @@ typedef struct{
 }TLB_t;
 
 typedef struct{
-	int32_t marco;
-	int32_t desplazamiento;
+	uint32_t marco;
+	uint32_t desplazamiento;
 }marco_t;
 
 void dispatchCpu();
@@ -42,12 +43,14 @@ int check_interrupt();
 void interrupcion();
 int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]);
 int ejecutarMOV_IN(uint32_t dir_logica);
+int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor);
 
 //TLB
 void inicializar_tlb();
 void limpiar_tlb();
+void imprimir_tlb();
 TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco);
-marco_t  traducir_direccion(uint32_t dir_logica);
+marco_t  traducir_direccion(uint32_t dir_logica,int operacion);
 uint32_t presente_en_tlb(uint32_t numero_segmento, uint32_t numero_pagina);
 void reemplazo_tlb_FIFO(uint32_t numero_segmento, uint32_t numero_pagina, uint32_t marco );
 bool menor(TLB_t* a,TLB_t* b);

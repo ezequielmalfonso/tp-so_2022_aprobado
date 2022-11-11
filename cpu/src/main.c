@@ -14,6 +14,7 @@ uint16_t cant_ent_por_tabla;
 t_list* tlb;
 bool hay_interrupcion;
 int memoria_fd;
+
 int main(){
 	cargarConfiguracion();
 	hay_interrupcion=false;
@@ -140,11 +141,10 @@ void interrupcion(){
 int ejecutarMOV_IN(uint32_t dir_logica){
 	marco_t dir_fisica;
 	uint32_t valor=0;
-	dir_fisica = traducir_direccion(dir_logica);
+	dir_fisica = traducir_direccion(dir_logica,0);
 	if(dir_fisica.marco==-1){
 		return -1;
-	}
-
+	}else if(dir_fisica.marco==-2){return -2;}
 	op_code cop = MOV_IN;
 	send(memoria_fd, &cop, sizeof(op_code),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
@@ -155,10 +155,25 @@ int ejecutarMOV_IN(uint32_t dir_logica){
 	return valor;
 }
 
+int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
+	marco_t dir_fisica;
+	dir_fisica = traducir_direccion(dir_logica,1);
+	if(dir_fisica.marco==-1){
+	    return -1;
+	}else if(dir_fisica.marco==-2){return -2;}
+
+	op_code cop = MOV_OUT;
+	send(memoria_fd, &cop, sizeof(op_code),0);
+	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
+	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint32_t),0);
+	send(memoria_fd, &valor, sizeof(uint32_t),0);
+	return 1;
+}
+
 int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 
 	if(!strcmp(instruccion_ejecutar->comando,"SET")){
-		log_info(logger,"Ejecutando SET");
+		log_info(logger,"Ejecutando SET parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		int i=0;
 		uint32_t valor= atoi(instruccion_ejecutar->parametro2);
 		switch(instruccion_ejecutar->parametro[0]){
@@ -176,7 +191,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 			break;
 		}
 	}else if(!strcmp(instruccion_ejecutar->comando,"ADD")){
-		log_info(logger,"Ejecutando ADD");
+		log_info(logger,"Ejecutando ADD parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		int i=0, destino, origen;
 		switch(instruccion_ejecutar->parametro[0]){
 		case 'A':
@@ -209,19 +224,45 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		registros[destino]+=registros[origen];
 
 	}else if(!strcmp(instruccion_ejecutar->comando,"MOV_OUT")){
-		log_info(logger,"Ejecutando MOV_OUT");
+		log_info(logger,"Ejecutando MOV_OUT parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
+		uint32_t valor= 0;
+		uint32_t dir_logica= atoi(instruccion_ejecutar->parametro);
+		switch(instruccion_ejecutar->parametro2[0]){
+		case 'A':
+			valor=registros[0];
+			break;
+		case 'B':
+			valor=registros[1];
+		break;
+		case 'C':
+			valor=registros[2];
+		break;
+		case 'D':
+			valor=registros[3];
+		break;
+		}
 
-		//log_info(logger,"Valor leido %d",ejecutarRead(instruccion_ejecutar->arg1,tabla_paginas));
+		if (ejecutarMOV_OUT(dir_logica,valor)==-1){
+			return PAGEFAULT;
+		}else if(ejecutarMOV_OUT(dir_logica,valor)==-2){
+			return SIGSEGV;
+		}
+
+		ejecutarMOV_OUT(dir_logica,valor);
+
+		log_info(logger,"se cargo valor del registro en memoria");
 
 	}else if(!strcmp(instruccion_ejecutar->comando,"MOV_IN")){
-		log_info(logger,"Ejecutando MOV_IN");
+		log_info(logger,"Ejecutando MOV_IN parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		uint32_t valor;
 		uint32_t dir_logica= atoi(instruccion_ejecutar->parametro2);
 		valor=ejecutarMOV_IN(dir_logica);
 		if (valor==-1){
 			return PAGEFAULT;
-
+		}else if(valor==-2){
+			return SIGSEGV;
 		}
+		log_info(logger, "se cambio el valor del registro");
 		switch(instruccion_ejecutar->parametro[0]){
 		case 'A':
 			registros[0]=valor;
@@ -237,7 +278,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 			break;
 		}
 	}else if(!strcmp(instruccion_ejecutar->comando,"I/O")){
-		log_info(logger,"Ejecutando IO");
+		log_info(logger,"Ejecutando IO parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		return IO;
 	}else if(!strcmp(instruccion_ejecutar->comando,"EXIT")){
 		log_info(logger, "a dormir");
@@ -253,6 +294,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 
 //TLB
 void inicializar_tlb(){
+
 
 	for(int i=0;i< configuracion->ENTRADAS_TLB;i++){
 		TLB_t *tlb_aux = crear_entrada_tlb(-1,-1,-1);
@@ -276,16 +318,37 @@ TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco){
 	tlb_entrada->pagina = pagina;
 	tlb_entrada->segmento=segmento;
 	tlb_entrada->ultima_referencia = clock();
+
+
+	log_info(logger,"Nuevo estado TLB:");
+	imprimir_tlb();
+
 	return tlb_entrada;
 }
 
-marco_t  traducir_direccion(uint32_t dir_logica){
+void imprimir_tlb(){
+	int i=0;
+	int cant_entradas=list_size(tlb);
+	while(i<cant_entradas){
+		TLB_t *tlb_aux = tlb_aux=list_get(tlb,i);
+		log_info(logger,"%d |PID:%d |SEGMENTO:%d |PAGINA:%d |MARCO:%d", i, tlb_aux->pid, tlb_aux->segmento, tlb_aux->pagina, tlb_aux->marco);
+		i++;
+	}
+}
+
+marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	marco_t dire_fisica;
-	uint32_t nro_marco = 145;
+	uint32_t nro_marco = 145; //supongo que inicializa en 145 para asegurarse que no este presente en TLB
 
 	uint32_t tam_max_segmento = cant_ent_por_tabla * tam_pagina;
 	uint32_t num_segmento = floor(dir_logica / tam_max_segmento);
 	uint32_t desplazamiento_segmento = dir_logica % tam_max_segmento;
+	//CASO SEGMENTATION FAULT
+	if(desplazamiento_segmento>tam_max_segmento){
+		dire_fisica.marco=-2;
+		return dire_fisica;
+	}
+
 	uint32_t num_pagina = floor(desplazamiento_segmento  / tam_pagina);
 	uint32_t desplazamiento_pagina = desplazamiento_segmento % tam_pagina;
 	uint16_t pid_actual=process_get_thread_id();
@@ -293,7 +356,7 @@ marco_t  traducir_direccion(uint32_t dir_logica){
 	nro_marco = presente_en_tlb(num_segmento, num_pagina);
 
 	if(nro_marco==-1){
-		log_info(logger, "TLB MISS (pagina %d)", num_pagina);
+		log_info(logger, "TLB MISS PID: %d Segmento: %d Pagina: %d", pid_actual, num_segmento, num_pagina);
 
 		op_code cop = SOLICITUD_NRO_MARCO;
 		send(memoria_fd, &cop, sizeof(op_code),0);
@@ -323,6 +386,12 @@ marco_t  traducir_direccion(uint32_t dir_logica){
 	dire_fisica.marco = nro_marco;
 	dire_fisica.desplazamiento =desplazamiento_pagina;
 
+	if(operacion==0){
+		log_info(logger,"PID: %d - Acción: LEER - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",process_get_thread_id(),num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
+	}else{
+		log_info(logger,"PID: %d - Acción: ESCRIBIR - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",process_get_thread_id(),num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
+	}
+
 	return dire_fisica;
 }
 
@@ -335,7 +404,7 @@ uint32_t presente_en_tlb(uint32_t numero_segmento, uint32_t numero_pagina){
 //		log_info(logger,"Ciclo cpu: %d",(int)tlb_aux->ultima_referencia);
 		if(tlb_aux->pagina==numero_pagina && tlb_aux->segmento==numero_segmento){
 			tlb_aux->ultima_referencia = clock();
-			log_info(logger,"TLB HIT (segmento %d ,pagina %d) ", numero_segmento, numero_pagina);
+			log_info(logger,"TLB HIT PID: %d Segmento: %d Pagina: %d", tlb_aux->pid, numero_segmento, numero_pagina);
 			return tlb_aux->marco;
 		}
 
