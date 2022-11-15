@@ -17,6 +17,9 @@ int memoria_fd;
 
 int main(){
 	cargarConfiguracion();
+	t_config* config_ips = config_create("../ips.conf");
+	char* ip = config_get_string_value(config_ips,"IP_CPU");
+
 	hay_interrupcion=false;
 	tlb=list_create();
     inicializar_tlb();
@@ -32,9 +35,9 @@ int main(){
 	char* puertoInterrupt = string_itoa(configuracion->PUERTO_ESCUCHA_INTERRUPT);
     char* puertoDispatch= string_itoa(configuracion->PUERTO_ESCUCHA_DISPATCH);
 	//INICIO SERVIDORES
-	cpuServerInterrupt = iniciar_servidor(logger,"interrupt server","127.0.0.1",puertoInterrupt);
+	cpuServerInterrupt = iniciar_servidor(logger,"interrupt server",ip,puertoInterrupt);//ACA IP PROPIA
 
-    cpuServerDispatch = iniciar_servidor(logger,"dispatch server","127.0.0.1",puertoDispatch);
+    cpuServerDispatch = iniciar_servidor(logger,"dispatch server",ip,puertoDispatch);//ACA IP PROPIA
 
     free(puertoInterrupt);
     free(puertoDispatch);
@@ -319,8 +322,9 @@ TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco){
 	tlb_entrada->segmento=segmento;
 	tlb_entrada->ultima_referencia = clock();
 
-
-	log_info(logger,"Nuevo estado TLB:");
+	if(segmento>-1){
+		log_info(logger,"Nuevo estado TLB:");
+	}
 	imprimir_tlb();
 
 	return tlb_entrada;
@@ -331,7 +335,9 @@ void imprimir_tlb(){
 	int cant_entradas=list_size(tlb);
 	while(i<cant_entradas){
 		TLB_t *tlb_aux = tlb_aux=list_get(tlb,i);
-		log_info(logger,"%d |PID:%d |SEGMENTO:%d |PAGINA:%d |MARCO:%d", i, tlb_aux->pid, tlb_aux->segmento, tlb_aux->pagina, tlb_aux->marco);
+		if(tlb_aux->segmento>-1){
+			log_info(logger,"%d |PID:%d |SEGMENTO:%d |PAGINA:%d |MARCO:%d", i, tlb_aux->pid, tlb_aux->segmento, tlb_aux->pagina, tlb_aux->marco);
+		}
 		i++;
 	}
 }
