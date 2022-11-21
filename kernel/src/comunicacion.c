@@ -88,10 +88,10 @@ void solicitar_tabla_de_segmentos(PCB_t* pcb){
 	send(memoria_fd,&cantElementos,sizeof(uint32_t),0);
 	int i=0;
 	while(i<cantElementos){
-	    int sid = list_get(pcb->nros_segmentos,i);
-	    int tamanio = list_get(pcb->segmentos,i);
-	    send(memoria_fd,&sid ,sizeof(int),0);
-	    send(memoria_fd,&tamanio, sizeof(int),0);
+	    uint32_t sid = list_get(pcb->nros_segmentos,i);
+	    uint32_t tamanio = list_get(pcb->segmentos,i);
+	    send(memoria_fd,&sid ,sizeof(uint32_t),0);
+	    send(memoria_fd,&tamanio, sizeof(uint32_t),0);
 	    i++;
 	}
 

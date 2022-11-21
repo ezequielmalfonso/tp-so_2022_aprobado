@@ -41,7 +41,7 @@ static void procesar_kernel(void* void_args) {
 
 
 	recv(cliente_socket, &pid, sizeof(uint16_t), 0);
-	recv(cliente_socket, &cantidad_ids, sizeof(int), 0);
+	recv(cliente_socket, &cantidad_ids, sizeof(uint32_t), 0);
 
 	log_info(logger, "[KERNEL] Creando tabla para programa %d", pid);
 
@@ -49,8 +49,8 @@ static void procesar_kernel(void* void_args) {
 	while(i<cantidad_ids){
 		    int sid = 0;
 		    int tamanio = 0;
-		    recv(cliente_socket,&sid ,sizeof(int),0);
-		    recv(cliente_socket,&tamanio, sizeof(int),0);
+		    recv(cliente_socket,&sid ,sizeof(uint32_t),0);
+		    recv(cliente_socket,&tamanio, sizeof(uint32_t),0);
 		    uint32_t tabla_paginas = crear_tabla(pid, tamanio);
 		    log_info(logger, "[KERNEL] Tabla creada del Segmento %d con %d entradas ", sid, tabla_paginas);
 	    	list_add(lista_tablas_de_paginas, tabla_paginas);

@@ -26,6 +26,8 @@
 int servers_escuchar(char* server_name, int server_socket, char* server_dispatch_name, int server_dispatch_socket);
 int server_escuchar(char* server_name, int server_socket);
 
-extern int cliente_socket, segmento, pagina;
+extern int cliente_socket;
+
+extern uint32_t segmento, pagina;
 
 #endif /* SRC_COMUNICACION_H_ */

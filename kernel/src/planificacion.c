@@ -163,19 +163,19 @@ void inicializarPlanificacion(){
 /****Hilo NEW -> READY */
 
 void pageFault(PCB_t* pcb){
-	int segmento=0;
-	int pagina=0;
+	uint32_t segmento=0;
+	uint32_t pagina=0;
 	op_code op = PAGEFAULT;
 	sem_wait(&s_blocked);
-	recv(dispatch_fd,&segmento,sizeof(int),0);
-	recv(dispatch_fd,&pagina,sizeof(int),0);
+	recv(dispatch_fd,&segmento,sizeof(uint32_t),0);
+	recv(dispatch_fd,&pagina,sizeof(uint32_t),0);
 	pthread_mutex_lock(&mx_log);
 	log_info(logger, "Page Fault PID: %d - Segmento: %d - Pagina: %d", pcb->pid,segmento,pagina);
 	pthread_mutex_unlock(&mx_log);
 
 	send(memoria_fd,&op,sizeof(op_code),0);
-	send(memoria_fd,&segmento,sizeof(int),0);
-	send(memoria_fd,&pagina,sizeof(int),0);
+	send(memoria_fd,&segmento,sizeof(uint32_t),0);
+	send(memoria_fd,&pagina,sizeof(uint32_t),0);
 	recv(memoria_fd,&op,sizeof(op_code),0);
 	log_info(logger, "pase");
 

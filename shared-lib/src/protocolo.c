@@ -200,6 +200,7 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		   ((3*25)*elementosLista)+ //SIZE LISTA INSTRUCCIONES
 		   sizeof(uint32_t)+//SIZE cantSegmentos
 		   sizeof(uint32_t)*cantSegmentos + //SIZE SEGMENTOS SIN LOS ID
+		   sizeof(uint32_t)*cantSegmentos + //SIZE SEGMENTOS ID
 		   sizeof(int); //SIZE CONSOLA FD
 
 	size_t size_payload=*size- sizeof(op_code) -sizeof(size_t);
@@ -254,9 +255,16 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 		uint32_t auxSeg=list_get(proceso->segmentos,i);
 		memcpy(stream + offset, &auxSeg, sizeof(uint32_t));
 		offset += sizeof(uint32_t);
-		//FALTA ID SEGMENTO
 		i++;
 	}
+
+	i=0;
+	while(i<cantSegmentos){
+		uint32_t auxSeg=list_get(proceso->nros_segmentos,i);
+		memcpy(stream + offset, &auxSeg, sizeof(uint32_t));
+		offset += sizeof(uint32_t);
+		i++;
+		}
 
 	memcpy(stream + offset, &proceso->cliente_fd, sizeof(int));
 
@@ -331,6 +339,17 @@ static void deserializar_proceso(void* stream, PCB_t* proceso) {
 	    	list_add(proceso->segmentos,aux);
 	    	c++;
 	    }
+
+	c=0;
+	while (c<cantSegmentos)
+		{
+			uint32_t aux=0;
+			memcpy(&aux, stream, sizeof(uint32_t));
+			stream += sizeof(uint32_t);
+
+			list_add(proceso->nros_segmentos,aux);
+			c++;
+		}
 
 	memcpy(&proceso->cliente_fd, stream, sizeof(int));
 

@@ -13,7 +13,8 @@ typedef struct {
 	char* server_name;
 } t_procesar_conexion_args;
 
-int cliente_socket, segmento, pagina;
+int cliente_socket;
+uint32_t segmento, pagina;
 
 static void procesar_conexion(void* void_args) {
  t_procesar_conexion_args* args = (t_procesar_conexion_args*) void_args;
@@ -42,8 +43,8 @@ static void procesar_conexion(void* void_args) {
 	 send_proceso(cliente_socket,proceso,codigo);
 	 if(codigo==PAGEFAULT){
 	   log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",proceso->pid,segmento,pagina);
-	   send(cliente_socket, &segmento, sizeof(int),0);
-	   send(cliente_socket, &pagina, sizeof(int),0);
+	   send(cliente_socket, &segmento, sizeof(uint32_t),0);
+	   send(cliente_socket, &pagina, sizeof(uint32_t),0);
 	   segmento=0;
 	   pagina=0;
 	 }
