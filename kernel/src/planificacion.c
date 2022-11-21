@@ -162,6 +162,29 @@ void inicializarPlanificacion(){
 //int  string_array_size(char** array);
 /****Hilo NEW -> READY */
 
+void pageFault(PCB_t* pcb){
+	int segmento=0;
+	int pagina=0;
+	op_code op = PAGEFAULT;
+	sem_wait(&s_blocked);
+	recv(dispatch_fd,&segmento,sizeof(int),0);
+	recv(dispatch_fd,&pagina,sizeof(int),0);
+	pthread_mutex_lock(&mx_log);
+	log_info(logger, "Page Fault PID: %d - Segmento: %d - Pagina: %d", pcb->pid,segmento,pagina);
+	pthread_mutex_unlock(&mx_log);
+
+	send(memoria_fd,&op,sizeof(op_code),0);
+	send(memoria_fd,&segmento,sizeof(int),0);
+	send(memoria_fd,&pagina,sizeof(int),0);
+	recv(memoria_fd,&op,sizeof(op_code),0);
+	log_info(logger, "pase");
+
+	pthread_mutex_lock(&mx_cola_ready);
+	queue_push(cola_ready, pcb);
+	pthread_mutex_unlock(&mx_cola_ready);
+	sem_post(&s_ready_execute);
+	sem_post(&s_cont_ready);
+}
 
 void esperar_cpu(){
 	while(1){
@@ -218,9 +241,9 @@ void esperar_cpu(){
 					break;
 
 			case IO:
-				pthread_mutex_lock(&mx_cola_blocked);
+				//pthread_mutex_lock(&mx_cola_blocked);
 				//queue_push(cola_blocked,pcb);
-				pthread_mutex_unlock(&mx_cola_blocked);
+				//pthread_mutex_unlock(&mx_cola_blocked);
 				//Creamos el hilo aparte que lo bloquee y se encargue de su io
 				pthread_t hilo_bloqueado;
 				sem_post(&s_blocked);
@@ -247,13 +270,15 @@ void esperar_cpu(){
 				break;
 
 				case PAGEFAULT:
-					int segmento=0;
-					int pagina=0;
-					recv(dispatch_fd,&segmento,sizeof(int),0);
-					recv(dispatch_fd,&pagina,sizeof(int),0);
-					log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
+					pthread_t hilo_pagefault;
+					sem_post(&s_blocked);
+					pthread_create(&hilo_pagefault,NULL,(void*) pageFault,pcb);
+					pthread_detach(hilo_pagefault);
+					//recv(dispatch_fd,&segmento,sizeof(int),0);
+					//recv(dispatch_fd,&pagina,sizeof(int),0);
+					//log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
 					//falta manejo
-
+					sem_post(&s_cpu_desocupado);
 				break;
 
 			default:
@@ -266,6 +291,7 @@ void esperar_cpu(){
 void bloqueando(PCB_t* pcb){
 	int i = 0;
 	op_code cop;
+	sem_wait(&s_blocked);
 	INSTRUCCION* inst = list_get(pcb->instrucciones, pcb->pc - 1);
 		pthread_mutex_lock(&mx_log);
 		log_info(logger, "instruccion numer %d",(pcb->pc-1));
@@ -359,7 +385,6 @@ void bloqueando(PCB_t* pcb){
 
 
 void ejecutar_io(PCB_t* pcb,int numero) {
-		sem_wait(&s_blocked);
 		pthread_mutex_lock(&mx_log);
 		log_info(logger, " ejecutar io");
 		pthread_mutex_unlock(&mx_log);

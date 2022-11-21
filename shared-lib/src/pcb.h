@@ -24,6 +24,7 @@ typedef struct {
 	uint32_t pc;
 	uint32_t registro_cpu[4];
 	t_list* segmentos;
+	t_list* nros_segmentos;
 	int cliente_fd;
 }PCB_t;
 

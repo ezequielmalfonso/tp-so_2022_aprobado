@@ -12,6 +12,7 @@ PCB_t* pcb_create(){
 	PCB_t* pcb = malloc(sizeof(PCB_t));
 	pcb->instrucciones = list_create();
 	pcb->segmentos=list_create();
+	pcb->nros_segmentos=list_create();
 	/*pcb->registro_cpu->valores[0]=0;
 	pcb->registro_cpu->valores[1]=0;
 	pcb->registro_cpu->valores[2]=0;
@@ -33,6 +34,12 @@ void pcb_set(PCB_t* pcb, uint16_t pid, t_list* instrucciones, uint32_t pc, uint3
 	pcb->registro_cpu[3] = registro_cpu[3];
 	//list_destroy_and_destroy_elements(pcb->segmentos,free);
     list_add_all(pcb->segmentos,segmentos);
+    list_add_all(pcb->segmentos,segmentos);
+    int i=0;
+    while(i < list_size(segmentos)){
+        list_add(pcb->nros_segmentos, i);
+        i++;
+    }
     pcb->cliente_fd=cliente;
 }
 

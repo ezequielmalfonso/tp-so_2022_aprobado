@@ -29,6 +29,8 @@ int main(){
 	//CLIENTE
 
 	generar_conexion(&memoria_fd, configuracion);
+	op_code op=INICIALIZAR;
+	send(memoria_fd,&op,sizeof(op_code),0);
 	recv(memoria_fd, &tam_pagina, sizeof(uint16_t), 0);
 	recv(memoria_fd, &cant_ent_por_tabla, sizeof(uint16_t), 0);
 
@@ -38,6 +40,8 @@ int main(){
 	cpuServerInterrupt = iniciar_servidor(logger,"interrupt server",ip,puertoInterrupt);//ACA IP PROPIA
 
     cpuServerDispatch = iniciar_servidor(logger,"dispatch server",ip,puertoDispatch);//ACA IP PROPIA
+
+
 
     free(puertoInterrupt);
     free(puertoDispatch);

@@ -39,4 +39,5 @@ void bloqueando(PCB_t*);
 void inicializarPlanificacion();
 void execute_a_exit(PCB_t*);
 void ejecutar_io(PCB_t*,int);
+void pageFault(PCB_t*);
 #endif /* SRC_PLANIFICACION_H_ */

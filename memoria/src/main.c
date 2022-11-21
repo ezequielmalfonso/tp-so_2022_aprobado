@@ -9,10 +9,14 @@
 
 int main() {
 	cargarConfiguracion();
+	inicializar_memoria();
+	t_config* config_ips = config_create("../ips.conf");
+	char* ip = config_get_string_value(config_ips,"IP_MEMORIA");
 
 	char* puerto= string_itoa(configuracion->PUERTO_ESCUCHA);
 	//INICIO SERVIDORES
-    memoriaServer = iniciar_servidor(logger,"memoria_sv","127.0.0.1",puerto);
+    memoriaServer = iniciar_servidor(logger,"memoria_sv",ip,puerto);// ACA IP PROPIA
+
 
 	pthread_t hilo_kernel;
 	pthread_t hilo_cpu;

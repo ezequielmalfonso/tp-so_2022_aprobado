@@ -18,6 +18,7 @@
 #include "protocolo.h"
 #include "socket.h"
 #include "memoriaConfig.h"
+#include "memoria_utils.h"
 #include <semaphore.h>
 
 //KERNEL

@@ -62,6 +62,7 @@ static void procesar_conexion(void* void_args) {
 	proceso=queue_pop(cola_new);
     pthread_mutex_unlock(&mx_cola_new);
     //solicitar_tabla_de_segmentos();
+
     pthread_mutex_lock(&mx_cola_ready);
     queue_push(cola_ready,proceso);
     pthread_mutex_unlock(&mx_cola_ready);
@@ -77,6 +78,26 @@ static void procesar_conexion(void* void_args) {
 	//liberar_conexion(cliente_socket);
 
 	return;
+}
+
+void solicitar_tabla_de_segmentos(PCB_t* pcb){
+	op_code op=CREAR_TABLA;
+    send(memoria_fd,&op,sizeof(op_code),0);
+	send(memoria_fd,&pcb->pid,sizeof(uint16_t),0);
+	uint32_t cantElementos=list_size(pcb->segmentos);
+	send(memoria_fd,&cantElementos,sizeof(uint32_t),0);
+	int i=0;
+	while(i<cantElementos){
+	    int sid = list_get(pcb->nros_segmentos,i);
+	    int tamanio = list_get(pcb->segmentos,i);
+	    send(memoria_fd,&sid ,sizeof(int),0);
+	    send(memoria_fd,&tamanio, sizeof(int),0);
+	    i++;
+	}
+
+
+
+    recv(memoria_fd,&op,sizeof(op_code),0);
 }
 
 int server_escuchar(char* server_name, int server_socket) {
