@@ -21,11 +21,11 @@ int main() {
 	pthread_t hilo_kernel;
 	pthread_t hilo_cpu;
 
-	pthread_create(&hilo_kernel, NULL, (void*) escuchar_kernel, NULL);
 	pthread_create(&hilo_cpu, NULL, (void*) escuchar_cpu, NULL);
+	pthread_create(&hilo_kernel, NULL, (void*) escuchar_kernel, NULL);
 
-	pthread_join(hilo_kernel,NULL);
 	pthread_join(hilo_cpu, NULL);
+	pthread_join(hilo_kernel,NULL);
 
 	return 0;
 

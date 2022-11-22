@@ -143,18 +143,22 @@ void eliminar_estructuras(uint32_t tabla_paginas, uint16_t pid) {
 /***********************************************************************/
 
 //modificar a una sola tabla
-uint32_t obtener_nro_marco_memoria(uint32_t nro_pag, uint32_t index){//corregir lo de buscar en swap
-	fila_de_pagina* pagina = list_get(tabla_de_paginas, nro_pag);
+uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){//corregir lo de buscar en swap
+
+	t_list* tabla_de_marcos = list_create();
+	tabla_de_marcos = list_get(lista_tablas_de_paginas, num_segmento);
+
+	fila_de_pagina* pagina = list_get(tabla_de_marcos, num_pagina);
 	if (pagina->presencia == 1){
 		log_info(logger, "[CPU] Pagina en memoria principal!");
 		pagina->uso = 1;
 		return pagina->nro_marco;
 	}
 	log_info(logger, "[CPU][ACCESO A DISCO] PAGE FAULT!!!");
-	uint32_t nro_marco_en_swap = entradas_por_tabla + index;
-	void* marco = leer_marco_en_swap(fd,nro_marco_en_swap, tam_pagina);
+	uint32_t nro_marco_en_swap = num_segmento*entradas_por_tabla + num_pagina;// Ver bien esta cuenta
+	void* marco = leer_marco_en_swap(fd, nro_marco_en_swap, tam_pagina);//Revisar esta funcion
 	int32_t nro_marco;
-	if (marcos_en_memoria() == marcos_por_proceso){
+	if (marcos_en_memoria(pid_actual) == marcos_por_proceso){// llega hasta aca, Revisar por que viene la estructura de clock vacia dentro de la funcion
 		nro_marco = usar_algoritmo(pid_actual);
 	}
 	else{
@@ -330,7 +334,7 @@ void* obtener_marco(uint32_t nro_marco){//ESTO ESTA BIEN
 }
 
 // Cuenta la cantidad de marcos en memoria que tiene un proceso
-uint32_t marcos_en_memoria(){//ESTO ESTA BIEN
+uint32_t marcos_en_memoria(uint16_t pid_actual){//ESTO ESTA BIEN
 	estructura_clock* estructura = get_estructura_clock(pid_actual);
 	return list_size(estructura->marcos_en_memoria);
 }

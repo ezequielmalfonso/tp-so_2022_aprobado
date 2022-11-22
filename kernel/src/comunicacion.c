@@ -61,7 +61,7 @@ static void procesar_conexion(void* void_args) {
     pthread_mutex_lock(&mx_cola_new);
 	proceso=queue_pop(cola_new);
     pthread_mutex_unlock(&mx_cola_new);
-    //solicitar_tabla_de_segmentos();
+    solicitar_tabla_de_segmentos(proceso);
 
     pthread_mutex_lock(&mx_cola_ready);
     queue_push(cola_ready,proceso);
@@ -83,7 +83,7 @@ static void procesar_conexion(void* void_args) {
 void solicitar_tabla_de_segmentos(PCB_t* pcb){
 	op_code op=CREAR_TABLA;
     send(memoria_fd,&op,sizeof(op_code),0);
-	send(memoria_fd,&pcb->pid,sizeof(uint16_t),0);
+	send(memoria_fd,&(pcb->pid),sizeof(uint16_t),0);
 	uint32_t cantElementos=list_size(pcb->segmentos);
 	send(memoria_fd,&cantElementos,sizeof(uint32_t),0);
 	int i=0;
