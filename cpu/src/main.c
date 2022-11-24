@@ -320,7 +320,7 @@ void limpiar_tlb(){
 TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco){
 	TLB_t *tlb_entrada= malloc(sizeof(TLB_t));
 
-	tlb_entrada->pid=process_get_thread_id();
+	tlb_entrada->pid=pid_actual;
 	tlb_entrada->marco = marco;
 	tlb_entrada->pagina = pagina;
 	tlb_entrada->segmento=segmento;
@@ -361,7 +361,6 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 
 	uint32_t num_pagina = floor(desplazamiento_segmento  / tam_pagina);
 	uint32_t desplazamiento_pagina = desplazamiento_segmento % tam_pagina;
-	uint16_t pid_actual=process_get_thread_id();
 	//Aca hay que fijarse si esta en la tlb
 	nro_marco = presente_en_tlb(num_segmento, num_pagina);
 
@@ -397,9 +396,9 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	dire_fisica.desplazamiento =desplazamiento_pagina;
 
 	if(operacion==0){
-		log_info(logger,"PID: %d - Acción: LEER - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",process_get_thread_id(),num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
+		log_info(logger,"PID: %d - Acción: LEER - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",pid_actual,num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
 	}else{
-		log_info(logger,"PID: %d - Acción: ESCRIBIR - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",process_get_thread_id(),num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
+		log_info(logger,"PID: %d - Acción: ESCRIBIR - Segmento: %d - Pagina: %d - Dirección Fisica: Marco:%d desplazamiento: %d ",pid_actual,num_segmento,num_pagina,nro_marco, desplazamiento_pagina);
 	}
 
 	return dire_fisica;

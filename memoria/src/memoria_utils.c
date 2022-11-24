@@ -85,6 +85,7 @@ void inicializar_memoria(){
 	tabla_de_paginas = list_create();
 	lista_tablas_de_paginas = list_create();
 	estructuras_clock = dictionary_create();
+
 	bitarray_marcos_ocupados = malloc(tam_memoria / tam_pagina);
 	for (int i = 0; i < tam_memoria / tam_pagina; i++)
 		bitarray_marcos_ocupados[i] = 0;
@@ -101,21 +102,20 @@ void inicializar_memoria(){
 //// INICIALIZACIÓN DE PROCESO
 
 // creas los marcos y las tablas necesarias para el proceso
-uint32_t crear_tabla(uint16_t pid, uint16_t tamanio){//Esto capaz funca
-	int marcos_req = calcular_cant_marcos(tamanio);
+uint32_t crear_tabla(uint16_t pid){//Esto capaz funca
+	//int marcos_req = calcular_cant_marcos(tamanio);
 	int nro_pagina = 0;
-	for (int i = 0; i < entradas_por_tabla && marcos_req > marcos_actuales(i, 0); i++){
+	for (int i = 0; i < entradas_por_tabla ; i++){
 		fila_de_pagina* pagina = malloc(entradas_por_tabla * sizeof(fila_de_pagina));
 		inicializar_tabla_de_paginas(pagina);
-		for (int j = 0 ; j < entradas_por_tabla && marcos_req > marcos_actuales(i, j); j++){
+		for (int j = 0 ; j < entradas_por_tabla; j++){
 			fila_de_pagina fila = {nro_pagina,0,0,0};
 			nro_pagina++;
 			pagina[j] = fila;
 			list_add(tabla_de_paginas, pagina);
 		}
 	}
-	crear_estructura_clock(pid);
-	return list_size(tabla_de_paginas) - 1;
+	return list_size(tabla_de_paginas);
 }
 
 void inicializar_tabla_de_paginas(fila_de_pagina* pagina){// modificada
@@ -178,7 +178,7 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 	escribir_marco_en_memoria(pagina->nro_marco, marco);
 
 	free(marco);
-	agregar_pagina_a_estructura_clock(nro_marco, pagina, nro_marco_en_swap);
+	agregar_pagina_a_estructura_clock(nro_marco, pagina, nro_marco_en_swap, pid_actual);
 	return nro_marco;
 }
 
@@ -299,7 +299,7 @@ void reemplazo_por_clock(uint32_t nro_marco_en_swap, fila_de_pagina* entrada, in
 }
 
 // Dado un nro de marco y un desplazamiento, devuelve el dato en concreto
-uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento){//VAN??
+uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint16_t pid_actual){
 	uint32_t desplazamiento_final = nro_marco * tam_pagina + desplazamiento;
 	uint32_t dato;
 	pthread_mutex_lock(&mx_memoria);
@@ -312,7 +312,7 @@ uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento){//VAN??
 }
 
 // Dado un nro de marco, un desplazamiento y un dato, escribe el dato en dicha posicion
-void write_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint32_t dato) {//VAN??
+void write_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint32_t dato, uint16_t pid_actual) {//VAN??
 	uint32_t desplazamiento_final = nro_marco * tam_pagina + desplazamiento;
 	pthread_mutex_lock(&mx_memoria);
 	memcpy(memoria + desplazamiento_final, &dato, sizeof(dato));
@@ -334,7 +334,7 @@ void* obtener_marco(uint32_t nro_marco){//ESTO ESTA BIEN
 }
 
 // Cuenta la cantidad de marcos en memoria que tiene un proceso
-uint32_t marcos_en_memoria(uint16_t pid_actual){//ESTO ESTA BIEN
+uint32_t marcos_en_memoria (uint16_t pid_actual){//ESTO ESTA BIEN
 	estructura_clock* estructura = get_estructura_clock(pid_actual);
 	return list_size(estructura->marcos_en_memoria);
 }
@@ -375,7 +375,7 @@ int marcos_actuales(int tamanio, int entrada){
 
 ////////////////////////// ESTRUCTURA CLOCK //////////////////////////
 
-void agregar_pagina_a_estructura_clock(int32_t nro_marco, fila_de_pagina* pagina, uint32_t nro_marco_en_swap){//ESTO ESTA BIEN
+void agregar_pagina_a_estructura_clock(int32_t nro_marco, fila_de_pagina* pagina, uint32_t nro_marco_en_swap, uint16_t pid_actual){//ESTO ESTA BIEN
 	//Si ya está ese marco en la estructura, actualizo su página.
 	estructura_clock* estructura = get_estructura_clock(pid_actual);
 	fila_estructura_clock* fila_busqueda;

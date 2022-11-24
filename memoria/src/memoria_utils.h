@@ -57,7 +57,7 @@ void apagar_memoria();
 
 /***************************** HILO KERNEL *****************************/
 
-uint32_t crear_tabla(uint16_t pid, uint16_t tamanio);
+uint32_t crear_tabla(uint16_t pid);
 void inicializar_tabla_de_paginas(fila_de_pagina* pagina);
 
 void suspender_proceso(uint16_t pid, uint32_t tabla_paginas);
@@ -75,8 +75,8 @@ uint32_t clock_modificado(int pid);
 void reemplazo_por_clock(uint32_t nro_marco_en_swap, fila_de_pagina* entrada_2do_nivel, int pid);
 
 // READ Y WRITE
-uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento);
-void write_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint32_t dato);
+uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint16_t pid_actual);
+void write_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint32_t dato, uint16_t pid_actual);
 
 // FUNCIONES GENERALES
 void* obtener_marco(uint32_t nro_marco);
@@ -89,7 +89,7 @@ int marcos_actuales(int entrada_1er_nivel, int entrada_2do_nivel);
 /***************************** FUNCIONES ESTRUCTURA CLOCK *****************************/
 void crear_estructura_clock(uint16_t pid);
 uint16_t avanzar_puntero(uint16_t puntero_clock);
-void agregar_pagina_a_estructura_clock(int32_t nro_marco, fila_de_pagina* pagina, uint32_t nro_marco_en_swap);
+void agregar_pagina_a_estructura_clock(int32_t nro_marco, fila_de_pagina* pagina, uint32_t nro_marco_en_swap, uint16_t pid_actual);
 fila_de_pagina* obtener_pagina(uint16_t pid_actual, int32_t nro_marco);
 
 #endif /* SRC_MEMORIA_UTILS_H_ */

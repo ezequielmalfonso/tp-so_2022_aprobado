@@ -51,11 +51,13 @@ static void procesar_kernel(void * void_args) {
         int tamanio = 0;
         recv(cliente_socket, & sid, sizeof(uint32_t), 0);
         recv(cliente_socket, & tamanio, sizeof(uint32_t), 0);
-        uint32_t entradas = crear_tabla(pid, tamanio);
-        log_info(logger, "[KERNEL] Tabla creada del Segmento %d con %d entradas ", sid, entradas);
+        crear_tabla(pid);
+        log_info(logger, "[KERNEL] Tabla creada del Segmento %d con %d entradas ", sid, configuracion->ENTRADAS_POR_TABLA);
         list_add(lista_tablas_de_paginas, tabla_de_paginas);
         i++;
       }
+      crear_estructura_clock(pid);
+
       send(cliente_socket, & op, sizeof(op_code), 0);
       break;
     case ELIMINAR_ESTRUCTURAS:
@@ -135,12 +137,6 @@ static void procesar_cpu(void * void_args) {
       uint32_t num_pagina = 0;
       uint16_t pid_actual = 0;
 
-      //send de cpu
-      /*send(memoria_fd, &cop, sizeof(op_code),0);
-      	send(memoria_fd, &pid_actual, sizeof(uint16_t),0);
-      	send(memoria_fd, &num_segmento, sizeof(int32_t),0);
-      	send(memoria_fd, &num_pagina, sizeof(uint32_t),0);*/
-
       recv(cliente_socket, &pid_actual, sizeof(uint16_t), 0);
       recv(cliente_socket, &num_segmento, sizeof(int32_t), 0);
       recv(cliente_socket, &num_pagina, sizeof(uint32_t), 0);
@@ -157,7 +153,7 @@ static void procesar_cpu(void * void_args) {
       recv(cliente_socket, & nro_marco, sizeof(uint32_t), 0);
       recv(cliente_socket, & desplazamiento, sizeof(uint32_t), 0);
 
-      uint32_t dato = read_en_memoria(nro_marco, desplazamiento);
+      uint32_t dato = read_en_memoria(nro_marco, desplazamiento, pid_actual);
 
       usleep(configuracion -> RETARDO_MEMORIA * 1000);
       send(cliente_socket, & dato, sizeof(uint32_t), 0);
@@ -170,7 +166,7 @@ static void procesar_cpu(void * void_args) {
       recv(cliente_socket, & dato, sizeof(uint32_t), 0);
       //leer el valor del registro que se guardaria en dato
 
-      write_en_memoria(nro_marco, desplazamiento, dato);
+      write_en_memoria(nro_marco, desplazamiento, dato, pid_actual);
       log_info(logger, "[CPU] Dato escrito: '%d' (nro_marco = %d, desplazamiento = %d)", dato, nro_marco, desplazamiento);
 
       op_code resultado = ESCRITURA_OK;

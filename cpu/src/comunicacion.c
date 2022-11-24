@@ -6,7 +6,7 @@
  */
 
 #include "comunicacion.h"
-
+uint16_t pid_actual=0;
 //PROCESAR CONEXIONES SEPARADAS
 typedef struct {
 	int fd;
@@ -37,6 +37,7 @@ static void procesar_conexion(void* void_args) {
  case DISPATCH: {
 	 PCB_t* proceso= pcb_create();
 	 recv_proceso(cliente_socket,proceso);
+	 pid_actual=proceso->pid;
 	 log_info(logger,"recibi pcb");
 	 limpiar_tlb();
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
