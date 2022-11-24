@@ -31,8 +31,8 @@ int main(){
 	generar_conexion(&memoria_fd, configuracion);
 	op_code op=INICIALIZAR;
 	send(memoria_fd,&op,sizeof(op_code),0);
-	recv(memoria_fd, &tam_pagina, sizeof(uint16_t), 0);
 	recv(memoria_fd, &cant_ent_por_tabla, sizeof(uint16_t), 0);
+	recv(memoria_fd, &tam_pagina, sizeof(uint16_t), 0);
 
 	char* puertoInterrupt = string_itoa(configuracion->PUERTO_ESCUCHA_INTERRUPT);
     char* puertoDispatch= string_itoa(configuracion->PUERTO_ESCUCHA_DISPATCH);
@@ -108,6 +108,9 @@ op_code iniciar_ciclo_instruccion(PCB_t* pcb){
 			estado = check_interrupt();
 		}
 		pcb->pc++;
+		if(estado == PAGEFAULT){
+			pcb->pc--;
+		}
 	}
 	return estado;
 }
@@ -249,13 +252,15 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		break;
 		}
 
-		if (ejecutarMOV_OUT(dir_logica,valor)==-1){
+		int x=ejecutarMOV_OUT(dir_logica,valor);
+		if (x==-1){
 			return PAGEFAULT;
-		}else if(ejecutarMOV_OUT(dir_logica,valor)==-2){
+		}else if(x==-2){
 			return SIGSEGV;
 		}
+		op_code resultado;
+		recv(memoria_fd, &resultado, sizeof(op_code), 0);
 
-		ejecutarMOV_OUT(dir_logica,valor);
 
 		log_info(logger,"se cargo valor del registro en memoria");
 

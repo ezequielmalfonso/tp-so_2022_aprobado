@@ -174,6 +174,7 @@ void pageFault(PCB_t* pcb){
 	pthread_mutex_unlock(&mx_log);
 
 	send(memoria_fd,&op,sizeof(op_code),0);
+	send(memoria_fd,&(pcb->pid),sizeof(uint16_t),0);
 	send(memoria_fd,&segmento,sizeof(uint32_t),0);
 	send(memoria_fd,&pagina,sizeof(uint32_t),0);
 	recv(memoria_fd,&op,sizeof(op_code),0);

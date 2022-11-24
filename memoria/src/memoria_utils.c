@@ -154,11 +154,19 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 		pagina->uso = 1;
 		return pagina->nro_marco;
 	}
+	return -1;
+}
+
+uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){
+	t_list* tabla_de_marcos = list_create();
+	tabla_de_marcos = list_get(lista_tablas_de_paginas, num_segmento);
+	fila_de_pagina* pagina = list_get(tabla_de_marcos, num_pagina);
+
 	log_info(logger, "[CPU][ACCESO A DISCO] PAGE FAULT!!!");
-	uint32_t nro_marco_en_swap = num_segmento*entradas_por_tabla + num_pagina;// Ver bien esta cuenta
-	void* marco = leer_marco_en_swap(fd, nro_marco_en_swap, tam_pagina);//Revisar esta funcion
+	uint32_t nro_marco_en_swap = num_segmento*entradas_por_tabla + num_pagina;
+	void* marco = leer_marco_en_swap(fd, nro_marco_en_swap, tam_pagina);
 	int32_t nro_marco;
-	if (marcos_en_memoria(pid_actual) == marcos_por_proceso){// llega hasta aca, Revisar por que viene la estructura de clock vacia dentro de la funcion
+	if (marcos_en_memoria(pid_actual) == marcos_por_proceso){
 		nro_marco = usar_algoritmo(pid_actual);
 	}
 	else{
@@ -317,7 +325,7 @@ void write_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint32_t dato
 	pthread_mutex_lock(&mx_memoria);
 	memcpy(memoria + desplazamiento_final, &dato, sizeof(dato));
 	pthread_mutex_unlock(&mx_memoria);
-	fila_de_pagina* pagina_actual = obtener_pagina(pid_actual, nro_marco);
+	fila_de_pagina* pagina_actual = obtener_pagina(pid_actual, nro_marco);//ACA NO ENCUENTRA PAGINA
 	pagina_actual->uso = 1;
 	pagina_actual->modificado = 1;
 }
@@ -416,7 +424,7 @@ uint16_t avanzar_puntero(uint16_t puntero_clock){
 
 // Devuelve el puntero a una página
 fila_de_pagina* obtener_pagina(uint16_t pid_actual, int32_t nro_marco){//ESTO ESTA BIEN
-	estructura_clock* estructura = get_estructura_clock(pid_actual);
+	estructura_clock* estructura = get_estructura_clock(pid_actual);//EN LA SEGUNDA VUELTA VUELVE VACIO
 	fila_estructura_clock* fila_busqueda;
 	for (int i = 0; i < list_size(estructura->marcos_en_memoria); i++){
 		fila_busqueda = list_get(estructura->marcos_en_memoria, i);

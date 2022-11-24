@@ -67,6 +67,7 @@ void eliminar_estructuras(uint32_t tabla_paginas, uint16_t pid);
 /***************************** HILO CPU *****************************/
 
 uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual);
+uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual);
 
 // FUNCIONES ALGORITMOS CLOCK Y CLOCK MODIFICADO
 uint32_t usar_algoritmo(int pid);

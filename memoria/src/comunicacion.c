@@ -72,8 +72,21 @@ static void procesar_kernel(void * void_args) {
 
       break;
     case PAGEFAULT:
-      //op_code op = PAGEFAULT;
-      //send(cliente_socket, & op, sizeof(op_code), 0);
+      op_code op2 = PAGEFAULT;
+
+      uint32_t num_segmento = 0;
+      uint32_t num_pagina = 0;
+       uint16_t pid_actual = 0;
+
+      recv(cliente_socket, &pid_actual, sizeof(uint16_t), 0);
+      recv(cliente_socket, &num_segmento, sizeof(int32_t), 0);
+      recv(cliente_socket, &num_pagina, sizeof(uint32_t), 0);
+
+      uint32_t nro_marco = tratar_page_fault(num_segmento, num_pagina, pid_actual);
+      log_info(logger, "[CPU] Numero de marco obtenido = %d", nro_marco);
+      usleep(configuracion -> RETARDO_MEMORIA * 1000);
+      send(cliente_socket, & op2, sizeof(uint32_t), 0);
+
       break;
     // Errores
     case -1:
@@ -141,7 +154,7 @@ static void procesar_cpu(void * void_args) {
       recv(cliente_socket, &num_segmento, sizeof(int32_t), 0);
       recv(cliente_socket, &num_pagina, sizeof(uint32_t), 0);
 
-      uint32_t nro_marco = obtener_nro_marco_memoria(num_segmento, num_pagina, pid_actual);
+      uint32_t nro_marco = obtener_nro_marco_memoria(num_segmento, num_pagina, pid_actual); //LE ESTAMOS PASANDO EL PID PERO NO LO USA, SIEMPRE BUSCA EN EL MISMO LUGAR Y EN LA SEGUNDA VUELTA NO ENCUENTRA PAGINA Y ROMPE
       log_info(logger, "[CPU] Numero de marco obtenido = %d", nro_marco);
       usleep(configuracion -> RETARDO_MEMORIA * 1000);
       send(cliente_socket, & nro_marco, sizeof(uint32_t), 0);
