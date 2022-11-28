@@ -35,6 +35,8 @@ uint16_t puerto_escucha;
 // Extras
 uint16_t pid_actual;
 
+uint16_t nro_segmento_anterior;
+
 // funciones para no pasar a char cada vez que accedemos
 
 
@@ -164,7 +166,7 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 		agregar_pagina_a_estructura_clock(pagina->nro_marco, pagina, nro_marco_en_swap, pid_actual);
 		return pagina->nro_marco;
 	}
-	return -1;int32_t nro_marco;
+	return -1;
 }
 
 uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){
@@ -178,6 +180,7 @@ uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t 
 	int32_t nro_marco;
 	if (marcos_en_memoria(pid_actual) == marcos_por_proceso){
 		nro_marco = usar_algoritmo(pid_actual);
+		log_info(logger, "REEMPLAZO - PID: <%d> - Marco: <%d> - Page In: <SEGMENTO %d>|<PAGINA %d>" ,pid_actual,nro_marco,num_segmento,num_pagina);//borramos page out
 	}
 	else{
 		nro_marco = buscar_marco_libre();
@@ -197,6 +200,7 @@ uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t 
 
 	free(marco);
 	agregar_pagina_a_estructura_clock(nro_marco, pagina, nro_marco_en_swap, pid_actual);
+	log_info(logger, "[CPU]LECTURA EN SWAP: SWAP IN -  PID: <%d> - Marco: <%d> - Page In: <SEGMENTO %d>|<PÁGINA %d>",pid_actual,nro_marco,num_segmento,num_pagina);
 	return nro_marco;
 }
 
@@ -305,8 +309,12 @@ void reemplazo_por_clock(uint32_t nro_marco_en_swap, fila_de_pagina* entrada, in
 	log_info(logger, "[CPU] Pagina victima elegida: %d",nro_marco_en_swap);
 	// si tiene el bit de modificado en 1, hay que actualizar el archivo swap
 	if (entrada->modificado == 1){
-		log_info(logger,"[CPU][ACCESO A DISCO] Actualizando pagina victima en swap (bit de modificado = 1)");
 		actualizar_marco_en_swap(fd, nro_marco_en_swap, obtener_marco(entrada->nro_marco), tam_pagina);
+		//uint32_t nro_marco_en_swap = num_segmento*entradas_por_tabla + num_pagina;
+		uint16_t num_segmento = floor(nro_marco_en_swap / entradas_por_tabla);
+		uint16_t num_pagina = nro_marco_en_swap % entradas_por_tabla;
+
+		log_info(logger, "[CPU] ESCRITURA SWAP OUT -  PID: <%d> - Marco: <%d> - Page Out: <SEGMENTO %d>|<PÁGINA %d>",pid_actual,entrada->nro_marco,num_segmento,num_pagina);
 		usleep(configuracion->RETARDO_SWAP * 1000); // tenemos el retardo por swappear un marco modificado
 		entrada->modificado = 0;
 	}
@@ -325,7 +333,7 @@ uint32_t read_en_memoria(uint32_t nro_marco, uint32_t desplazamiento, uint16_t p
 	pthread_mutex_unlock(&mx_memoria);
 	fila_de_pagina* pagina_actual = obtener_pagina(pid_actual, nro_marco);
 	pagina_actual->uso = 1;
-	log_info(logger, "[CPU] Dato '%d' leido en marco %d", dato, nro_marco);
+	log_info(logger, "[CPU] Dato '%d' leido en MARCO: %d, DESPLAZAMIENTO: %d",dato, nro_marco,desplazamiento);
 	return dato;
 }
 

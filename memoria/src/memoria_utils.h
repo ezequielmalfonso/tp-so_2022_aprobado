@@ -49,6 +49,7 @@ typedef struct {
 	int32_t nro_marco_en_memoria;
 	fila_de_pagina* pagina;
 	uint32_t nro_marco_en_swap;
+	uint16_t nro_segmento;
 } fila_estructura_clock;
 
 

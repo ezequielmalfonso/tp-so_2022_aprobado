@@ -156,7 +156,7 @@ static void procesar_cpu(void * void_args) {
       recv(cliente_socket, &num_pagina, sizeof(uint32_t), 0);
 
       uint32_t nro_marco = obtener_nro_marco_memoria(num_segmento, num_pagina, pid_actual); //LE ESTAMOS PASANDO EL PID PERO NO LO USA, SIEMPRE BUSCA EN EL MISMO LUGAR Y EN LA SEGUNDA VUELTA NO ENCUENTRA PAGINA Y ROMPE
-      log_info(logger, "[CPU] Numero de marco obtenido = %d", nro_marco);
+      log_info(logger, "[CPU] “PID: <%d> - Página: <%d> - Marco: <%d>”",pid_actual,num_pagina,nro_marco);
       usleep(configuracion -> RETARDO_MEMORIA * 1000);
       send(cliente_socket, & nro_marco, sizeof(uint32_t), 0);
       break;
@@ -181,7 +181,7 @@ static void procesar_cpu(void * void_args) {
       //leer el valor del registro que se guardaria en dato
 
       write_en_memoria(nro_marco, desplazamiento, dato, pid_actual);
-      log_info(logger, "[CPU] Dato escrito: '%d' (nro_marco = %d, desplazamiento = %d)", dato, nro_marco, desplazamiento);
+      log_info(logger, "[CPU] Dato escrito: '%d' en MARCO: %d, DESPLAZAMIENTO: %d", dato, nro_marco, desplazamiento);
 
       op_code resultado = ESCRITURA_OK;
       usleep(configuracion -> RETARDO_MEMORIA * 1000);

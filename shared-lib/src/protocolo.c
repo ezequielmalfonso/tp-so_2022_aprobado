@@ -80,8 +80,8 @@ void* serializar_instrucciones_tam(uint32_t size, t_list* lista, char** segmento
     while( aux1!=NULL )
 	{
 		INSTRUCCION* auxl2 = aux1->data;
-		printf("Verificamos la lista:\n");
-		printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
+		//printf("Verificamos la lista:\n");
+		//printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
 
 		memcpy(stream + offset, &auxl2->comando, sizeof(aux->comando));
 		offset += sizeof(aux->comando);
@@ -235,8 +235,8 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 	while( aux1!=NULL )
 	{
 		INSTRUCCION* auxl2 = aux1->data;
-		printf("Verificamos la lista:\n");
-		printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
+		//printf("Verificamos la lista:\n");
+		//printf("Comando: %s | Par1: %s | Par2: %s \n\n", auxl2->comando, auxl2->parametro, auxl2->parametro2 );
 
 		memcpy(stream + offset, &auxl2->comando, sizeof(auxl2->comando));
 		offset += sizeof(auxl2->comando);
