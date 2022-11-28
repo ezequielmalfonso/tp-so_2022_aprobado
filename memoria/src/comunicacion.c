@@ -51,9 +51,10 @@ static void procesar_kernel(void * void_args) {
         int tamanio = 0;
         recv(cliente_socket, & sid, sizeof(uint32_t), 0);
         recv(cliente_socket, & tamanio, sizeof(uint32_t), 0);
-        crear_tabla(pid);
+        t_list* tabla_de_paginas = crear_tabla(pid);
         log_info(logger, "[KERNEL] Tabla creada del Segmento %d con %d entradas ", sid, configuracion->ENTRADAS_POR_TABLA);
         list_add(lista_tablas_de_paginas, tabla_de_paginas);
+
         i++;
       }
       crear_estructura_clock(pid);

@@ -57,7 +57,7 @@ void apagar_memoria();
 
 /***************************** HILO KERNEL *****************************/
 
-uint32_t crear_tabla(uint16_t pid);
+t_list* crear_tabla(uint16_t pid);
 void inicializar_tabla_de_paginas(fila_de_pagina* pagina);
 
 void suspender_proceso(uint16_t pid, uint32_t tabla_paginas);

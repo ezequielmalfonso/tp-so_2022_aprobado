@@ -22,6 +22,7 @@ int main(){
 
 	hay_interrupcion=false;
 	tlb=list_create();
+
     inicializar_tlb();
 
 	//sem_init(&sem,0,1);

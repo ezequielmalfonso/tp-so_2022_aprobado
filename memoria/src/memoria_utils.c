@@ -10,7 +10,7 @@ int cliente_kernel;
 int cliente_cpu;
 
 // Tabla de páginas
-t_list* tabla_de_paginas;
+//t_list* tabla_de_paginas;
 
 t_list* lista_tablas_de_paginas;
 // Estructura clock
@@ -82,7 +82,7 @@ void inicializar_memoria(){
 	//send(cliente_cpu, &tam_pagina, sizeof(uint16_t),0);
 
 	memoria = malloc(configuracion->TAM_MEMORIA);
-	tabla_de_paginas = list_create();
+	//tabla_de_paginas = list_create();
 	lista_tablas_de_paginas = list_create();
 	estructuras_clock = dictionary_create();
 
@@ -102,9 +102,10 @@ void inicializar_memoria(){
 //// INICIALIZACIÓN DE PROCESO
 
 // creas los marcos y las tablas necesarias para el proceso
-uint32_t crear_tabla(uint16_t pid){//Esto capaz funca
+t_list* crear_tabla(uint16_t pid){//Esto capaz funca
 	//int marcos_req = calcular_cant_marcos(tamanio);
 	int nro_pagina = 0;
+	t_list* tabla_de_paginas = list_create();
 	for (int i = 0; i < entradas_por_tabla ; i++){
 		fila_de_pagina* pagina = malloc(entradas_por_tabla * sizeof(fila_de_pagina));
 		inicializar_tabla_de_paginas(pagina);
@@ -115,7 +116,7 @@ uint32_t crear_tabla(uint16_t pid){//Esto capaz funca
 			list_add(tabla_de_paginas, pagina);
 		}
 	}
-	return list_size(tabla_de_paginas);
+	return tabla_de_paginas;
 }
 
 void inicializar_tabla_de_paginas(fila_de_pagina* pagina){// modificada
@@ -152,9 +153,18 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 	if (pagina->presencia == 1){
 		log_info(logger, "[CPU] Pagina en memoria principal!");
 		pagina->uso = 1;
+		uint32_t nro_marco_en_swap = num_segmento*entradas_por_tabla + num_pagina;
+
+		pthread_mutex_lock(&mx_bitarray_marcos_ocupados);
+		bitarray_marcos_ocupados[pagina->nro_marco] = 1;
+		pthread_mutex_unlock(&mx_bitarray_marcos_ocupados);
+		pagina->presencia = 1;
+		pagina->uso = 1;
+
+		agregar_pagina_a_estructura_clock(pagina->nro_marco, pagina, nro_marco_en_swap, pid_actual);
 		return pagina->nro_marco;
 	}
-	return -1;
+	return -1;int32_t nro_marco;
 }
 
 uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){
@@ -205,7 +215,7 @@ uint32_t usar_algoritmo(int pid){//ESTO ESTA BIEN
 	}
 }
 
-uint32_t clock_simple(int pid){ //ESTO ESTA BIEN
+uint32_t clock_simple(int pid_actual){ //ESTO ESTA BIEN
 	// hasta que no encuentre uno no para
 	estructura_clock* estructura = get_estructura_clock(pid_actual);
 	uint16_t puntero_clock = estructura->puntero;
@@ -221,7 +231,7 @@ uint32_t clock_simple(int pid){ //ESTO ESTA BIEN
 		puntero_clock = avanzar_puntero(puntero_clock);
 
 		if (pagina->uso == 0){ //Encontró a la víctima
-			reemplazo_por_clock(nro_marco_en_swap, pagina, pid);
+			reemplazo_por_clock(nro_marco_en_swap, pagina, pid_actual);
 			log_info(logger, "[CPU] Posición final puntero: %d",puntero_clock);
 			estructura->puntero = puntero_clock; //Guardo el puntero actualizado.
 			return nro_marco;
@@ -234,7 +244,7 @@ uint32_t clock_simple(int pid){ //ESTO ESTA BIEN
 	return 0;
 }
 
-uint32_t clock_modificado(int pid){//ESTO ESTA BIEN
+uint32_t clock_modificado(int pid_actual){//ESTO ESTA BIEN
 	estructura_clock* estructura = get_estructura_clock(pid_actual);
 	uint16_t puntero_clock = estructura->puntero;
 	fila_estructura_clock* fila;
@@ -252,7 +262,7 @@ uint32_t clock_modificado(int pid){//ESTO ESTA BIEN
 			puntero_clock = avanzar_puntero(puntero_clock);
 
 			if (pagina->uso == 0 && pagina->modificado == 0){
-				reemplazo_por_clock(nro_marco_en_swap, pagina, pid);
+				reemplazo_por_clock(nro_marco_en_swap, pagina, pid_actual);
 				log_info(logger, "[CPU] Posición final puntero: %d",puntero_clock);
 				estructura->puntero = puntero_clock; //Guardo el puntero actualizado.
 				return nro_marco;
@@ -271,7 +281,7 @@ uint32_t clock_modificado(int pid){//ESTO ESTA BIEN
 			puntero_clock = avanzar_puntero(puntero_clock);
 
 			if (pagina->uso == 0 && pagina->modificado == 1){
-				reemplazo_por_clock(nro_marco_en_swap, pagina, pid);
+				reemplazo_por_clock(nro_marco_en_swap, pagina, pid_actual);
 				estructura->puntero = puntero_clock; //Guardo el puntero actualizado.
 				return nro_marco;
 			}
@@ -290,7 +300,7 @@ uint32_t clock_modificado(int pid){//ESTO ESTA BIEN
 	return 0;
 }
 
-void reemplazo_por_clock(uint32_t nro_marco_en_swap, fila_de_pagina* entrada, int pid){//ESTO ESTA BIEN
+void reemplazo_por_clock(uint32_t nro_marco_en_swap, fila_de_pagina* entrada, int pid_actual){//ESTO ESTA BIEN
 	// logica de swappeo de marco
 	log_info(logger, "[CPU] Pagina victima elegida: %d",nro_marco_en_swap);
 	// si tiene el bit de modificado en 1, hay que actualizar el archivo swap
