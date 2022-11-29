@@ -54,6 +54,6 @@ dkms.conf
 *.log
 .project
 .cproject
-Debug/
+#Debug/
 .settings/
 /.metadata/
