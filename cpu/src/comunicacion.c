@@ -15,6 +15,7 @@ typedef struct {
 
 int cliente_socket;
 uint32_t segmento, pagina;
+t_list* tam_segmentos_actuales;
 
 static void procesar_conexion(void* void_args) {
  t_procesar_conexion_args* args = (t_procesar_conexion_args*) void_args;
@@ -36,10 +37,14 @@ static void procesar_conexion(void* void_args) {
  break;
  case DISPATCH: {
 	 PCB_t* proceso= pcb_create();
+	 tam_segmentos_actuales=list_create();
 	 recv_proceso(cliente_socket,proceso);
 	 pid_actual=proceso->pid;
+	 list_add_all(tam_segmentos_actuales,proceso->segmentos);
 	 log_info(logger,"recibi pcb");
+	 if(configuracion->ENTRADAS_TLB>0){
 	 limpiar_tlb();
+	 }
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
 	 if(codigo==PAGEFAULT){

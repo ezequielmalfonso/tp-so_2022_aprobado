@@ -105,18 +105,15 @@ void inicializar_memoria(){
 
 // creas los marcos y las tablas necesarias para el proceso
 t_list* crear_tabla(uint16_t pid){//Esto capaz funca
-	//int marcos_req = calcular_cant_marcos(tamanio);
-	int nro_pagina = 0;
 	t_list* tabla_de_paginas = list_create();
 	for (int i = 0; i < entradas_por_tabla ; i++){
 		fila_de_pagina* pagina = malloc(entradas_por_tabla * sizeof(fila_de_pagina));
-		inicializar_tabla_de_paginas(pagina);
-		for (int j = 0 ; j < entradas_por_tabla; j++){
-			fila_de_pagina fila = {nro_pagina,0,0,0};
-			nro_pagina++;
-			pagina[j] = fila;
-			list_add(tabla_de_paginas, pagina);
-		}
+		//inicializar_tabla_de_paginas(pagina);
+		pagina->nro_marco=-1;
+		pagina->modificado=0;
+		pagina->presencia=0;
+		pagina->uso=0;
+		list_add(tabla_de_paginas, pagina);
 	}
 	return tabla_de_paginas;
 }

@@ -9,6 +9,7 @@
 
 int cpuServerDispatch, cpuServerInterrupt;
 pthread_mutex_t mx_hay_interrupcion = PTHREAD_MUTEX_INITIALIZER;
+//pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
 uint16_t tam_pagina;
 uint16_t cant_ent_por_tabla;
 t_list* tlb;
@@ -21,9 +22,12 @@ int main(){
 	char* ip = config_get_string_value(config_ips,"IP_CPU");
 
 	hay_interrupcion=false;
+
+	if(configuracion->ENTRADAS_TLB>0){
 	tlb=list_create();
 
     inicializar_tlb();
+	}
 
 	//sem_init(&sem,0,1);
 
@@ -31,10 +35,11 @@ int main(){
 
 	generar_conexion(&memoria_fd, configuracion);
 	op_code op=INICIALIZAR;
+	//pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd,&op,sizeof(op_code),0);
 	recv(memoria_fd, &cant_ent_por_tabla, sizeof(uint16_t), 0);
 	recv(memoria_fd, &tam_pagina, sizeof(uint16_t), 0);
-
+	//pthread_mutex_unlock(&mx_memoria);
 	char* puertoInterrupt = string_itoa(configuracion->PUERTO_ESCUCHA_INTERRUPT);
     char* puertoDispatch= string_itoa(configuracion->PUERTO_ESCUCHA_DISPATCH);
 	//INICIO SERVIDORES
@@ -157,11 +162,13 @@ int ejecutarMOV_IN(uint32_t dir_logica){
 		return -1;
 	}else if(dir_fisica.marco==-2){return -2;}
 	op_code cop = MOV_IN;
+	//pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint16_t),0);
-
 	recv(memoria_fd, &valor, sizeof(uint32_t), 0);
+	//pthread_mutex_unlock(&mx_memoria);
+
 	log_info(logger, "Dato leido = %d", valor);
 	return valor;
 }
@@ -174,10 +181,12 @@ int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
 	}else if(dir_fisica.marco==-2){return -2;}
 
 	op_code cop = MOV_OUT;
+	//pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint32_t),0);
 	send(memoria_fd, &valor, sizeof(uint32_t),0);
+	//pthread_mutex_unlock(&mx_memoria);
 	return 1;
 }
 
@@ -294,8 +303,8 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		log_info(logger,"Ejecutando IO parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		return IO;
 	}else if(!strcmp(instruccion_ejecutar->comando,"EXIT")){
-		log_info(logger, "a dormir");
-		sleep(5);
+		log_info(logger, "a mimir");
+		//sleep(5);
 		log_info(logger,"Ejecutando EXIT");
 		return EXIT;
 	}else{
@@ -360,7 +369,7 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	uint32_t num_segmento = floor(dir_logica / tam_max_segmento);
 	uint32_t desplazamiento_segmento = dir_logica % tam_max_segmento;
 	//CASO SEGMENTATION FAULT
-	if(desplazamiento_segmento>tam_max_segmento){
+	if(desplazamiento_segmento>=list_get(tam_segmentos_actuales,num_segmento)){
 		dire_fisica.marco=-2;
 		return dire_fisica;
 	}
@@ -368,17 +377,23 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	uint32_t num_pagina = floor(desplazamiento_segmento  / tam_pagina);
 	uint32_t desplazamiento_pagina = desplazamiento_segmento % tam_pagina;
 	//Aca hay que fijarse si esta en la tlb
+	if(configuracion->ENTRADAS_TLB>0){
 	nro_marco = presente_en_tlb(num_segmento, num_pagina);
+	}
 
 	if(nro_marco==-1){
+		if(configuracion->ENTRADAS_TLB>0){
 		log_info(logger, "TLB MISS PID: %d Segmento: %d Pagina: %d", pid_actual, num_segmento, num_pagina);
+		}
 
 		op_code cop = SOLICITUD_NRO_MARCO;
+		//pthread_mutex_lock(&mx_memoria);
 		send(memoria_fd, &cop, sizeof(op_code),0);
 		send(memoria_fd, &pid_actual, sizeof(uint16_t),0);
 		send(memoria_fd, &num_segmento, sizeof(int32_t),0);
 		send(memoria_fd, &num_pagina, sizeof(uint32_t),0);
 		recv(memoria_fd, &nro_marco, sizeof(uint32_t), 0);
+		//pthread_mutex_unlock(&mx_memoria);
 		//CASO PAGE FAULT
 		if(nro_marco==-1){
 			dire_fisica.marco = nro_marco;
@@ -390,11 +405,13 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 		}
 		log_info(logger, "Recibido numero de marco: %d", nro_marco);
 
+		if(configuracion->ENTRADAS_TLB>0){
 		if(!marco_en_tlb(nro_marco,num_segmento,num_pagina)){
 			if(strcmp(configuracion->REEMPLAZO_TLB,"LRU") == 0)
 				reemplazo_tlb_LRU(num_segmento,num_pagina, nro_marco);
 			else if(strcmp(configuracion->REEMPLAZO_TLB,"FIFO") == 0)
 				reemplazo_tlb_FIFO(num_segmento,num_pagina,nro_marco);
+		}
 		}
 	}
 

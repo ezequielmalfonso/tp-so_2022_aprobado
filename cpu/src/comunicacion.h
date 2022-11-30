@@ -31,4 +31,6 @@ extern int cliente_socket;
 
 extern uint32_t segmento, pagina;
 
+extern t_list* tam_segmentos_actuales;
+
 #endif /* SRC_COMUNICACION_H_ */

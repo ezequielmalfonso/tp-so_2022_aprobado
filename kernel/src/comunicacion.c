@@ -25,9 +25,6 @@ static void procesar_conexion(void* void_args) {
 	mensaje=recibir_instrucciones(cliente_socket);
 	//printf("Segmento % \n", &mensaje->segmentos[0]);
 
-	log_info(logger, "La consola se desconecto de %s server", server_name);
-
-
 	t_list* segmentos=malloc(sizeof(TABLA_SEGMENTO));
 	int c=0;
 	while(c<list_size(mensaje->listaTamSegmentos)){
@@ -82,22 +79,28 @@ static void procesar_conexion(void* void_args) {
 
 void solicitar_tabla_de_segmentos(PCB_t* pcb){
 	op_code op=CREAR_TABLA;
+	uint32_t cantElementos=list_size(pcb->segmentos);
+	pthread_mutex_lock(&mx_memoria);
     send(memoria_fd,&op,sizeof(op_code),0);
 	send(memoria_fd,&(pcb->pid),sizeof(uint16_t),0);
-	uint32_t cantElementos=list_size(pcb->segmentos);
 	send(memoria_fd,&cantElementos,sizeof(uint32_t),0);
+	//pthread_mutex_unlock(&mx_memoria);
 	int i=0;
 	while(i<cantElementos){
 	    uint32_t sid = list_get(pcb->nros_segmentos,i);
 	    uint32_t tamanio = list_get(pcb->segmentos,i);
+	    //pthread_mutex_lock(&mx_memoria);
 	    send(memoria_fd,&sid ,sizeof(uint32_t),0);
 	    send(memoria_fd,&tamanio, sizeof(uint32_t),0);
+	    //pthread_mutex_unlock(&mx_memoria);
 	    i++;
 	}
 
 
 
+	//pthread_mutex_lock(&mx_memoria);
     recv(memoria_fd,&op,sizeof(op_code),0);
+    pthread_mutex_unlock(&mx_memoria);
 }
 
 int server_escuchar(char* server_name, int server_socket) {

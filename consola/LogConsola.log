@@ -375,3 +375,1308 @@ PUERTO_KERNEL: 8000
 [INFO] 00:26:32:670 Consola/(16189:16189): SEGMENTO: 32
 [INFO] 00:26:32:670 Consola/(16189:16189): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
 
+[ERROR] 21:13:39:714 Consola/(1640:1640): Archivo de configuración inválido.
+[ERROR] 21:13:39:717 Consola/(1640:1640): Error al conectar (a KERNEL)
+
+[INFO] 21:14:04:372 Consola/(1644:1644): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:14:04:373 Consola/(1644:1644): SEGMENTO: 1024
+[INFO] 21:14:04:373 Consola/(1644:1644): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:17:55:680 Consola/(1843:1843): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:17:55:680 Consola/(1843:1843): SEGMENTO: 1024
+[INFO] 21:17:55:681 Consola/(1843:1843): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:19:16:817 Consola/(1843:1843): valor registro:912
+[INFO] 21:19:17:585 Consola/(1843:1843): valor registro:912
+[INFO] 21:19:18:088 Consola/(1843:1843): valor registro:912
+[INFO] 21:24:21:730 Consola/(1916:1916): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:24:21:730 Consola/(1916:1916): SEGMENTO: 1024
+[INFO] 21:24:21:731 Consola/(1916:1916): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:25:42:871 Consola/(1916:1916): valor registro:912
+[INFO] 21:25:43:653 Consola/(1916:1916): valor registro:912
+[INFO] 21:25:44:175 Consola/(1916:1916): valor registro:912
+[INFO] 21:32:01:033 Consola/(2063:2063): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:32:01:033 Consola/(2063:2063): SEGMENTO: 1024
+[INFO] 21:32:01:033 Consola/(2063:2063): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:34:52:646 Consola/(2063:2063): valor registro:912
+[INFO] 21:36:30:681 Consola/(2063:2063): valor registro:912
+[INFO] 21:36:31:182 Consola/(2063:2063): valor registro:912
+[INFO] 21:37:42:177 Consola/(2184:2184): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:37:42:177 Consola/(2184:2184): SEGMENTO: 1024
+[INFO] 21:37:42:178 Consola/(2184:2184): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:39:03:315 Consola/(2184:2184): valor registro:912
+[INFO] 21:39:04:112 Consola/(2184:2184): valor registro:912
+[INFO] 21:39:04:616 Consola/(2184:2184): valor registro:912
+[INFO] 21:40:22:289 Consola/(2214:2214): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:40:22:289 Consola/(2214:2214): SEGMENTO: 1024
+[INFO] 21:40:22:289 Consola/(2214:2214): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:41:08:409 Consola/(2214:2214): valor registro:28
+[INFO] 21:41:09:162 Consola/(2214:2214): valor registro:28
+[INFO] 21:41:09:671 Consola/(2214:2214): valor registro:28
+[INFO] 21:42:07:626 Consola/(2256:2256): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:42:07:627 Consola/(2256:2256): SEGMENTO: 1024
+[INFO] 21:42:07:627 Consola/(2256:2256): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:45:01:322 Consola/(2278:2278): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:45:01:322 Consola/(2278:2278): SEGMENTO: 1024
+[INFO] 21:45:01:325 Consola/(2278:2278): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:49:03:825 Consola/(2462:2462): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:49:03:825 Consola/(2462:2462): SEGMENTO: 1024
+[INFO] 21:49:03:826 Consola/(2462:2462): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:49:17:419 Consola/(2462:2462): valor registro:1
+[INFO] 21:49:22:920 Consola/(2462:2462): Se realizo el envio se desconecto del kernel
+[INFO] 21:51:03:794 Consola/(2578:2578): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:51:03:795 Consola/(2578:2578): SEGMENTO: 1024
+[INFO] 21:51:03:795 Consola/(2578:2578): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:52:24:924 Consola/(2578:2578): valor registro:912
+[INFO] 21:52:30:425 Consola/(2578:2578): Se realizo el envio se desconecto del kernel
+[INFO] 21:53:26:095 Consola/(2666:2666): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 21:53:26:095 Consola/(2666:2666): SEGMENTO: 1024
+[INFO] 21:53:26:095 Consola/(2666:2666): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 21:53:56:132 Consola/(2666:2666): valor registro:28
+[INFO] 21:54:16:641 Consola/(2666:2666): valor registro:37
+[INFO] 21:54:22:142 Consola/(2666:2666): Se realizo el envio se desconecto del kernel
+[INFO] 22:00:00:355 Consola/(2716:2716): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:00:00:356 Consola/(2716:2716): SEGMENTO: 1024
+[INFO] 22:00:00:356 Consola/(2716:2716): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:03:04:976 Consola/(2810:2810): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:03:04:976 Consola/(2810:2810): SEGMENTO: 1024
+[INFO] 22:03:04:977 Consola/(2810:2810): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:10:53:207 Consola/(1807:1807): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:10:53:208 Consola/(1807:1807): SEGMENTO: 1024
+[INFO] 22:10:53:208 Consola/(1807:1807): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:17:43:478 Consola/(2003:2003): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:17:43:479 Consola/(2003:2003): SEGMENTO: 1024
+[INFO] 22:17:43:479 Consola/(2003:2003): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:34:16:274 Consola/(2412:2412): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:34:16:274 Consola/(2412:2412): SEGMENTO: 1024
+[INFO] 22:34:16:274 Consola/(2412:2412): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:36:23:403 Consola/(2474:2474): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:36:23:403 Consola/(2474:2474): SEGMENTO: 1024
+[INFO] 22:36:23:403 Consola/(2474:2474): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:43:30:344 Consola/(2684:2684): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:43:30:345 Consola/(2684:2684): SEGMENTO: 1024
+[INFO] 22:43:30:345 Consola/(2684:2684): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:46:29:201 Consola/(2864:2864): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:46:29:201 Consola/(2864:2864): SEGMENTO: 1024
+[INFO] 22:46:29:201 Consola/(2864:2864): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:49:24:466 Consola/(2958:2958): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:49:24:467 Consola/(2958:2958): SEGMENTO: 1024
+[INFO] 22:49:24:467 Consola/(2958:2958): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 22:58:52:584 Consola/(3385:3385): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 22:58:52:585 Consola/(3385:3385): SEGMENTO: 1024
+[INFO] 22:58:52:585 Consola/(3385:3385): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:00:21:724 Consola/(3385:3385): valor registro:912
+[INFO] 23:00:27:225 Consola/(3385:3385): Se realizo el envio se desconecto del kernel
+[INFO] 23:12:17:154 Consola/(3555:3555): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:12:17:154 Consola/(3555:3555): SEGMENTO: 64
+[INFO] 23:12:17:154 Consola/(3555:3555): SEGMENTO: 96
+[INFO] 23:12:17:154 Consola/(3555:3555): SEGMENTO: 128
+[INFO] 23:12:17:154 Consola/(3555:3555): SEGMENTO: 32
+[INFO] 23:12:17:154 Consola/(3555:3555): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:12:18:940 Consola/(3558:3558): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:12:18:941 Consola/(3558:3558): SEGMENTO: 64
+[INFO] 23:12:18:941 Consola/(3558:3558): SEGMENTO: 64
+[INFO] 23:12:18:941 Consola/(3558:3558): SEGMENTO: 96
+[INFO] 23:12:18:941 Consola/(3558:3558): SEGMENTO: 128
+[INFO] 23:12:18:941 Consola/(3558:3558): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:12:20:838 Consola/(3560:3560): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:12:20:838 Consola/(3560:3560): SEGMENTO: 64
+[INFO] 23:12:20:838 Consola/(3560:3560): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:15:43:281 Consola/(3584:3584): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:15:43:282 Consola/(3584:3584): SEGMENTO: 64
+[INFO] 23:15:43:282 Consola/(3584:3584): SEGMENTO: 96
+[INFO] 23:15:43:282 Consola/(3584:3584): SEGMENTO: 128
+[INFO] 23:15:43:282 Consola/(3584:3584): SEGMENTO: 32
+[INFO] 23:15:43:287 Consola/(3584:3584): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:17:23:012 Consola/(3623:3623): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:17:23:012 Consola/(3623:3623): SEGMENTO: 64
+[INFO] 23:17:23:012 Consola/(3623:3623): SEGMENTO: 96
+[INFO] 23:17:23:012 Consola/(3623:3623): SEGMENTO: 128
+[INFO] 23:17:23:012 Consola/(3623:3623): SEGMENTO: 32
+[INFO] 23:17:23:012 Consola/(3623:3623): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:20:33:136 Consola/(3685:3685): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:20:33:136 Consola/(3685:3685): SEGMENTO: 64
+[INFO] 23:20:33:136 Consola/(3685:3685): SEGMENTO: 96
+[INFO] 23:20:33:136 Consola/(3685:3685): SEGMENTO: 128
+[INFO] 23:20:33:136 Consola/(3685:3685): SEGMENTO: 32
+[INFO] 23:20:33:136 Consola/(3685:3685): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:21:44:248 Consola/(3685:3685): valor registro:912
+[INFO] 23:21:49:999 Consola/(3685:3685): Se realizo el envio se desconecto del kernel
+[INFO] 23:25:58:662 Consola/(3859:3859): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:25:58:662 Consola/(3859:3859): SEGMENTO: 64
+[INFO] 23:25:58:662 Consola/(3859:3859): SEGMENTO: 96
+[INFO] 23:25:58:662 Consola/(3859:3859): SEGMENTO: 128
+[INFO] 23:25:58:662 Consola/(3859:3859): SEGMENTO: 32
+[INFO] 23:25:58:663 Consola/(3859:3859): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:27:09:774 Consola/(3859:3859): valor registro:912
+[INFO] 23:27:15:525 Consola/(3859:3859): Se realizo el envio se desconecto del kernel
+[INFO] 23:28:42:118 Consola/(3910:3910): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:28:42:119 Consola/(3910:3910): SEGMENTO: 64
+[INFO] 23:28:42:119 Consola/(3910:3910): SEGMENTO: 96
+[INFO] 23:28:42:119 Consola/(3910:3910): SEGMENTO: 128
+[INFO] 23:28:42:119 Consola/(3910:3910): SEGMENTO: 32
+[INFO] 23:28:42:119 Consola/(3910:3910): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:28:43:581 Consola/(3913:3913): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:28:43:581 Consola/(3913:3913): SEGMENTO: 64
+[INFO] 23:28:43:581 Consola/(3913:3913): SEGMENTO: 64
+[INFO] 23:28:43:581 Consola/(3913:3913): SEGMENTO: 96
+[INFO] 23:28:43:581 Consola/(3913:3913): SEGMENTO: 128
+[INFO] 23:28:43:582 Consola/(3913:3913): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:28:45:457 Consola/(3915:3915): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:28:45:457 Consola/(3915:3915): SEGMENTO: 64
+[INFO] 23:28:45:457 Consola/(3915:3915): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:29:53:244 Consola/(3910:3910): valor registro:912
+[INFO] 23:29:58:995 Consola/(3910:3910): Se realizo el envio se desconecto del kernel
+[INFO] 23:30:14:099 Consola/(3913:3913): valor registro:912
+[INFO] 23:30:19:850 Consola/(3913:3913): Se realizo el envio se desconecto del kernel
+[INFO] 23:30:33:947 Consola/(3915:3915): Se realizo el envio se desconecto del kernel
+[INFO] 23:38:04:217 Consola/(4055:4055): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:38:04:218 Consola/(4055:4055): SEGMENTO: 64
+[INFO] 23:38:04:218 Consola/(4055:4055): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:39:22:527 Consola/(4055:4055): Se realizo el envio se desconecto del kernel
+[INFO] 23:42:07:641 Consola/(4145:4145): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:42:07:642 Consola/(4145:4145): SEGMENTO: 64
+[INFO] 23:42:07:642 Consola/(4145:4145): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:45:32:453 Consola/(4244:4244): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:45:32:453 Consola/(4244:4244): SEGMENTO: 64
+[INFO] 23:45:32:453 Consola/(4244:4244): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:47:51:195 Consola/(4273:4273): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:47:51:195 Consola/(4273:4273): SEGMENTO: 64
+[INFO] 23:47:51:195 Consola/(4273:4273): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 23:54:53:495 Consola/(4496:4496): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:54:53:495 Consola/(4496:4496): SEGMENTO: 64
+[INFO] 23:54:53:495 Consola/(4496:4496): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:17:46:592 Consola/(5376:5376): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:17:46:592 Consola/(5376:5376): SEGMENTO: 64
+[INFO] 00:17:46:592 Consola/(5376:5376): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:17:46:595 Consola/(5376:5376): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:21:00:057 Consola/(5393:5393): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:21:00:057 Consola/(5393:5393): SEGMENTO: 64
+[INFO] 00:21:00:057 Consola/(5393:5393): SEGMENTO: 96
+[INFO] 00:21:00:057 Consola/(5393:5393): SEGMENTO: 128
+[INFO] 00:21:00:057 Consola/(5393:5393): SEGMENTO: 32
+[INFO] 00:21:00:057 Consola/(5393:5393): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:21:02:001 Consola/(5396:5396): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:21:02:001 Consola/(5396:5396): SEGMENTO: 64
+[INFO] 00:21:02:001 Consola/(5396:5396): SEGMENTO: 64
+[INFO] 00:21:02:001 Consola/(5396:5396): SEGMENTO: 96
+[INFO] 00:21:02:001 Consola/(5396:5396): SEGMENTO: 128
+[INFO] 00:21:02:001 Consola/(5396:5396): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:21:03:724 Consola/(5398:5398): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:21:03:724 Consola/(5398:5398): SEGMENTO: 64
+[INFO] 00:21:03:727 Consola/(5398:5398): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:22:11:183 Consola/(5393:5393): valor registro:912
+[INFO] 00:22:16:934 Consola/(5393:5393): Se realizo el envio se desconecto del kernel
+[INFO] 00:22:32:032 Consola/(5396:5396): valor registro:912
+[INFO] 00:22:37:783 Consola/(5396:5396): Se realizo el envio se desconecto del kernel
+[INFO] 00:22:37:785 Consola/(5398:5398): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:30:40:812 Consola/(5502:5502): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:40:813 Consola/(5502:5502): SEGMENTO: 1024
+[INFO] 00:30:40:813 Consola/(5502:5502): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:30:42:703 Consola/(5505:5505): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:42:703 Consola/(5505:5505): SEGMENTO: 1024
+[INFO] 00:30:42:703 Consola/(5505:5505): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:30:44:759 Consola/(5507:5507): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:44:760 Consola/(5507:5507): SEGMENTO: 512
+[INFO] 00:30:44:760 Consola/(5507:5507): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:30:46:514 Consola/(5509:5509): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:46:515 Consola/(5509:5509): SEGMENTO: 512
+[INFO] 00:30:46:515 Consola/(5509:5509): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:30:48:390 Consola/(5511:5511): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:48:390 Consola/(5511:5511): SEGMENTO: 768
+[INFO] 00:30:48:390 Consola/(5511:5511): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:30:49:923 Consola/(5514:5514): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:30:49:923 Consola/(5514:5514): SEGMENTO: 768
+[INFO] 00:30:49:924 Consola/(5514:5514): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:34:068 Consola/(5569:5569): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:34:068 Consola/(5569:5569): SEGMENTO: 1024
+[INFO] 00:34:34:068 Consola/(5569:5569): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:35:621 Consola/(5571:5571): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:35:621 Consola/(5571:5571): SEGMENTO: 1024
+[INFO] 00:34:35:621 Consola/(5571:5571): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:37:230 Consola/(5574:5574): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:37:230 Consola/(5574:5574): SEGMENTO: 512
+[INFO] 00:34:37:230 Consola/(5574:5574): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:38:741 Consola/(5576:5576): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:38:742 Consola/(5576:5576): SEGMENTO: 512
+[INFO] 00:34:38:743 Consola/(5576:5576): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:40:392 Consola/(5579:5579): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:40:392 Consola/(5579:5579): SEGMENTO: 768
+[INFO] 00:34:40:392 Consola/(5579:5579): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:34:41:989 Consola/(5581:5581): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:34:41:989 Consola/(5581:5581): SEGMENTO: 768
+[INFO] 00:34:41:990 Consola/(5581:5581): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:37:39:296 Consola/(5596:5596): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:37:39:296 Consola/(5596:5596): SEGMENTO: 1024
+[ERROR] 00:37:39:296 Consola/(5596:5596): Error al conectar (a KERNEL)
+
+[INFO] 00:41:10:207 Consola/(5608:5608): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:41:10:208 Consola/(5608:5608): SEGMENTO: 1024
+[INFO] 00:41:10:208 Consola/(5608:5608): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:41:11:681 Consola/(5610:5610): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:41:11:681 Consola/(5610:5610): SEGMENTO: 1024
+[INFO] 00:41:11:682 Consola/(5610:5610): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:41:13:269 Consola/(5613:5613): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:41:13:269 Consola/(5613:5613): SEGMENTO: 512
+[INFO] 00:41:13:269 Consola/(5613:5613): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:41:14:749 Consola/(5615:5615): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 00:41:14:750 Consola/(5615:5615): SEGMENTO: 512
+[INFO] 00:41:14:752 Consola/(5615:5615): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 00:43:03:953 Consola/(5608:5608): valor registro:912
+[INFO] 00:43:18:960 Consola/(5608:5608): Se realizo el envio se desconecto del kernel
+[INFO] 00:43:59:009 Consola/(5613:5613): valor registro:2280
+[INFO] 00:44:04:031 Consola/(5613:5613): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:44:04:039 Consola/(5615:5615): valor registro:2280
+[INFO] 00:44:04:044 Consola/(5610:5610): valor registro:28
+[INFO] 00:45:29:678 Consola/(5615:5615): valor registro:2280
+[INFO] 00:45:29:678 Consola/(5610:5610): valor registro:28
+[INFO] 00:45:30:178 Consola/(5615:5615): valor registro:2280
+[INFO] 00:45:30:178 Consola/(5610:5610): valor registro:28
+[INFO] 01:17:21:800 Consola/(5751:5751): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:17:21:800 Consola/(5751:5751): SEGMENTO: 1024
+[INFO] 01:17:21:800 Consola/(5751:5751): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:18:15:926 Consola/(5751:5751): valor registro:28
+[INFO] 01:18:48:435 Consola/(5751:5751): valor registro:37
+[INFO] 01:18:53:936 Consola/(5751:5751): Se realizo el envio se desconecto del kernel
+[INFO] 01:19:01:608 Consola/(5774:5774): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:19:01:608 Consola/(5774:5774): SEGMENTO: 512
+[INFO] 01:19:01:609 Consola/(5774:5774): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:19:31:651 Consola/(5774:5774): valor registro:2280
+[INFO] 01:20:43:251 Consola/(5774:5774): valor registro:9804
+[INFO] 01:20:48:777 Consola/(5774:5774): valor registro:15276
+[INFO] 01:20:54:278 Consola/(5774:5774): Se realizo el envio se desconecto del kernel
+[INFO] 01:21:29:874 Consola/(5802:5802): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:21:29:874 Consola/(5802:5802): SEGMENTO: 768
+[INFO] 01:21:29:874 Consola/(5802:5802): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:21:29:877 Consola/(5802:5802): valor registro:1
+[INFO] 01:21:35:379 Consola/(5802:5802): valor registro:1
+[INFO] 01:21:35:881 Consola/(5802:5802): valor registro:2
+[INFO] 01:21:41:383 Consola/(5802:5802): valor registro:3
+[INFO] 01:21:49:388 Consola/(5802:5802): valor registro:5
+[INFO] 01:21:57:391 Consola/(5802:5802): valor registro:8
+[INFO] 01:22:05:394 Consola/(5802:5802): valor registro:13
+[INFO] 01:22:13:397 Consola/(5802:5802): valor registro:21
+[INFO] 01:22:21:400 Consola/(5802:5802): valor registro:34
+[INFO] 01:22:29:403 Consola/(5802:5802): valor registro:55
+[INFO] 01:22:37:406 Consola/(5802:5802): valor registro:89
+[INFO] 01:22:45:409 Consola/(5802:5802): valor registro:144
+[INFO] 01:22:53:414 Consola/(5802:5802): valor registro:233
+[INFO] 01:23:01:417 Consola/(5802:5802): valor registro:377
+[INFO] 01:23:09:421 Consola/(5802:5802): valor registro:610
+[INFO] 01:23:17:424 Consola/(5802:5802): valor registro:987
+[INFO] 01:23:25:428 Consola/(5802:5802): valor registro:1597
+[INFO] 01:23:33:430 Consola/(5802:5802): valor registro:2584
+[INFO] 01:23:43:948 Consola/(5802:5802): valor registro:4181
+[INFO] 01:23:51:950 Consola/(5802:5802): valor registro:6765
+[INFO] 01:23:59:954 Consola/(5802:5802): valor registro:10946
+[INFO] 01:24:07:958 Consola/(5802:5802): valor registro:17711
+[INFO] 01:24:15:961 Consola/(5802:5802): valor registro:28657
+[INFO] 01:24:23:965 Consola/(5802:5802): valor registro:46368
+[INFO] 01:24:31:968 Consola/(5802:5802): valor registro:75025
+[INFO] 01:24:39:971 Consola/(5802:5802): valor registro:121393
+[INFO] 01:24:47:974 Consola/(5802:5802): valor registro:196418
+[INFO] 01:24:55:978 Consola/(5802:5802): valor registro:317811
+[INFO] 01:25:03:981 Consola/(5802:5802): valor registro:514229
+[INFO] 01:25:11:984 Consola/(5802:5802): valor registro:832040
+[INFO] 01:25:19:988 Consola/(5802:5802): valor registro:1346269
+[INFO] 01:25:25:489 Consola/(5802:5802): Se realizo el envio se desconecto del kernel
+[INFO] 01:26:04:638 Consola/(5837:5837): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:26:04:638 Consola/(5837:5837): SEGMENTO: 768
+[INFO] 01:26:04:638 Consola/(5837:5837): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:26:04:682 Consola/(5837:5837): valor registro:1
+[INFO] 01:26:05:184 Consola/(5837:5837): valor registro:2
+[INFO] 01:26:13:187 Consola/(5837:5837): valor registro:4
+[INFO] 01:26:21:190 Consola/(5837:5837): valor registro:8
+[INFO] 01:26:29:194 Consola/(5837:5837): valor registro:16
+[INFO] 01:26:37:198 Consola/(5837:5837): valor registro:32
+[INFO] 01:26:45:202 Consola/(5837:5837): valor registro:64
+[INFO] 01:26:53:205 Consola/(5837:5837): valor registro:128
+[INFO] 01:27:01:208 Consola/(5837:5837): valor registro:256
+[INFO] 01:27:09:211 Consola/(5837:5837): valor registro:512
+[INFO] 01:27:17:214 Consola/(5837:5837): valor registro:1024
+[INFO] 01:27:25:218 Consola/(5837:5837): valor registro:2048
+[INFO] 01:27:33:221 Consola/(5837:5837): valor registro:4096
+[INFO] 01:27:41:225 Consola/(5837:5837): valor registro:8192
+[INFO] 01:27:49:229 Consola/(5837:5837): valor registro:16384
+[INFO] 01:27:57:232 Consola/(5837:5837): valor registro:32768
+[INFO] 01:28:05:235 Consola/(5837:5837): valor registro:65536
+[INFO] 01:28:13:238 Consola/(5837:5837): valor registro:131072
+[INFO] 01:28:21:242 Consola/(5837:5837): valor registro:262144
+[INFO] 01:28:29:247 Consola/(5837:5837): valor registro:524288
+[INFO] 01:28:37:250 Consola/(5837:5837): valor registro:1048576
+[INFO] 01:28:45:254 Consola/(5837:5837): valor registro:2097152
+[INFO] 01:28:53:257 Consola/(5837:5837): valor registro:4194304
+[INFO] 01:29:01:261 Consola/(5837:5837): valor registro:8388608
+[INFO] 01:29:09:264 Consola/(5837:5837): valor registro:16777216
+[INFO] 01:29:17:268 Consola/(5837:5837): valor registro:33554432
+[INFO] 01:29:25:270 Consola/(5837:5837): valor registro:67108864
+[INFO] 01:29:33:273 Consola/(5837:5837): valor registro:134217728
+[INFO] 01:29:38:774 Consola/(5837:5837): Se realizo el envio se desconecto del kernel
+[INFO] 01:40:50:834 Consola/(5961:5961): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:40:50:834 Consola/(5961:5961): SEGMENTO: 16
+[INFO] 01:40:50:834 Consola/(5961:5961): SEGMENTO: 16
+[INFO] 01:40:50:834 Consola/(5961:5961): SEGMENTO: 16
+[INFO] 01:40:50:834 Consola/(5961:5961): SEGMENTO: 16
+[INFO] 01:40:50:834 Consola/(5961:5961): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:40:50:841 Consola/(5961:5961): Ingrese valor:
+[INFO] 01:40:52:582 Consola/(5964:5964): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:40:52:583 Consola/(5964:5964): SEGMENTO: 16
+[INFO] 01:40:52:583 Consola/(5964:5964): SEGMENTO: 16
+[INFO] 01:40:52:583 Consola/(5964:5964): SEGMENTO: 16
+[INFO] 01:40:52:583 Consola/(5964:5964): SEGMENTO: 16
+[INFO] 01:40:52:583 Consola/(5964:5964): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:40:52:633 Consola/(5964:5964): Ingrese valor:
+[INFO] 01:40:54:288 Consola/(5967:5967): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:40:54:288 Consola/(5967:5967): SEGMENTO: 16
+[INFO] 01:40:54:288 Consola/(5967:5967): SEGMENTO: 16
+[INFO] 01:40:54:288 Consola/(5967:5967): SEGMENTO: 16
+[INFO] 01:40:54:288 Consola/(5967:5967): SEGMENTO: 16
+[INFO] 01:40:54:288 Consola/(5967:5967): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:40:55:978 Consola/(5969:5969): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:40:55:978 Consola/(5969:5969): SEGMENTO: 16
+[INFO] 01:40:55:978 Consola/(5969:5969): SEGMENTO: 16
+[INFO] 01:40:55:978 Consola/(5969:5969): SEGMENTO: 16
+[INFO] 01:40:55:978 Consola/(5969:5969): SEGMENTO: 16
+[INFO] 01:40:55:978 Consola/(5969:5969): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:41:13:281 Consola/(5961:5961): valor registro:28
+[INFO] 01:41:19:032 Consola/(5961:5961): Se realizo el envio se desconecto del kernel
+[INFO] 01:41:19:076 Consola/(5967:5967): Ingrese valor:
+[INFO] 01:41:20:896 Consola/(5964:5964): valor registro:28
+[INFO] 01:41:26:647 Consola/(5964:5964): Se realizo el envio se desconecto del kernel
+[INFO] 01:41:26:689 Consola/(5969:5969): Ingrese valor:
+[INFO] 01:42:23:639 Consola/(5967:5967): Se realizo el envio se desconecto del kernel
+[INFO] 01:42:28:683 Consola/(5969:5969): Se realizo el envio se desconecto del kernel
+[INFO] 01:43:36:382 Consola/(6010:6010): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:43:36:382 Consola/(6010:6010): SEGMENTO: 16
+[INFO] 01:43:36:382 Consola/(6010:6010): SEGMENTO: 16
+[INFO] 01:43:36:382 Consola/(6010:6010): SEGMENTO: 16
+[INFO] 01:43:36:382 Consola/(6010:6010): SEGMENTO: 16
+[INFO] 01:43:36:383 Consola/(6010:6010): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:43:36:384 Consola/(6010:6010): Ingrese valor:
+[INFO] 01:43:38:111 Consola/(6013:6013): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:43:38:111 Consola/(6013:6013): SEGMENTO: 16
+[INFO] 01:43:38:113 Consola/(6013:6013): SEGMENTO: 16
+[INFO] 01:43:38:113 Consola/(6013:6013): SEGMENTO: 16
+[INFO] 01:43:38:113 Consola/(6013:6013): SEGMENTO: 16
+[INFO] 01:43:38:114 Consola/(6013:6013): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:43:38:156 Consola/(6013:6013): Ingrese valor:
+[INFO] 01:43:45:354 Consola/(6010:6010): valor registro:28
+[INFO] 01:43:51:105 Consola/(6010:6010): Se realizo el envio se desconecto del kernel
+[INFO] 01:43:51:144 Consola/(6013:6013): valor registro:28
+[INFO] 01:43:56:895 Consola/(6013:6013): Se realizo el envio se desconecto del kernel
+[INFO] 01:58:05:185 Consola/(6088:6088): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:58:05:185 Consola/(6088:6088): SEGMENTO: 16
+[INFO] 01:58:05:185 Consola/(6088:6088): SEGMENTO: 16
+[INFO] 01:58:05:185 Consola/(6088:6088): SEGMENTO: 16
+[INFO] 01:58:05:185 Consola/(6088:6088): SEGMENTO: 16
+[INFO] 01:58:05:185 Consola/(6088:6088): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:58:05:187 Consola/(6088:6088): Ingrese valor:
+[INFO] 01:58:06:864 Consola/(6091:6091): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:58:06:864 Consola/(6091:6091): SEGMENTO: 16
+[INFO] 01:58:06:864 Consola/(6091:6091): SEGMENTO: 16
+[INFO] 01:58:06:865 Consola/(6091:6091): SEGMENTO: 16
+[INFO] 01:58:06:865 Consola/(6091:6091): SEGMENTO: 16
+[INFO] 01:58:06:869 Consola/(6091:6091): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:58:07:687 Consola/(6091:6091): Ingrese valor:
+[INFO] 01:58:08:658 Consola/(6094:6094): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:58:08:658 Consola/(6094:6094): SEGMENTO: 16
+[INFO] 01:58:08:658 Consola/(6094:6094): SEGMENTO: 16
+[INFO] 01:58:08:658 Consola/(6094:6094): SEGMENTO: 16
+[INFO] 01:58:08:658 Consola/(6094:6094): SEGMENTO: 16
+[INFO] 01:58:08:659 Consola/(6094:6094): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:58:10:250 Consola/(6096:6096): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 01:58:10:250 Consola/(6096:6096): SEGMENTO: 16
+[INFO] 01:58:10:251 Consola/(6096:6096): SEGMENTO: 16
+[INFO] 01:58:10:251 Consola/(6096:6096): SEGMENTO: 16
+[INFO] 01:58:10:251 Consola/(6096:6096): SEGMENTO: 16
+[INFO] 01:58:10:251 Consola/(6096:6096): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 01:59:21:897 Consola/(6088:6088): valor registro:28
+[INFO] 01:59:31:897 Consola/(6088:6088): Se realizo el envio se desconecto del kernel
+[INFO] 01:59:31:899 Consola/(6091:6091): valor registro:28
+[INFO] 01:59:34:398 Consola/(6094:6094): Ingrese valor:
+[INFO] 01:59:41:903 Consola/(6091:6091): Se realizo el envio se desconecto del kernel
+[INFO] 01:59:41:945 Consola/(6096:6096): Ingrese valor:
+[INFO] 02:17:51:562 Consola/(6454:6454): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:17:51:563 Consola/(6454:6454): SEGMENTO: 1024
+[INFO] 02:17:51:563 Consola/(6454:6454): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:17:53:081 Consola/(6458:6458): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:17:53:081 Consola/(6458:6458): SEGMENTO: 1024
+[INFO] 02:17:53:081 Consola/(6458:6458): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:17:54:913 Consola/(6461:6461): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:17:54:913 Consola/(6461:6461): SEGMENTO: 512
+[INFO] 02:17:54:913 Consola/(6461:6461): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:17:56:573 Consola/(6464:6464): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:17:56:574 Consola/(6464:6464): SEGMENTO: 512
+[INFO] 02:17:56:575 Consola/(6464:6464): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:17:58:315 Consola/(6467:6467): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:17:58:316 Consola/(6467:6467): SEGMENTO: 768
+[INFO] 02:17:58:317 Consola/(6467:6467): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:18:00:382 Consola/(6469:6469): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:18:00:382 Consola/(6469:6469): SEGMENTO: 768
+[INFO] 02:18:00:383 Consola/(6469:6469): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:35:160 Consola/(7378:7378): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:35:160 Consola/(7378:7378): SEGMENTO: 1024
+[INFO] 02:50:35:160 Consola/(7378:7378): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:36:734 Consola/(7381:7381): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:36:734 Consola/(7381:7381): SEGMENTO: 1024
+[INFO] 02:50:36:734 Consola/(7381:7381): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:38:582 Consola/(7384:7384): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:38:582 Consola/(7384:7384): SEGMENTO: 512
+[INFO] 02:50:38:582 Consola/(7384:7384): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:41:568 Consola/(7386:7386): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:41:568 Consola/(7386:7386): SEGMENTO: 512
+[INFO] 02:50:41:568 Consola/(7386:7386): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:43:781 Consola/(7388:7388): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:43:781 Consola/(7388:7388): SEGMENTO: 768
+[INFO] 02:50:43:781 Consola/(7388:7388): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 02:50:45:661 Consola/(7390:7390): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 02:50:45:661 Consola/(7390:7390): SEGMENTO: 768
+[INFO] 02:50:45:661 Consola/(7390:7390): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:18:33:336 Consola/(7939:7939): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:18:33:336 Consola/(7939:7939): SEGMENTO: 1024
+[INFO] 03:18:33:336 Consola/(7939:7939): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:18:34:865 Consola/(7943:7943): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:18:34:865 Consola/(7943:7943): SEGMENTO: 1024
+[INFO] 03:18:34:865 Consola/(7943:7943): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:18:36:499 Consola/(7946:7946): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:18:36:500 Consola/(7946:7946): SEGMENTO: 512
+[INFO] 03:18:36:500 Consola/(7946:7946): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:18:37:906 Consola/(7949:7949): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:18:37:906 Consola/(7949:7949): SEGMENTO: 512
+[INFO] 03:18:37:906 Consola/(7949:7949): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:18:39:674 Consola/(7951:7951): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:18:39:674 Consola/(7951:7951): SEGMENTO: 768
+[ERROR] 03:18:39:675 Consola/(7951:7951): Error al conectar (a KERNEL)
+
+[INFO] 03:26:15:142 Consola/(8248:8248): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:26:15:143 Consola/(8248:8248): SEGMENTO: 1024
+[INFO] 03:26:15:143 Consola/(8248:8248): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:26:16:543 Consola/(8251:8251): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:26:16:543 Consola/(8251:8251): SEGMENTO: 1024
+[INFO] 03:26:16:543 Consola/(8251:8251): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:26:18:289 Consola/(8255:8255): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:26:18:289 Consola/(8255:8255): SEGMENTO: 512
+[INFO] 03:26:18:290 Consola/(8255:8255): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:26:19:755 Consola/(8257:8257): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:26:19:755 Consola/(8257:8257): SEGMENTO: 512
+[ERROR] 03:26:19:756 Consola/(8257:8257): Error al conectar (a KERNEL)
+
+[INFO] 03:32:59:894 Consola/(8394:8394): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:32:59:894 Consola/(8394:8394): SEGMENTO: 1024
+[INFO] 03:32:59:894 Consola/(8394:8394): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:33:01:547 Consola/(8398:8398): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:33:01:547 Consola/(8398:8398): SEGMENTO: 1024
+[INFO] 03:33:01:547 Consola/(8398:8398): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:33:03:317 Consola/(8401:8401): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:33:03:317 Consola/(8401:8401): SEGMENTO: 512
+[INFO] 03:33:03:317 Consola/(8401:8401): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:33:05:499 Consola/(8404:8404): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:33:05:508 Consola/(8404:8404): SEGMENTO: 512
+[INFO] 03:33:05:509 Consola/(8404:8404): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:33:07:706 Consola/(8406:8406): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:33:07:707 Consola/(8406:8406): SEGMENTO: 768
+[ERROR] 03:33:07:707 Consola/(8406:8406): Error al conectar (a KERNEL)
+
+[INFO] 03:41:26:568 Consola/(8475:8475): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:41:26:568 Consola/(8475:8475): SEGMENTO: 1024
+[INFO] 03:41:26:568 Consola/(8475:8475): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:41:28:172 Consola/(8479:8479): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:41:28:172 Consola/(8479:8479): SEGMENTO: 512
+[INFO] 03:41:28:175 Consola/(8479:8479): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:47:59:315 Consola/(8629:8629): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:47:59:315 Consola/(8629:8629): SEGMENTO: 1024
+[INFO] 03:47:59:315 Consola/(8629:8629): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:48:00:575 Consola/(8632:8632): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:48:00:575 Consola/(8632:8632): SEGMENTO: 512
+[INFO] 03:48:00:575 Consola/(8632:8632): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:52:21:085 Consola/(8757:8757): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:52:21:085 Consola/(8757:8757): SEGMENTO: 1024
+[INFO] 03:52:21:086 Consola/(8757:8757): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:52:22:387 Consola/(8760:8760): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:52:22:391 Consola/(8760:8760): SEGMENTO: 512
+[INFO] 03:52:22:392 Consola/(8760:8760): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:54:42:070 Consola/(8791:8791): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:54:42:071 Consola/(8791:8791): SEGMENTO: 1024
+[INFO] 03:54:42:071 Consola/(8791:8791): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:54:51:097 Consola/(8791:8791): valor registro:912
+[INFO] 03:54:51:598 Consola/(8791:8791): Se realizo el envio se desconecto del kernel
+[INFO] 03:55:47:337 Consola/(8813:8813): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:55:47:337 Consola/(8813:8813): SEGMENTO: 1024
+[INFO] 03:55:47:337 Consola/(8813:8813): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 03:55:49:093 Consola/(8817:8817): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 03:55:49:093 Consola/(8817:8817): SEGMENTO: 512
+[INFO] 03:55:49:093 Consola/(8817:8817): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:03:33:392 Consola/(9144:9144): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:03:33:392 Consola/(9144:9144): SEGMENTO: 1024
+[INFO] 04:03:33:392 Consola/(9144:9144): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:03:35:024 Consola/(9148:9148): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:03:35:024 Consola/(9148:9148): SEGMENTO: 512
+[INFO] 04:03:35:024 Consola/(9148:9148): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:03:44:287 Consola/(9144:9144): valor registro:912
+[INFO] 04:03:44:793 Consola/(9144:9144): Se realizo el envio se desconecto del kernel
+[INFO] 04:03:44:802 Consola/(9148:9148): valor registro:2280
+[INFO] 04:03:52:452 Consola/(9148:9148): valor registro:9804
+[INFO] 04:03:53:458 Consola/(9148:9148): valor registro:15276
+[INFO] 04:03:53:960 Consola/(9148:9148): Se realizo el envio se desconecto del kernel
+[INFO] 04:04:44:227 Consola/(9191:9191): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:04:44:228 Consola/(9191:9191): SEGMENTO: 1024
+[INFO] 04:04:44:228 Consola/(9191:9191): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:04:45:615 Consola/(9194:9194): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:04:45:615 Consola/(9194:9194): SEGMENTO: 1024
+[INFO] 04:04:45:615 Consola/(9194:9194): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:04:47:165 Consola/(9197:9197): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:04:47:165 Consola/(9197:9197): SEGMENTO: 512
+[ERROR] 04:04:47:165 Consola/(9197:9197): Error al conectar (a KERNEL)
+
+[INFO] 04:10:43:528 Consola/(9357:9357): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:10:43:528 Consola/(9357:9357): SEGMENTO: 1024
+[INFO] 04:10:43:529 Consola/(9357:9357): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:10:49:072 Consola/(9357:9357): valor registro:28
+[INFO] 04:10:52:785 Consola/(9357:9357): valor registro:37
+[INFO] 04:10:53:286 Consola/(9357:9357): Se realizo el envio se desconecto del kernel
+[INFO] 04:11:29:042 Consola/(9389:9389): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:11:29:043 Consola/(9389:9389): SEGMENTO: 1024
+[INFO] 04:11:29:043 Consola/(9389:9389): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:11:30:323 Consola/(9392:9392): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:11:30:323 Consola/(9392:9392): SEGMENTO: 512
+[INFO] 04:11:30:323 Consola/(9392:9392): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:11:40:192 Consola/(9389:9389): valor registro:912
+[INFO] 04:11:40:196 Consola/(9392:9392): valor registro:2280
+[INFO] 04:11:40:693 Consola/(9389:9389): Se realizo el envio se desconecto del kernel
+[INFO] 04:11:47:913 Consola/(9392:9392): valor registro:9804
+[INFO] 04:11:48:923 Consola/(9392:9392): valor registro:15276
+[INFO] 04:11:49:424 Consola/(9392:9392): Se realizo el envio se desconecto del kernel
+[INFO] 04:12:39:401 Consola/(9436:9436): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:12:39:401 Consola/(9436:9436): SEGMENTO: 1024
+[INFO] 04:12:39:402 Consola/(9436:9436): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:12:40:828 Consola/(9439:9439): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:12:40:828 Consola/(9439:9439): SEGMENTO: 512
+[INFO] 04:12:40:834 Consola/(9439:9439): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:12:43:385 Consola/(9451:9451): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:12:43:385 Consola/(9451:9451): SEGMENTO: 768
+[INFO] 04:12:43:385 Consola/(9451:9451): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:12:43:967 Consola/(9451:9451): valor registro:1
+[INFO] 04:12:47:230 Consola/(9451:9451): valor registro:1
+[INFO] 04:12:47:773 Consola/(9451:9451): valor registro:2
+[INFO] 04:12:51:036 Consola/(9436:9436): valor registro:912
+[INFO] 04:12:51:539 Consola/(9451:9451): valor registro:3
+[INFO] 04:12:51:541 Consola/(9439:9439): valor registro:2280
+[INFO] 04:12:51:541 Consola/(9436:9436): Se realizo el envio se desconecto del kernel
+[INFO] 04:12:52:792 Consola/(9451:9451): valor registro:5
+[INFO] 04:12:57:324 Consola/(9439:9439): valor registro:2280
+[INFO] 04:12:57:325 Consola/(9451:9451): valor registro:5
+[INFO] 04:12:57:826 Consola/(9451:9451): valor registro:5
+[INFO] 04:12:57:826 Consola/(9439:9439): valor registro:2280
+[INFO] 04:20:52:190 Consola/(9712:9712): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:20:52:191 Consola/(9712:9712): SEGMENTO: 1024
+[INFO] 04:20:52:191 Consola/(9712:9712): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:20:53:505 Consola/(9715:9715): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:20:53:506 Consola/(9715:9715): SEGMENTO: 512
+[INFO] 04:20:53:506 Consola/(9715:9715): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:20:55:594 Consola/(9726:9726): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:20:55:594 Consola/(9726:9726): SEGMENTO: 768
+[INFO] 04:20:55:596 Consola/(9726:9726): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:25:16:259 Consola/(9838:9838): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:25:16:259 Consola/(9838:9838): SEGMENTO: 1024
+[INFO] 04:25:16:259 Consola/(9838:9838): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:25:17:590 Consola/(9841:9841): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:25:17:590 Consola/(9841:9841): SEGMENTO: 512
+[INFO] 04:25:17:590 Consola/(9841:9841): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:25:19:354 Consola/(9853:9853): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:25:19:354 Consola/(9853:9853): SEGMENTO: 768
+[INFO] 04:25:19:355 Consola/(9853:9853): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:25:20:276 Consola/(9853:9853): valor registro:1
+[INFO] 04:25:23:036 Consola/(9853:9853): valor registro:2
+[INFO] 04:25:24:297 Consola/(9853:9853): valor registro:4
+[INFO] 04:25:25:566 Consola/(9853:9853): valor registro:8
+[INFO] 04:25:28:830 Consola/(9838:9838): valor registro:912
+[INFO] 04:25:29:583 Consola/(9853:9853): valor registro:16
+[INFO] 04:25:29:585 Consola/(9841:9841): valor registro:2280
+[INFO] 04:25:29:585 Consola/(9838:9838): Se realizo el envio se desconecto del kernel
+[INFO] 04:25:30:842 Consola/(9853:9853): valor registro:32
+[INFO] 04:25:36:120 Consola/(9853:9853): valor registro:64
+[INFO] 04:25:39:141 Consola/(9853:9853): valor registro:128
+[INFO] 04:25:39:172 Consola/(9841:9841): valor registro:9804
+[INFO] 04:25:40:394 Consola/(9853:9853): valor registro:256
+[INFO] 04:25:40:915 Consola/(9841:9841): valor registro:15276
+[INFO] 04:25:41:668 Consola/(9853:9853): valor registro:512
+[INFO] 04:25:41:668 Consola/(9841:9841): Se realizo el envio se desconecto del kernel
+[INFO] 04:25:42:921 Consola/(9853:9853): valor registro:1024
+[INFO] 04:25:44:174 Consola/(9853:9853): valor registro:2048
+[INFO] 04:25:45:428 Consola/(9853:9853): valor registro:4096
+[INFO] 04:25:46:682 Consola/(9853:9853): valor registro:8192
+[INFO] 04:25:47:936 Consola/(9853:9853): valor registro:16384
+[INFO] 04:25:49:189 Consola/(9853:9853): valor registro:32768
+[INFO] 04:25:50:443 Consola/(9853:9853): valor registro:65536
+[INFO] 04:25:51:697 Consola/(9853:9853): valor registro:131072
+[INFO] 04:25:52:951 Consola/(9853:9853): valor registro:262144
+[INFO] 04:25:54:205 Consola/(9853:9853): valor registro:524288
+[INFO] 04:25:55:459 Consola/(9853:9853): valor registro:1048576
+[INFO] 04:25:56:713 Consola/(9853:9853): valor registro:2097152
+[INFO] 04:25:57:967 Consola/(9853:9853): valor registro:4194304
+[INFO] 04:25:59:220 Consola/(9853:9853): valor registro:8388608
+[INFO] 04:26:00:473 Consola/(9853:9853): valor registro:16777216
+[INFO] 04:26:01:727 Consola/(9853:9853): valor registro:33554432
+[INFO] 04:26:02:981 Consola/(9853:9853): valor registro:67108864
+[INFO] 04:26:04:234 Consola/(9853:9853): valor registro:134217728
+[INFO] 04:26:04:736 Consola/(9853:9853): Se realizo el envio se desconecto del kernel
+[INFO] 04:27:17:567 Consola/(9916:9916): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:17:567 Consola/(9916:9916): SEGMENTO: 1024
+[INFO] 04:27:17:567 Consola/(9916:9916): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:18:949 Consola/(9919:9919): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:18:950 Consola/(9919:9919): SEGMENTO: 1024
+[INFO] 04:27:18:955 Consola/(9919:9919): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:20:454 Consola/(9923:9923): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:20:455 Consola/(9923:9923): SEGMENTO: 512
+[INFO] 04:27:20:455 Consola/(9923:9923): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:22:779 Consola/(9926:9926): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:22:780 Consola/(9926:9926): SEGMENTO: 512
+[INFO] 04:27:22:781 Consola/(9926:9926): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:24:812 Consola/(9931:9931): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:24:813 Consola/(9931:9931): SEGMENTO: 768
+[INFO] 04:27:24:813 Consola/(9931:9931): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:26:541 Consola/(9945:9945): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:27:26:541 Consola/(9945:9945): SEGMENTO: 768
+[INFO] 04:27:26:541 Consola/(9945:9945): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:27:28:623 Consola/(9916:9916): valor registro:912
+[INFO] 04:27:29:643 Consola/(9916:9916): Se realizo el envio se desconecto del kernel
+[INFO] 04:27:30:659 Consola/(9931:9931): valor registro:1
+[INFO] 04:27:32:170 Consola/(9931:9931): valor registro:1
+[INFO] 04:27:33:181 Consola/(9931:9931): valor registro:2
+[INFO] 04:27:34:690 Consola/(9931:9931): valor registro:3
+[INFO] 04:27:35:193 Consola/(9919:9919): valor registro:28
+[INFO] 04:27:36:448 Consola/(9931:9931): valor registro:5
+[INFO] 04:27:36:450 Consola/(9923:9923): valor registro:2280
+[INFO] 04:27:36:745 Consola/(9926:9926): valor registro:2280
+[INFO] 04:27:37:709 Consola/(9931:9931): valor registro:8
+[INFO] 04:27:37:733 Consola/(9923:9923): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 04:27:43:054 Consola/(9945:9945): valor registro:1
+[INFO] 04:27:43:808 Consola/(9931:9931): valor registro:3200
+[INFO] 04:27:45:313 Consola/(9919:9919): valor registro:37
+[INFO] 04:27:47:573 Consola/(9945:9945): valor registro:2
+[INFO] 04:27:48:332 Consola/(9931:9931): valor registro:3208
+[INFO] 04:27:48:333 Consola/(9919:9919): Se realizo el envio se desconecto del kernel
+[INFO] 04:27:49:090 Consola/(9945:9945): valor registro:4
+[INFO] 04:27:49:854 Consola/(9931:9931): valor registro:6408
+[INFO] 04:27:50:608 Consola/(9945:9945): valor registro:8
+[INFO] 04:27:51:362 Consola/(9931:9931): valor registro:9616
+[INFO] 04:27:52:116 Consola/(9945:9945): valor registro:16
+[INFO] 04:27:52:870 Consola/(9931:9931): valor registro:16024
+[INFO] 04:27:53:624 Consola/(9945:9945): valor registro:32
+[INFO] 04:27:54:379 Consola/(9931:9931): valor registro:25640
+[INFO] 04:27:54:380 Consola/(9926:9926): valor registro:9804
+[INFO] 04:27:55:133 Consola/(9945:9945): valor registro:64
+[INFO] 04:27:55:885 Consola/(9931:9931): valor registro:41664
+[INFO] 04:27:56:403 Consola/(9926:9926): valor registro:15276
+[INFO] 04:27:57:159 Consola/(9945:9945): valor registro:128
+[INFO] 04:27:57:912 Consola/(9931:9931): valor registro:67304
+[INFO] 04:27:57:913 Consola/(9926:9926): Se realizo el envio se desconecto del kernel
+[INFO] 04:27:58:666 Consola/(9945:9945): valor registro:256
+[INFO] 04:27:59:424 Consola/(9931:9931): valor registro:108968
+[INFO] 04:28:00:179 Consola/(9945:9945): valor registro:512
+[INFO] 04:28:00:932 Consola/(9931:9931): valor registro:176272
+[INFO] 04:28:01:689 Consola/(9945:9945): valor registro:1024
+[INFO] 04:28:02:450 Consola/(9931:9931): valor registro:285240
+[INFO] 04:28:03:214 Consola/(9945:9945): valor registro:2048
+[INFO] 04:28:04:004 Consola/(9931:9931): valor registro:461512
+[INFO] 04:28:04:772 Consola/(9945:9945): valor registro:4096
+[INFO] 04:28:05:776 Consola/(9931:9931): valor registro:746752
+[INFO] 04:28:06:529 Consola/(9945:9945): valor registro:8192
+[INFO] 04:28:07:283 Consola/(9931:9931): valor registro:1208264
+[INFO] 04:28:08:036 Consola/(9945:9945): valor registro:16384
+[INFO] 04:28:08:790 Consola/(9931:9931): valor registro:1955016
+[INFO] 04:28:09:542 Consola/(9945:9945): valor registro:32768
+[INFO] 04:28:10:295 Consola/(9931:9931): valor registro:3163280
+[INFO] 04:28:11:048 Consola/(9945:9945): valor registro:65536
+[INFO] 04:28:11:802 Consola/(9931:9931): valor registro:5118296
+[INFO] 04:28:12:555 Consola/(9945:9945): valor registro:131072
+[INFO] 04:28:13:310 Consola/(9931:9931): valor registro:8281576
+[INFO] 04:28:14:064 Consola/(9945:9945): valor registro:262144
+[INFO] 04:28:14:817 Consola/(9931:9931): valor registro:13399872
+[INFO] 04:28:15:570 Consola/(9945:9945): valor registro:524288
+[INFO] 04:28:16:323 Consola/(9931:9931): valor registro:21681448
+[INFO] 04:28:17:077 Consola/(9945:9945): valor registro:1048576
+[INFO] 04:28:17:830 Consola/(9931:9931): valor registro:35081320
+[INFO] 04:28:18:583 Consola/(9945:9945): valor registro:2097152
+[INFO] 04:28:19:336 Consola/(9931:9931): valor registro:56762768
+[INFO] 04:28:20:089 Consola/(9945:9945): valor registro:4194304
+[INFO] 04:28:20:842 Consola/(9931:9931): valor registro:91844088
+[INFO] 04:28:21:598 Consola/(9945:9945): valor registro:8388608
+[INFO] 04:28:22:351 Consola/(9931:9931): valor registro:148606856
+[INFO] 04:28:23:104 Consola/(9945:9945): valor registro:16777216
+[INFO] 04:28:23:857 Consola/(9931:9931): valor registro:240450944
+[INFO] 04:28:24:611 Consola/(9945:9945): valor registro:33554432
+[INFO] 04:28:24:612 Consola/(9931:9931): Se realizo el envio se desconecto del kernel
+[INFO] 04:28:25:865 Consola/(9945:9945): valor registro:67108864
+[INFO] 04:28:27:118 Consola/(9945:9945): valor registro:134217728
+[INFO] 04:28:27:620 Consola/(9945:9945): Se realizo el envio se desconecto del kernel
+[INFO] 04:31:26:539 Consola/(10061:10061): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:26:540 Consola/(10061:10061): SEGMENTO: 1024
+[INFO] 04:31:26:540 Consola/(10061:10061): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:28:239 Consola/(10065:10065): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:28:239 Consola/(10065:10065): SEGMENTO: 1024
+[INFO] 04:31:28:239 Consola/(10065:10065): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:30:095 Consola/(10068:10068): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:30:095 Consola/(10068:10068): SEGMENTO: 512
+[INFO] 04:31:30:095 Consola/(10068:10068): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:33:474 Consola/(10073:10073): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:33:474 Consola/(10073:10073): SEGMENTO: 512
+[INFO] 04:31:33:474 Consola/(10073:10073): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:35:120 Consola/(10084:10084): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:35:128 Consola/(10084:10084): SEGMENTO: 768
+[INFO] 04:31:35:128 Consola/(10084:10084): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:36:742 Consola/(10086:10086): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:31:36:743 Consola/(10086:10086): SEGMENTO: 768
+[INFO] 04:31:36:743 Consola/(10086:10086): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:31:37:642 Consola/(10061:10061): valor registro:912
+[INFO] 04:31:38:161 Consola/(10061:10061): Se realizo el envio se desconecto del kernel
+[INFO] 04:31:39:170 Consola/(10084:10084): valor registro:1
+[INFO] 04:31:40:684 Consola/(10084:10084): valor registro:1
+[INFO] 04:31:41:697 Consola/(10084:10084): valor registro:2
+[INFO] 04:31:43:213 Consola/(10084:10084): valor registro:3
+[INFO] 04:31:44:973 Consola/(10084:10084): valor registro:5
+[INFO] 04:31:44:980 Consola/(10068:10068): valor registro:2280
+[INFO] 04:31:45:483 Consola/(10065:10065): valor registro:28
+[INFO] 04:31:46:236 Consola/(10084:10084): valor registro:8
+[INFO] 04:31:46:245 Consola/(10068:10068): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 04:31:46:256 Consola/(10073:10073): valor registro:2280
+[INFO] 04:31:46:552 Consola/(10086:10086): valor registro:1
+[INFO] 04:31:47:490 Consola/(10084:10084): valor registro:13
+[INFO] 04:31:52:760 Consola/(10086:10086): valor registro:2
+[INFO] 04:31:53:513 Consola/(10084:10084): valor registro:3433
+[INFO] 04:31:57:277 Consola/(10065:10065): valor registro:37
+[INFO] 04:31:58:030 Consola/(10086:10086): valor registro:4
+[INFO] 04:31:58:783 Consola/(10084:10084): valor registro:3446
+[INFO] 04:31:58:784 Consola/(10065:10065): Se realizo el envio se desconecto del kernel
+[INFO] 04:31:59:537 Consola/(10086:10086): valor registro:8
+[INFO] 04:32:00:297 Consola/(10084:10084): valor registro:6879
+[INFO] 04:32:01:051 Consola/(10086:10086): valor registro:16
+[INFO] 04:32:01:805 Consola/(10084:10084): valor registro:10325
+[INFO] 04:32:02:567 Consola/(10086:10086): valor registro:32
+[INFO] 04:32:03:357 Consola/(10084:10084): valor registro:17204
+[INFO] 04:32:04:140 Consola/(10086:10086): valor registro:64
+[INFO] 04:32:04:946 Consola/(10084:10084): valor registro:27529
+[INFO] 04:32:04:959 Consola/(10073:10073): valor registro:9804
+[INFO] 04:32:05:712 Consola/(10086:10086): valor registro:128
+[INFO] 04:32:06:466 Consola/(10084:10084): valor registro:44733
+[INFO] 04:32:06:973 Consola/(10073:10073): valor registro:15276
+[INFO] 04:32:07:726 Consola/(10086:10086): valor registro:256
+[INFO] 04:32:08:480 Consola/(10084:10084): valor registro:72262
+[INFO] 04:32:08:480 Consola/(10073:10073): Se realizo el envio se desconecto del kernel
+[INFO] 04:32:09:234 Consola/(10086:10086): valor registro:512
+[INFO] 04:32:09:987 Consola/(10084:10084): valor registro:116995
+[INFO] 04:32:10:740 Consola/(10086:10086): valor registro:1024
+[INFO] 04:32:11:492 Consola/(10084:10084): valor registro:189257
+[INFO] 04:32:12:246 Consola/(10086:10086): valor registro:2048
+[INFO] 04:32:12:999 Consola/(10084:10084): valor registro:306252
+[INFO] 04:32:13:754 Consola/(10086:10086): valor registro:4096
+[INFO] 04:32:14:757 Consola/(10084:10084): valor registro:495509
+[INFO] 04:32:15:511 Consola/(10086:10086): valor registro:8192
+[INFO] 04:32:16:264 Consola/(10084:10084): valor registro:801761
+[INFO] 04:32:17:018 Consola/(10086:10086): valor registro:16384
+[INFO] 04:32:17:771 Consola/(10084:10084): valor registro:1297270
+[INFO] 04:32:18:524 Consola/(10086:10086): valor registro:32768
+[INFO] 04:32:19:277 Consola/(10084:10084): valor registro:2099031
+[INFO] 04:32:20:029 Consola/(10086:10086): valor registro:65536
+[INFO] 04:32:20:783 Consola/(10084:10084): valor registro:3396301
+[INFO] 04:32:21:535 Consola/(10086:10086): valor registro:131072
+[INFO] 04:32:22:288 Consola/(10084:10084): valor registro:5495332
+[INFO] 04:32:23:041 Consola/(10086:10086): valor registro:262144
+[INFO] 04:32:23:795 Consola/(10084:10084): valor registro:8891633
+[INFO] 04:32:24:549 Consola/(10086:10086): valor registro:524288
+[INFO] 04:32:25:303 Consola/(10084:10084): valor registro:14386965
+[INFO] 04:32:26:056 Consola/(10086:10086): valor registro:1048576
+[INFO] 04:32:26:809 Consola/(10084:10084): valor registro:23278598
+[INFO] 04:32:27:563 Consola/(10086:10086): valor registro:2097152
+[INFO] 04:32:28:316 Consola/(10084:10084): valor registro:37665563
+[INFO] 04:32:29:069 Consola/(10086:10086): valor registro:4194304
+[INFO] 04:32:29:822 Consola/(10084:10084): valor registro:60944161
+[INFO] 04:32:30:574 Consola/(10086:10086): valor registro:8388608
+[INFO] 04:32:31:328 Consola/(10084:10084): valor registro:98609724
+[INFO] 04:32:32:081 Consola/(10086:10086): valor registro:16777216
+[INFO] 04:32:32:834 Consola/(10084:10084): valor registro:159553885
+[INFO] 04:32:33:587 Consola/(10086:10086): valor registro:33554432
+[INFO] 04:32:33:587 Consola/(10084:10084): Se realizo el envio se desconecto del kernel
+[INFO] 04:32:34:840 Consola/(10086:10086): valor registro:67108864
+[INFO] 04:32:36:093 Consola/(10086:10086): valor registro:134217728
+[INFO] 04:32:36:594 Consola/(10086:10086): Se realizo el envio se desconecto del kernel
+[INFO] 04:39:33:262 Consola/(10314:10314): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:39:33:262 Consola/(10314:10314): SEGMENTO: 160
+[INFO] 04:39:33:262 Consola/(10314:10314): SEGMENTO: 144
+[INFO] 04:39:33:262 Consola/(10314:10314): SEGMENTO: 128
+[INFO] 04:39:33:262 Consola/(10314:10314): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:39:35:312 Consola/(10316:10316): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:39:35:317 Consola/(10316:10316): SEGMENTO: 64
+[INFO] 04:39:35:317 Consola/(10316:10316): SEGMENTO: 32
+[INFO] 04:39:35:317 Consola/(10316:10316): SEGMENTO: 96
+[INFO] 04:39:35:317 Consola/(10316:10316): SEGMENTO: 80
+[INFO] 04:39:35:317 Consola/(10316:10316): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:39:35:808 Consola/(10316:10316): Ingrese valor:
+[INFO] 04:40:37:382 Consola/(10316:10316): valor registro:54
+[INFO] 04:41:03:389 Consola/(10314:10314): valor registro:684
+[INFO] 04:41:08:390 Consola/(10316:10316): Se realizo el envio se desconecto del kernel
+[INFO] 04:41:08:392 Consola/(10314:10314): Ingrese valor:
+[INFO] 04:41:14:273 Consola/(10314:10314): Se realizo el envio se desconecto del kernel
+[INFO] 04:52:14:312 Consola/(10443:10443): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:52:14:312 Consola/(10443:10443): SEGMENTO: 160
+[INFO] 04:52:14:312 Consola/(10443:10443): SEGMENTO: 144
+[INFO] 04:52:14:312 Consola/(10443:10443): SEGMENTO: 128
+[INFO] 04:52:14:312 Consola/(10443:10443): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:52:15:847 Consola/(10445:10445): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 04:52:15:847 Consola/(10445:10445): SEGMENTO: 64
+[INFO] 04:52:15:847 Consola/(10445:10445): SEGMENTO: 32
+[INFO] 04:52:15:847 Consola/(10445:10445): SEGMENTO: 96
+[INFO] 04:52:15:847 Consola/(10445:10445): SEGMENTO: 80
+[INFO] 04:52:15:848 Consola/(10445:10445): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 04:52:16:908 Consola/(10445:10445): Ingrese valor:
+[INFO] 04:52:27:230 Consola/(10445:10445): valor registro:45
+[INFO] 04:52:34:775 Consola/(10445:10445): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 04:53:47:261 Consola/(10443:10443): valor registro:684
+[INFO] 04:53:48:012 Consola/(10443:10443): Ingrese valor:
+[INFO] 04:53:50:067 Consola/(10443:10443): Se realizo el envio se desconecto del kernel
+[INFO] 05:09:28:847 Consola/(10923:10923): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 05:09:28:847 Consola/(10923:10923): SEGMENTO: 64
+[INFO] 05:09:28:847 Consola/(10923:10923): SEGMENTO: 96
+[INFO] 05:09:28:847 Consola/(10923:10923): SEGMENTO: 128
+[INFO] 05:09:28:847 Consola/(10923:10923): SEGMENTO: 32
+[INFO] 05:09:28:848 Consola/(10923:10923): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 05:09:30:315 Consola/(10926:10926): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 05:09:30:316 Consola/(10926:10926): SEGMENTO: 64
+[INFO] 05:09:30:316 Consola/(10926:10926): SEGMENTO: 64
+[INFO] 05:09:30:316 Consola/(10926:10926): SEGMENTO: 96
+[INFO] 05:09:30:316 Consola/(10926:10926): SEGMENTO: 128
+[ERROR] 05:09:30:316 Consola/(10926:10926): Error al conectar (a KERNEL)
+
+[INFO] 05:12:09:853 Consola/(11061:11061): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 05:12:09:853 Consola/(11061:11061): SEGMENTO: 64
+[INFO] 05:12:09:853 Consola/(11061:11061): SEGMENTO: 96
+[INFO] 05:12:09:853 Consola/(11061:11061): SEGMENTO: 128
+[INFO] 05:12:09:853 Consola/(11061:11061): SEGMENTO: 32
+[INFO] 05:12:09:853 Consola/(11061:11061): Cliente conectado en 127.0.0.1:8000 (a KERNEL)
+
+[INFO] 05:12:11:499 Consola/(11064:11064): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 05:12:11:499 Consola/(11064:11064): SEGMENTO: 64
+[INFO] 05:12:11:499 Consola/(11064:11064): SEGMENTO: 64
+[INFO] 05:12:11:499 Consola/(11064:11064): SEGMENTO: 96
+[INFO] 05:12:11:499 Consola/(11064:11064): SEGMENTO: 128
+[ERROR] 05:12:11:499 Consola/(11064:11064): Error al conectar (a KERNEL)
+

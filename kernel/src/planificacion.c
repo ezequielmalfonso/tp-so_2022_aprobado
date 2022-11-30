@@ -17,6 +17,10 @@ pthread_mutex_t mx_lista_new = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_log = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cola_blocked = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cpu_desocupado = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_cpu = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_pageFault = PTHREAD_MUTEX_INITIALIZER;
+
 
 sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked,s_io;
 sem_t s_ios[10];
@@ -39,7 +43,9 @@ void fifo_ready_execute(){
 		pthread_mutex_lock(&mx_log);
 		log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
+		//pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
+		//pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		sem_post(&s_esperar_cpu);
 	}
@@ -56,7 +62,9 @@ void rr_ready_execute(){
 		pthread_mutex_lock(&mx_log);
 		log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
+		//pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
+		//pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado=false;
@@ -85,7 +93,9 @@ void feedback_ready_execute(){
 			pthread_mutex_lock(&mx_log);
 			log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 			pthread_mutex_unlock(&mx_log);
+			//pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
+			//pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			cpu_desocupado=false;
 			sem_post(&s_esperar_cpu);
@@ -101,7 +111,9 @@ void feedback_ready_execute(){
 			pthread_mutex_lock(&mx_log);
 			log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 			pthread_mutex_unlock(&mx_log);
+			//pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
+			//pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			sem_post(&s_esperar_cpu);
 		}
@@ -167,17 +179,22 @@ void pageFault(PCB_t* pcb){
 	uint32_t pagina=0;
 	op_code op = PAGEFAULT;
 	sem_wait(&s_blocked);
+	//pthread_mutex_lock(&mx_cpu);
 	recv(dispatch_fd,&segmento,sizeof(uint32_t),0);
 	recv(dispatch_fd,&pagina,sizeof(uint32_t),0);
+	//pthread_mutex_unlock(&mx_cpu);
+	pthread_mutex_unlock(&mx_pageFault);
 	pthread_mutex_lock(&mx_log);
 	log_info(logger, "Page Fault PID: %d - Segmento: %d - Pagina: %d", pcb->pid,segmento,pagina);
 	pthread_mutex_unlock(&mx_log);
 
+	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd,&op,sizeof(op_code),0);
 	send(memoria_fd,&(pcb->pid),sizeof(uint16_t),0);
 	send(memoria_fd,&segmento,sizeof(uint32_t),0);
 	send(memoria_fd,&pagina,sizeof(uint32_t),0);
 	recv(memoria_fd,&op,sizeof(op_code),0);
+	pthread_mutex_unlock(&mx_memoria);
 	log_info(logger, "pase");
 
 	pthread_mutex_lock(&mx_cola_ready);
@@ -191,19 +208,26 @@ void esperar_cpu(){
 	while(1){
 		sem_wait(&s_esperar_cpu);
 		op_code cop;
+		PCB_t* pcb = pcb_create();
+		//pthread_mutex_lock(&mx_cpu);
+		pthread_mutex_lock(&mx_pageFault);
 		if (recv(dispatch_fd, &cop, sizeof(op_code), 0) <= 0) {
 			pthread_mutex_lock(&mx_log);
 			log_error(logger,"DISCONNECT FAILURE!");
 			pthread_mutex_unlock(&mx_log);
 			exit(-1);
 		}
-		PCB_t* pcb = pcb_create();
+		if(cop!=PAGEFAULT){
+			pthread_mutex_unlock(&mx_pageFault);
+		}
+
 		if (!recv_proceso(dispatch_fd, pcb)) {
 			pthread_mutex_lock(&mx_log);
 			log_error(logger,"Fallo recibiendo PROGRAMA");
 			pthread_mutex_unlock(&mx_log);
-			return;
+			exit(-1);
 		}
+		//pthread_mutex_unlock(&mx_cpu);
 		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado = true;
 		pthread_mutex_unlock(&mx_cpu_desocupado);
@@ -273,13 +297,14 @@ void esperar_cpu(){
 				case PAGEFAULT:
 					pthread_t hilo_pagefault;
 					sem_post(&s_blocked);
+					sem_post(&s_cpu_desocupado);
 					pthread_create(&hilo_pagefault,NULL,(void*) pageFault,pcb);
 					pthread_detach(hilo_pagefault);
 					//recv(dispatch_fd,&segmento,sizeof(int),0);
 					//recv(dispatch_fd,&pagina,sizeof(int),0);
 					//log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
 					//falta manejo
-					sem_post(&s_cpu_desocupado);
+
 				break;
 
 			default:
