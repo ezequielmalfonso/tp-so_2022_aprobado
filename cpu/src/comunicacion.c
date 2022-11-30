@@ -42,9 +42,7 @@ static void procesar_conexion(void* void_args) {
 	 pid_actual=proceso->pid;
 	 list_add_all(tam_segmentos_actuales,proceso->segmentos);
 	 log_info(logger,"recibi pcb");
-	 if(configuracion->ENTRADAS_TLB>0){
 	 limpiar_tlb();
-	 }
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
 	 if(codigo==PAGEFAULT){

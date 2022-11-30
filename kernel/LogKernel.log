@@ -8412,3 +8412,101 @@ QUANTUM_RR: 2500
 [INFO] 05:12:09:854 Kernel/(11058:11062): “PID: 11062 - Estado Anterior: NEW - Estado Actual: READY
 [INFO] 05:12:09:854 Kernel/(11058:11059): PID: 11062 - Estado Anterior: READY - Estado Actual: EXECUTE
 [ERROR] 05:12:10:195 Kernel/(11058:11060): DISCONNECT FAILURE!
+[INFO] 22:29:10:194 Kernel/(2610:2610): 
+IP_MEMORIA: 127.0.0.1
+PUERTO_MEMORIA: 8002
+IP_CPU: 127.0.0.1
+PUERTO_CPU_DISPATCH: 8001
+PUERTO_CPU_INTERRUPT: 8005
+PUERTO_ESCUCHA: 8000
+ALGORITMO_PLANIFICACION: FIFO
+GRADO_MAX_MULTIPROGRAMACION: 1
+QUANTUM_RR: 2500
+
+[INFO] 22:29:10:196 Kernel/(2610:2610): ALGORITMO_PLANIFICACION FIFOOO!!!!
+[INFO] 22:29:10:196 Kernel/(2610:2610): Cliente conectado en 127.0.0.1:8001 (a CPU DISPATCH)
+
+[INFO] 22:29:10:196 Kernel/(2610:2610): Cliente conectado en 127.0.0.1:8005 (a CPU INTERRUPT)
+
+[INFO] 22:29:10:196 Kernel/(2610:2610): Cliente conectado en 127.0.0.1:8002 (a MEMORIA)
+
+[INFO] 22:29:10:196 Kernel/(2610:2610): Escuchando en 127.0.0.1:8000 (kernel server)
+
+[INFO] 22:30:50:011 Kernel/(2610:2610): Cliente conectado (a KERNEL_SV)
+
+[INFO] 22:30:50:012 Kernel/(2610:2631): Se crea el proceso 2631 en NEW
+[INFO] 22:30:50:013 Kernel/(2610:2631): “PID: 2631 - Estado Anterior: NEW - Estado Actual: READY
+[INFO] 22:30:50:017 Kernel/(2610:2611): PID: 2631 - Estado Anterior: READY - Estado Actual: EXECUTE
+[ERROR] 22:30:50:353 Kernel/(2610:2612): DISCONNECT FAILURE!
+[INFO] 22:32:30:344 Kernel/(2804:2804): 
+IP_MEMORIA: 127.0.0.1
+PUERTO_MEMORIA: 8002
+IP_CPU: 127.0.0.1
+PUERTO_CPU_DISPATCH: 8001
+PUERTO_CPU_INTERRUPT: 8005
+PUERTO_ESCUCHA: 8000
+ALGORITMO_PLANIFICACION: FIFO
+GRADO_MAX_MULTIPROGRAMACION: 1
+QUANTUM_RR: 2500
+
+[INFO] 22:32:30:344 Kernel/(2804:2804): ALGORITMO_PLANIFICACION FIFOOO!!!!
+[INFO] 22:32:30:344 Kernel/(2804:2804): Cliente conectado en 127.0.0.1:8001 (a CPU DISPATCH)
+
+[INFO] 22:32:30:344 Kernel/(2804:2804): Cliente conectado en 127.0.0.1:8005 (a CPU INTERRUPT)
+
+[INFO] 22:32:30:344 Kernel/(2804:2804): Cliente conectado en 127.0.0.1:8002 (a MEMORIA)
+
+[INFO] 22:32:30:344 Kernel/(2804:2804): Escuchando en 127.0.0.1:8000 (kernel server)
+
+[INFO] 22:32:33:635 Kernel/(2804:2804): Cliente conectado (a KERNEL_SV)
+
+[INFO] 22:32:33:636 Kernel/(2804:2808): Se crea el proceso 2808 en NEW
+[INFO] 22:32:33:636 Kernel/(2804:2808): “PID: 2808 - Estado Anterior: NEW - Estado Actual: READY
+[INFO] 22:32:33:636 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:32:34:679 Kernel/(2804:2809): Page Fault PID: 2808 - Segmento: 0 - Pagina: 0
+[INFO] 22:32:35:478 Kernel/(2804:2804): Cliente conectado (a KERNEL_SV)
+
+[INFO] 22:32:35:478 Kernel/(2804:2811): Se crea el proceso 2811 en NEW
+[INFO] 22:32:37:226 Kernel/(2804:2804): Cliente conectado (a KERNEL_SV)
+
+[INFO] 22:32:37:228 Kernel/(2804:2813): Se crea el proceso 2813 en NEW
+[INFO] 22:32:40:723 Kernel/(2804:2809): pase
+[INFO] 22:32:40:723 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:32:43:726 Kernel/(2804:2814): Page Fault PID: 2808 - Segmento: 1 - Pagina: 0
+[INFO] 22:32:49:727 Kernel/(2804:2814): pase
+[INFO] 22:32:49:727 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:32:52:729 Kernel/(2804:2815): Page Fault PID: 2808 - Segmento: 2 - Pagina: 0
+[INFO] 22:33:03:730 Kernel/(2804:2815): pase
+[INFO] 22:33:03:730 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:06:732 Kernel/(2804:2817): Page Fault PID: 2808 - Segmento: 3 - Pagina: 0
+[INFO] 22:33:17:733 Kernel/(2804:2817): pase
+[INFO] 22:33:17:733 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:20:736 Kernel/(2804:2818): Page Fault PID: 2808 - Segmento: 0 - Pagina: 0
+[INFO] 22:33:31:736 Kernel/(2804:2818): pase
+[INFO] 22:33:31:737 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:36:740 Kernel/(2804:2819): Page Fault PID: 2808 - Segmento: 1 - Pagina: 0
+[INFO] 22:33:42:740 Kernel/(2804:2819): pase
+[INFO] 22:33:42:740 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:44:745 Kernel/(2804:2806): PID: 2808 - Estado Anterior: EXECUTE - Estado Actual: BLOCKED
+[INFO] 22:33:44:745 Kernel/(2804:2820): instruccion numer 11
+[INFO] 22:33:44:745 Kernel/(2804:2820):  lo mande
+[INFO] 22:33:44:745 Kernel/(2804:2820):  PID: 2808 - Bloqueado por: PANTALLA
+[INFO] 22:33:45:496 Kernel/(2804:2820): PID: 2808 - Estado Anterior: BLOCKED - Estado Actual: READY
+[INFO] 22:33:45:496 Kernel/(2804:2805): PID: 2808 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:45:496 Kernel/(2804:2806): PID: 2808 - Estado Anterior: EXECUTE - Estado Actual: EXIT
+[INFO] 22:33:45:497 Kernel/(2804:2811): “PID: 2811 - Estado Anterior: NEW - Estado Actual: READY
+[INFO] 22:33:45:497 Kernel/(2804:2805): PID: 2811 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:33:46:547 Kernel/(2804:2821): Page Fault PID: 2811 - Segmento: 0 - Pagina: 0
+[INFO] 22:33:52:591 Kernel/(2804:2821): pase
+[INFO] 22:33:52:592 Kernel/(2804:2805): PID: 2811 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:34:06:603 Kernel/(2804:2806): PID: 2811 - Estado Anterior: EXECUTE - Estado Actual: BLOCKED
+[INFO] 22:34:06:603 Kernel/(2804:2822): instruccion numer 11
+[INFO] 22:34:06:603 Kernel/(2804:2822):  lo mande
+[INFO] 22:34:06:604 Kernel/(2804:2822):  PID: 2811 - Bloqueado por: PANTALLA
+[INFO] 22:34:07:354 Kernel/(2804:2822): PID: 2811 - Estado Anterior: BLOCKED - Estado Actual: READY
+[INFO] 22:34:07:354 Kernel/(2804:2805): PID: 2811 - Estado Anterior: READY - Estado Actual: EXECUTE
+[INFO] 22:34:07:354 Kernel/(2804:2806): PID: 2811 - Estado Anterior: EXECUTE - Estado Actual: EXIT
+[INFO] 22:34:07:355 Kernel/(2804:2813): “PID: 2813 - Estado Anterior: NEW - Estado Actual: READY
+[INFO] 22:34:07:355 Kernel/(2804:2805): PID: 2813 - Estado Anterior: READY - Estado Actual: EXECUTE
+[ERROR] 22:34:07:356 Kernel/(2804:2806): Error: Segmentation Fault (SIGSEGV).
+[INFO] 22:34:07:356 Kernel/(2804:2806): PID: 2813 - Estado Anterior: EXECUTE - Estado Actual: EXIT

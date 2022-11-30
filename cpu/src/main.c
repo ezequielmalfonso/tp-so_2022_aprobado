@@ -23,11 +23,9 @@ int main(){
 
 	hay_interrupcion=false;
 
-	if(configuracion->ENTRADAS_TLB>0){
 	tlb=list_create();
 
     inicializar_tlb();
-	}
 
 	//sem_init(&sem,0,1);
 
@@ -378,13 +376,15 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	uint32_t desplazamiento_pagina = desplazamiento_segmento % tam_pagina;
 	//Aca hay que fijarse si esta en la tlb
 	if(configuracion->ENTRADAS_TLB>0){
-	nro_marco = presente_en_tlb(num_segmento, num_pagina);
+		nro_marco = presente_en_tlb(num_segmento, num_pagina);
+	}else{
+		nro_marco=-1;
 	}
 
 	if(nro_marco==-1){
-		if(configuracion->ENTRADAS_TLB>0){
+
 		log_info(logger, "TLB MISS PID: %d Segmento: %d Pagina: %d", pid_actual, num_segmento, num_pagina);
-		}
+
 
 		op_code cop = SOLICITUD_NRO_MARCO;
 		//pthread_mutex_lock(&mx_memoria);
