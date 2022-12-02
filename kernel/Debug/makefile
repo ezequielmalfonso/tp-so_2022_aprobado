@@ -42,7 +42,7 @@ main-build: kernel
 kernel: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -L"/home/utnso/tp-2022-2c-Grupo-54/shared-lib/Debug" -o "kernel" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -L"/home/utnso/Desktop/tp-2022-2c-Grupo-54/shared-lib/Debug" -o "kernel" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

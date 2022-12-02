@@ -43,9 +43,9 @@ void fifo_ready_execute(){
 		pthread_mutex_lock(&mx_log);
 		log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
-		//pthread_mutex_lock(&mx_cpu);
+		pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
-		//pthread_mutex_unlock(&mx_cpu);
+		pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		sem_post(&s_esperar_cpu);
 	}
@@ -184,6 +184,7 @@ void pageFault(PCB_t* pcb){
 	recv(dispatch_fd,&pagina,sizeof(uint32_t),0);
 	//pthread_mutex_unlock(&mx_cpu);
 	pthread_mutex_unlock(&mx_pageFault);
+	pthread_mutex_unlock(&mx_cpu);
 	pthread_mutex_lock(&mx_log);
 	log_info(logger, "Page Fault PID: %d - Segmento: %d - Pagina: %d", pcb->pid,segmento,pagina);
 	pthread_mutex_unlock(&mx_log);
@@ -209,7 +210,7 @@ void esperar_cpu(){
 		sem_wait(&s_esperar_cpu);
 		op_code cop;
 		PCB_t* pcb = pcb_create();
-		//pthread_mutex_lock(&mx_cpu);
+		pthread_mutex_lock(&mx_cpu);
 		pthread_mutex_lock(&mx_pageFault);
 		if (recv(dispatch_fd, &cop, sizeof(op_code), 0) <= 0) {
 			pthread_mutex_lock(&mx_log);
@@ -219,6 +220,7 @@ void esperar_cpu(){
 		}
 		if(cop!=PAGEFAULT){
 			pthread_mutex_unlock(&mx_pageFault);
+			pthread_mutex_unlock(&mx_cpu);
 		}
 
 		if (!recv_proceso(dispatch_fd, pcb)) {
@@ -227,7 +229,6 @@ void esperar_cpu(){
 			pthread_mutex_unlock(&mx_log);
 			exit(-1);
 		}
-		//pthread_mutex_unlock(&mx_cpu);
 		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado = true;
 		pthread_mutex_unlock(&mx_cpu_desocupado);

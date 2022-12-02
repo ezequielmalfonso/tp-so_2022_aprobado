@@ -9,7 +9,8 @@
 
 int cpuServerDispatch, cpuServerInterrupt;
 pthread_mutex_t mx_hay_interrupcion = PTHREAD_MUTEX_INITIALIZER;
-//pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_mov_in = PTHREAD_MUTEX_INITIALIZER;
 uint16_t tam_pagina;
 uint16_t cant_ent_por_tabla;
 t_list* tlb;
@@ -33,11 +34,11 @@ int main(){
 
 	generar_conexion(&memoria_fd, configuracion);
 	op_code op=INICIALIZAR;
-	//pthread_mutex_lock(&mx_memoria);
+	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd,&op,sizeof(op_code),0);
 	recv(memoria_fd, &cant_ent_por_tabla, sizeof(uint16_t), 0);
 	recv(memoria_fd, &tam_pagina, sizeof(uint16_t), 0);
-	//pthread_mutex_unlock(&mx_memoria);
+	pthread_mutex_unlock(&mx_memoria);
 	char* puertoInterrupt = string_itoa(configuracion->PUERTO_ESCUCHA_INTERRUPT);
     char* puertoDispatch= string_itoa(configuracion->PUERTO_ESCUCHA_DISPATCH);
 	//INICIO SERVIDORES
@@ -160,12 +161,13 @@ int ejecutarMOV_IN(uint32_t dir_logica){
 		return -1;
 	}else if(dir_fisica.marco==-2){return -2;}
 	op_code cop = MOV_IN;
-	//pthread_mutex_lock(&mx_memoria);
+	pthread_mutex_lock(&mx_mov_in);
+	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint16_t),0);
 	recv(memoria_fd, &valor, sizeof(uint32_t), 0);
-	//pthread_mutex_unlock(&mx_memoria);
+	pthread_mutex_unlock(&mx_memoria);
 
 	log_info(logger, "Dato leido = %d", valor);
 	return valor;
@@ -179,12 +181,12 @@ int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
 	}else if(dir_fisica.marco==-2){return -2;}
 
 	op_code cop = MOV_OUT;
-	//pthread_mutex_lock(&mx_memoria);
+	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint32_t),0);
 	send(memoria_fd, &valor, sizeof(uint32_t),0);
-	//pthread_mutex_unlock(&mx_memoria);
+	pthread_mutex_unlock(&mx_memoria);
 	return 1;
 }
 
@@ -267,7 +269,9 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 			return SIGSEGV;
 		}
 		op_code resultado;
+		pthread_mutex_lock(&mx_memoria);
 		recv(memoria_fd, &resultado, sizeof(op_code), 0);
+		pthread_mutex_unlock(&mx_memoria);
 
 
 		log_info(logger,"se cargo valor del registro en memoria");
@@ -282,7 +286,6 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		}else if(valor==-2){
 			return SIGSEGV;
 		}
-		log_info(logger, "se cambio el valor del registro");
 		switch(instruccion_ejecutar->parametro[0]){
 		case 'A':
 			registros[0]=valor;
@@ -297,6 +300,8 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 			registros[3]=valor;
 			break;
 		}
+		pthread_mutex_unlock(&mx_mov_in);
+		log_info(logger, "se cambio el valor del registro");
 	}else if(!strcmp(instruccion_ejecutar->comando,"I/O")){
 		log_info(logger,"Ejecutando IO parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		return IO;
@@ -387,13 +392,13 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 
 
 		op_code cop = SOLICITUD_NRO_MARCO;
-		//pthread_mutex_lock(&mx_memoria);
+		pthread_mutex_lock(&mx_memoria);
 		send(memoria_fd, &cop, sizeof(op_code),0);
 		send(memoria_fd, &pid_actual, sizeof(uint16_t),0);
 		send(memoria_fd, &num_segmento, sizeof(int32_t),0);
 		send(memoria_fd, &num_pagina, sizeof(uint32_t),0);
 		recv(memoria_fd, &nro_marco, sizeof(uint32_t), 0);
-		//pthread_mutex_unlock(&mx_memoria);
+		pthread_mutex_unlock(&mx_memoria);
 		//CASO PAGE FAULT
 		if(nro_marco==-1){
 			dire_fisica.marco = nro_marco;
