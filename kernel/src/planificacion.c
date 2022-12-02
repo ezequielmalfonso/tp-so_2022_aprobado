@@ -62,9 +62,9 @@ void rr_ready_execute(){
 		pthread_mutex_lock(&mx_log);
 		log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 		pthread_mutex_unlock(&mx_log);
-		//pthread_mutex_lock(&mx_cpu);
+		pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
-		//pthread_mutex_unlock(&mx_cpu);
+		pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado=false;
@@ -93,9 +93,9 @@ void feedback_ready_execute(){
 			pthread_mutex_lock(&mx_log);
 			log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 			pthread_mutex_unlock(&mx_log);
-			//pthread_mutex_lock(&mx_cpu);
+			pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
-			//pthread_mutex_unlock(&mx_cpu);
+			pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			cpu_desocupado=false;
 			sem_post(&s_esperar_cpu);
@@ -111,9 +111,9 @@ void feedback_ready_execute(){
 			pthread_mutex_lock(&mx_log);
 			log_info(logger,"PID: %d - Estado Anterior: READY - Estado Actual: EXECUTE", proceso->pid);
 			pthread_mutex_unlock(&mx_log);
-			//pthread_mutex_lock(&mx_cpu);
+			pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
-			//pthread_mutex_unlock(&mx_cpu);
+			pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			sem_post(&s_esperar_cpu);
 		}
