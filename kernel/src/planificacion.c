@@ -228,7 +228,7 @@ void esperar_cpu(){
 
 		if (!recv_proceso(dispatch_fd, pcb)) {
 			pthread_mutex_lock(&mx_log);
-			log_error(logger,"Fallo recibiendo PROGRAMA");
+			log_error(logger,"Fallo recibiendo PROGRAMA %d", pcb->pid);
 			pthread_mutex_unlock(&mx_log);
 			exit(-1);
 		}
