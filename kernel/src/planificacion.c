@@ -199,7 +199,7 @@ void pageFault(PCB_t* pcb){
 	send(memoria_fd,&pagina,sizeof(uint32_t),0);
 	recv(memoria_fd,&op,sizeof(op_code),0);
 	pthread_mutex_unlock(&mx_memoria);
-	log_info(logger, "pase");
+	//log_info(logger, "pase");
 
 	pthread_mutex_lock(&mx_cola_ready);
 	queue_push(cola_ready, pcb);
