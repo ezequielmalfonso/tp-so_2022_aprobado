@@ -302,10 +302,10 @@ void esperar_cpu(){
 					pthread_t hilo_pagefault;
 					sem_post(&s_blocked);
 					sem_post(&s_cpu_desocupado);
-					//pthread_mutex_lock(&mx_hilo_pageFault);
+					pthread_mutex_lock(&mx_hilo_pageFault);
 					pthread_create(&hilo_pagefault,NULL,(void*) pageFault,pcb);
-					pthread_detach(hilo_pagefault);
-					//pthread_mutex_unlock(&mx_hilo_pageFault);
+					pthread_join(hilo_pagefault,0);
+					pthread_mutex_unlock(&mx_hilo_pageFault);
 					//recv(dispatch_fd,&segmento,sizeof(int),0);
 					//recv(dispatch_fd,&pagina,sizeof(int),0);
 					//log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
