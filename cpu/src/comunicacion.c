@@ -84,6 +84,21 @@ int server_escuchar(char* server_name, int server_socket){
 
 }
 
+int server_escucharI(char* server_name, int server_socket){
+	int cliente_socketI = esperar_cliente(logger,server_name, server_socket);
+	//sem_wait(&sem);
+	if (cliente_socketI != -1 ) {
+			t_procesar_conexion_args* argsSev = malloc(sizeof(t_procesar_conexion_args));
+			argsSev->fd = cliente_socketI;
+			argsSev->server_name = server_name;
+			procesar_conexion(argsSev);
+	        return 1;
+	       // sem_post(&sem);
+		}
+	return 0;
+
+}
+
 //CLIENTE
 //MEMORIA
 int generar_conexion(int* memoria_fd, t_config_cpu* configuracion) {
