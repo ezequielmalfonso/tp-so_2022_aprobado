@@ -21,7 +21,7 @@ pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cpu = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_pageFault = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_interrupt = PTHREAD_MUTEX_INITIALIZER;
-
+pthread_mutex_t mx_hilo_pageFault = PTHREAD_MUTEX_INITIALIZER;
 
 sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked,s_io;
 sem_t s_ios[10];
@@ -46,7 +46,7 @@ void fifo_ready_execute(){
 		pthread_mutex_unlock(&mx_log);
 		pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
-		pthread_mutex_unlock(&mx_cpu);
+		//pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		sem_post(&s_esperar_cpu);
 	}
@@ -65,7 +65,7 @@ void rr_ready_execute(){
 		pthread_mutex_unlock(&mx_log);
 		pthread_mutex_lock(&mx_cpu);
 		send_proceso(dispatch_fd, proceso,DISPATCH);
-		pthread_mutex_unlock(&mx_cpu);
+		//pthread_mutex_unlock(&mx_cpu);
 		pcb_destroy(proceso);
 		pthread_mutex_lock(&mx_cpu_desocupado);
 		cpu_desocupado=false;
@@ -98,7 +98,7 @@ void feedback_ready_execute(){
 			pthread_mutex_unlock(&mx_log);
 			pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
-			pthread_mutex_unlock(&mx_cpu);
+			//pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			cpu_desocupado=false;
 			sem_post(&s_esperar_cpu);
@@ -118,7 +118,7 @@ void feedback_ready_execute(){
 			pthread_mutex_unlock(&mx_log);
 			pthread_mutex_lock(&mx_cpu);
 			send_proceso(dispatch_fd, proceso,DISPATCH);
-			pthread_mutex_unlock(&mx_cpu);
+			//pthread_mutex_unlock(&mx_cpu);
 			pcb_destroy(proceso);
 			sem_post(&s_esperar_cpu);
 		}
@@ -184,10 +184,8 @@ void pageFault(PCB_t* pcb){
 	uint32_t pagina=0;
 	op_code op = PAGEFAULT;
 	sem_wait(&s_blocked);
-	//pthread_mutex_lock(&mx_cpu);
 	recv(dispatch_fd,&segmento,sizeof(uint32_t),0);
 	recv(dispatch_fd,&pagina,sizeof(uint32_t),0);
-	//pthread_mutex_unlock(&mx_cpu);
 	pthread_mutex_unlock(&mx_pageFault);
 	pthread_mutex_unlock(&mx_cpu);
 	pthread_mutex_lock(&mx_log);
@@ -215,7 +213,7 @@ void esperar_cpu(){
 		sem_wait(&s_esperar_cpu);
 		op_code cop;
 		PCB_t* pcb = pcb_create();
-		pthread_mutex_lock(&mx_cpu);
+		//pthread_mutex_lock(&mx_cpu);
 		pthread_mutex_lock(&mx_pageFault);
 		if (recv(dispatch_fd, &cop, sizeof(op_code), 0) <= 0) {
 			pthread_mutex_lock(&mx_log);
@@ -304,8 +302,10 @@ void esperar_cpu(){
 					pthread_t hilo_pagefault;
 					sem_post(&s_blocked);
 					sem_post(&s_cpu_desocupado);
+					//pthread_mutex_lock(&mx_hilo_pageFault);
 					pthread_create(&hilo_pagefault,NULL,(void*) pageFault,pcb);
 					pthread_detach(hilo_pagefault);
+					//pthread_mutex_unlock(&mx_hilo_pageFault);
 					//recv(dispatch_fd,&segmento,sizeof(int),0);
 					//recv(dispatch_fd,&pagina,sizeof(int),0);
 					//log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",pcb->pid,segmento,pagina);
