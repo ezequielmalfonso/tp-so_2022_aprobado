@@ -20,6 +20,7 @@ pthread_mutex_t mx_cpu_desocupado = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cpu = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_pageFault = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_interrupt = PTHREAD_MUTEX_INITIALIZER;
 
 
 sem_t s_pasaje_a_ready, s_ready_execute,s_cpu_desocupado,s_cont_ready,s_multiprogramacion_actual,s_esperar_cpu,s_pcb_desalojado,s_blocked,s_io;
@@ -75,7 +76,9 @@ void rr_ready_execute(){
 			pthread_mutex_lock(&mx_log);
 			log_info(logger,"mando interrupt");
 			pthread_mutex_unlock(&mx_log);
+			pthread_mutex_lock(&mx_interrupt);
 			send(interrupt_fd,INTERRUPT,sizeof(op_code),0);
+			pthread_mutex_lock(&mx_interrupt);
 			hay_interrupcion=true;
 		}
 	}
@@ -101,7 +104,9 @@ void feedback_ready_execute(){
 			sem_post(&s_esperar_cpu);
 			usleep(configuracion->QUANTUM_RR*1000);
 			if(!cpu_desocupado){
+				pthread_mutex_lock(&mx_interrupt);
 				send(interrupt_fd,INTERRUPT,sizeof(op_code),0);
+				pthread_mutex_unlock(&mx_interrupt);
 			}
 		}
 		else{

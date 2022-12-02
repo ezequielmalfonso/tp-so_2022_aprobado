@@ -11,6 +11,7 @@ int cpuServerDispatch, cpuServerInterrupt;
 pthread_mutex_t mx_hay_interrupcion = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_memoria = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_mov_in = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_interrupt = PTHREAD_MUTEX_INITIALIZER;
 uint16_t tam_pagina;
 uint16_t cant_ent_por_tabla;
 t_list* tlb;
@@ -144,7 +145,9 @@ void interrupcion(){
 	//cambia hay_interrupcion a true
 	while(1){
 		op_code opcode;
+		pthread_mutex_lock(&mx_interrupt);
 		recv(cpuServerInterrupt, &opcode, sizeof(op_code), 0);
+		pthread_mutex_unlock(&mx_interrupt);
 //		log_info(logger, "Interrupcion recibida");
 		if(opcode==INTERRUPT){
 		pthread_mutex_lock(&mx_hay_interrupcion);
