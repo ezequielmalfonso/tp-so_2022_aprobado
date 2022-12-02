@@ -26,6 +26,7 @@ extern uint16_t pid_actual;
 
 int servers_escuchar(char* server_name, int server_socket, char* server_dispatch_name, int server_dispatch_socket);
 int server_escuchar(char* server_name, int server_socket);
+int server_escucharI(char* server_name, int server_socket);
 
 extern int cliente_socket;
 

@@ -95,7 +95,7 @@ void interruptCpu() {
 	//free(puertoInterrupt);
 
 
-	while(server_escuchar("INTERRUPT_SV",cpuServerInterrupt));
+	while(server_escucharI("INTERRUPT_SV",cpuServerInterrupt));
 }
 
 //EJECUCION DE INSTRUCCIONES
