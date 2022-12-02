@@ -25,14 +25,14 @@ static void procesar_conexion(void* void_args) {
 	mensaje=recibir_instrucciones(cliente_socket);
 	//printf("Segmento % \n", &mensaje->segmentos[0]);
 
-	t_list* segmentos=malloc(sizeof(TABLA_SEGMENTO));
+	/*t_list* segmentos=malloc(sizeof(TABLA_SEGMENTO));
 	int c=0;
 	while(c<list_size(mensaje->listaTamSegmentos)){
 		TABLA_SEGMENTO* aux=malloc(sizeof(TABLA_SEGMENTO));
 		aux->tamSegmento=list_get(mensaje->listaTamSegmentos,c);//habria que probar esto
 		list_add(segmentos,aux);
 		c++;
-	}
+	}*/
     PCB_t* proceso = malloc(sizeof(PCB_t));
 	proceso = pcb_create();
 
