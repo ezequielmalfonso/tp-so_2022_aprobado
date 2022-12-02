@@ -78,7 +78,7 @@ void rr_ready_execute(){
 			pthread_mutex_unlock(&mx_log);
 			pthread_mutex_lock(&mx_interrupt);
 			send(interrupt_fd,INTERRUPT,sizeof(op_code),0);
-			pthread_mutex_lock(&mx_interrupt);
+			pthread_mutex_unlock(&mx_interrupt);
 			hay_interrupcion=true;
 		}
 	}
