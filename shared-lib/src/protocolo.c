@@ -48,9 +48,9 @@ t_instrucciones* recibir_instrucciones(int socket_fd)
 {
 	t_buffer* buffer=malloc(sizeof(t_buffer));
 
-	recv(socket_fd, &(buffer->size), sizeof(int), 0);
+	recv(socket_fd, &(buffer->size), sizeof(int), MSG_WAITALL);
 	buffer->stream=malloc(buffer->size);
-	recv(socket_fd, buffer->stream, buffer->size, 0);
+	recv(socket_fd, buffer->stream, buffer->size, MSG_WAITALL);
 
 	t_instrucciones* mensaje = deserializar_instrucciones(buffer);
 
@@ -275,10 +275,10 @@ static void* serializar_proceso(size_t* size, PCB_t *proceso, op_code codigo) {
 //Recepcion y deserializacion
 bool recv_proceso(int fd, PCB_t* proceso) {
     size_t size_payload;
-    if (recv(fd, &size_payload, sizeof(size_t), 0) != sizeof(size_t))
+    if (recv(fd, &size_payload, sizeof(size_t), MSG_WAITALL) != sizeof(size_t))
         return false;
     void* stream = malloc(size_payload);
-    if (recv(fd, stream, size_payload, 0) != size_payload) {
+    if (recv(fd, stream, size_payload, MSG_WAITALL) != size_payload) {
         free(stream);
         return false;
     }

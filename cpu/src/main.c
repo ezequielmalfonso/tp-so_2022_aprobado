@@ -60,12 +60,13 @@ int main(){
 
 	pthread_create(&dispatch_id,NULL,(void*) dispatchCpu,NULL);
 	pthread_create(&interrupt_id,NULL,(void*) interruptCpu,NULL);
-	pthread_create(&hilo_interrupciones,NULL,(void*)interrupcion,NULL);
-	pthread_detach(hilo_interrupciones);
+
 
 	pthread_join(dispatch_id,0);
 	pthread_join(interrupt_id,0);
 
+	pthread_create(&hilo_interrupciones,NULL,(void*)interrupcion,NULL);
+	pthread_detach(hilo_interrupciones);
 
 	limpiarConfiguracion();
 	return 0;
