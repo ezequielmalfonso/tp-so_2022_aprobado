@@ -53,9 +53,9 @@ static void procesar_conexion(void* void_args) {
 	pthread_mutex_lock(&mx_cola_new);
     queue_push(cola_new,proceso);
     pthread_mutex_unlock(&mx_cola_new);
-    pthread_mutex_lock(&mx_log);
+    //pthread_mutex_lock(&mx_log);
     log_info(logger,"Se crea el proceso %d en NEW", proceso->pid);
-    pthread_mutex_unlock(&mx_log);
+    //pthread_mutex_unlock(&mx_log);
     sem_wait(&s_multiprogramacion_actual);
     pthread_mutex_lock(&mx_cola_new);
 	proceso=queue_pop(cola_new);
@@ -65,9 +65,9 @@ static void procesar_conexion(void* void_args) {
     pthread_mutex_lock(&mx_cola_ready);
     queue_push(cola_ready,proceso);
     pthread_mutex_unlock(&mx_cola_ready);
-    pthread_mutex_lock(&mx_log);
+    //pthread_mutex_lock(&mx_log);
     log_info(logger,"“PID: %d - Estado Anterior: NEW - Estado Actual: READY", proceso->pid);
-    pthread_mutex_unlock(&mx_log);
+    //pthread_mutex_unlock(&mx_log);
     sem_post(&s_cont_ready);
     sem_post(&s_ready_execute);
 
