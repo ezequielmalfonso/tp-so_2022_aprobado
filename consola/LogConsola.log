@@ -2051,3 +2051,595 @@ PUERTO_KERNEL: 8000
 [INFO] 01:11:22:901 Consola/(2960:2960): valor registro:67108864
 [INFO] 01:11:24:155 Consola/(2960:2960): valor registro:134217728
 [INFO] 01:11:24:656 Consola/(2960:2960): Se realizo el envio se desconecto del kernel
+[INFO] 23:57:27:395 Consola/(3625:3625): 
+IP_KERNEL: 127.0.0.1
+PUERTO_KERNEL: 8000
+[INFO] 23:57:27:395 Consola/(3625:3625): SEGMENTO: 1024
+[ERROR] 23:57:27:395 Consola/(3625:3625): Error al conectar (a KERNEL)
+
+[INFO] 23:59:17:571 Consola/(3650:3650): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:17:571 Consola/(3650:3650): SEGMENTO: 1024
+[INFO] 23:59:17:571 Consola/(3650:3650): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:18:111 Consola/(3653:3653): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:18:111 Consola/(3653:3653): SEGMENTO: 1024
+[INFO] 23:59:18:112 Consola/(3653:3653): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:19:194 Consola/(3656:3656): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:19:195 Consola/(3656:3656): SEGMENTO: 512
+[INFO] 23:59:19:195 Consola/(3656:3656): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:20:045 Consola/(3658:3658): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:20:046 Consola/(3658:3658): SEGMENTO: 512
+[INFO] 23:59:20:046 Consola/(3658:3658): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:20:891 Consola/(3661:3661): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:20:891 Consola/(3661:3661): SEGMENTO: 768
+[INFO] 23:59:20:892 Consola/(3661:3661): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:21:786 Consola/(3664:3664): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 23:59:21:786 Consola/(3664:3664): SEGMENTO: 768
+[INFO] 23:59:21:787 Consola/(3664:3664): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 23:59:28:933 Consola/(3650:3650): valor registro:912
+[INFO] 23:59:29:999 Consola/(3650:3650): Se realizo el envio se desconecto del kernel
+[INFO] 23:59:31:026 Consola/(3661:3661): valor registro:1
+[INFO] 23:59:32:559 Consola/(3661:3661): valor registro:1
+[INFO] 23:59:33:590 Consola/(3661:3661): valor registro:2
+[INFO] 23:59:35:131 Consola/(3661:3661): valor registro:3
+[INFO] 23:59:36:914 Consola/(3661:3661): valor registro:5
+[INFO] 23:59:36:920 Consola/(3656:3656): valor registro:2280
+[INFO] 23:59:36:926 Consola/(3658:3658): valor registro:2280
+[INFO] 23:59:36:931 Consola/(3653:3653): valor registro:28
+[INFO] 23:59:38:174 Consola/(3661:3661): valor registro:8
+[INFO] 23:59:38:183 Consola/(3656:3656): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 23:59:43:426 Consola/(3664:3664): valor registro:1
+[INFO] 23:59:44:183 Consola/(3661:3661): valor registro:3200
+[INFO] 23:59:47:567 Consola/(3664:3664): valor registro:2
+[INFO] 23:59:48:324 Consola/(3661:3661): valor registro:3208
+[INFO] 23:59:49:847 Consola/(3653:3653): valor registro:37
+[INFO] 23:59:50:609 Consola/(3664:3664): valor registro:4
+[INFO] 23:59:51:376 Consola/(3661:3661): valor registro:6408
+[INFO] 23:59:51:380 Consola/(3653:3653): Se realizo el envio se desconecto del kernel
+[INFO] 23:59:52:143 Consola/(3664:3664): valor registro:8
+[INFO] 23:59:52:913 Consola/(3661:3661): valor registro:9616
+[INFO] 23:59:53:679 Consola/(3664:3664): valor registro:16
+[INFO] 23:59:54:445 Consola/(3661:3661): valor registro:16024
+[INFO] 23:59:55:212 Consola/(3664:3664): valor registro:32
+[INFO] 23:59:55:977 Consola/(3661:3661): valor registro:25640
+[INFO] 23:59:55:983 Consola/(3658:3658): valor registro:9804
+[INFO] 23:59:56:743 Consola/(3664:3664): valor registro:64
+[INFO] 23:59:57:504 Consola/(3661:3661): valor registro:41664
+[INFO] 23:59:58:039 Consola/(3658:3658): valor registro:15276
+[INFO] 23:59:58:799 Consola/(3664:3664): valor registro:128
+[INFO] 23:59:59:559 Consola/(3661:3661): valor registro:67304
+[INFO] 23:59:59:564 Consola/(3658:3658): Se realizo el envio se desconecto del kernel
+[INFO] 00:00:00:321 Consola/(3664:3664): valor registro:256
+[INFO] 00:00:01:082 Consola/(3661:3661): valor registro:108968
+[INFO] 00:00:01:842 Consola/(3664:3664): valor registro:512
+[INFO] 00:00:02:603 Consola/(3661:3661): valor registro:176272
+[INFO] 00:00:03:362 Consola/(3664:3664): valor registro:1024
+[INFO] 00:00:04:122 Consola/(3661:3661): valor registro:285240
+[INFO] 00:00:04:883 Consola/(3664:3664): valor registro:2048
+[INFO] 00:00:05:644 Consola/(3661:3661): valor registro:461512
+[INFO] 00:00:06:406 Consola/(3664:3664): valor registro:4096
+[INFO] 00:00:07:417 Consola/(3661:3661): valor registro:746752
+[INFO] 00:00:08:179 Consola/(3664:3664): valor registro:8192
+[INFO] 00:00:08:939 Consola/(3661:3661): valor registro:1208264
+[INFO] 00:00:09:699 Consola/(3664:3664): valor registro:16384
+[INFO] 00:00:10:458 Consola/(3661:3661): valor registro:1208264
+[INFO] 00:00:10:459 Consola/(3664:3664): valor registro:16384
+[INFO] 00:00:10:959 Consola/(3664:3664): valor registro:16384
+[INFO] 00:00:10:959 Consola/(3661:3661): valor registro:1208264
+[INFO] 00:12:53:972 Consola/(4050:4050): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:53:973 Consola/(4050:4050): SEGMENTO: 1024
+[INFO] 00:12:53:973 Consola/(4050:4050): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:12:54:863 Consola/(4053:4053): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:54:863 Consola/(4053:4053): SEGMENTO: 1024
+[INFO] 00:12:54:864 Consola/(4053:4053): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:12:55:784 Consola/(4056:4056): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:55:784 Consola/(4056:4056): SEGMENTO: 512
+[INFO] 00:12:55:785 Consola/(4056:4056): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:12:56:610 Consola/(4059:4059): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:56:610 Consola/(4059:4059): SEGMENTO: 512
+[INFO] 00:12:56:610 Consola/(4059:4059): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:12:57:308 Consola/(4061:4061): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:57:309 Consola/(4061:4061): SEGMENTO: 768
+[INFO] 00:12:57:309 Consola/(4061:4061): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:12:58:221 Consola/(4065:4065): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:12:58:221 Consola/(4065:4065): SEGMENTO: 768
+[INFO] 00:12:58:222 Consola/(4065:4065): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:13:05:338 Consola/(4050:4050): valor registro:912
+[INFO] 00:13:05:857 Consola/(4050:4050): Se realizo el envio se desconecto del kernel
+[INFO] 00:13:05:877 Consola/(4061:4061): valor registro:1
+[INFO] 00:13:07:907 Consola/(4061:4061): valor registro:1
+[INFO] 00:13:08:517 Consola/(4061:4061): valor registro:1
+[INFO] 00:13:09:033 Consola/(4061:4061): valor registro:1
+[INFO] 00:16:30:362 Consola/(4152:4152): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:30:362 Consola/(4152:4152): SEGMENTO: 1024
+[INFO] 00:16:30:362 Consola/(4152:4152): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:32:366 Consola/(4156:4156): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:32:367 Consola/(4156:4156): SEGMENTO: 1024
+[INFO] 00:16:32:367 Consola/(4156:4156): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:34:453 Consola/(4159:4159): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:34:453 Consola/(4159:4159): SEGMENTO: 512
+[INFO] 00:16:34:453 Consola/(4159:4159): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:36:549 Consola/(4162:4162): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:36:549 Consola/(4162:4162): SEGMENTO: 512
+[INFO] 00:16:36:550 Consola/(4162:4162): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:38:689 Consola/(4176:4176): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:38:690 Consola/(4176:4176): SEGMENTO: 768
+[INFO] 00:16:38:690 Consola/(4176:4176): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:40:903 Consola/(4178:4178): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:16:40:903 Consola/(4178:4178): SEGMENTO: 768
+[INFO] 00:16:40:903 Consola/(4178:4178): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:16:41:463 Consola/(4152:4152): valor registro:912
+[INFO] 00:16:42:544 Consola/(4152:4152): Se realizo el envio se desconecto del kernel
+[INFO] 00:16:43:571 Consola/(4176:4176): valor registro:1
+[INFO] 00:16:45:104 Consola/(4176:4176): valor registro:1
+[INFO] 00:16:46:145 Consola/(4176:4176): valor registro:2
+[INFO] 00:16:47:678 Consola/(4176:4176): valor registro:3
+[INFO] 00:16:49:462 Consola/(4176:4176): valor registro:5
+[INFO] 00:16:49:468 Consola/(4159:4159): valor registro:2280
+[INFO] 00:16:49:474 Consola/(4156:4156): valor registro:28
+[INFO] 00:16:49:479 Consola/(4162:4162): valor registro:2280
+[INFO] 00:16:50:720 Consola/(4176:4176): valor registro:8
+[INFO] 00:16:50:732 Consola/(4159:4159): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:16:55:876 Consola/(4178:4178): valor registro:1
+[INFO] 00:16:56:633 Consola/(4176:4176): valor registro:3200
+[INFO] 00:16:59:665 Consola/(4178:4178): valor registro:2
+[INFO] 00:17:00:425 Consola/(4176:4176): valor registro:3208
+[INFO] 00:17:01:941 Consola/(4156:4156): valor registro:37
+[INFO] 00:17:02:707 Consola/(4178:4178): valor registro:4
+[INFO] 00:17:03:467 Consola/(4176:4176): valor registro:6408
+[INFO] 00:17:03:478 Consola/(4156:4156): Se realizo el envio se desconecto del kernel
+[INFO] 00:17:04:234 Consola/(4178:4178): valor registro:8
+[INFO] 00:17:05:000 Consola/(4176:4176): valor registro:9616
+[INFO] 00:17:05:768 Consola/(4178:4178): valor registro:16
+[INFO] 00:17:06:545 Consola/(4176:4176): valor registro:16024
+[INFO] 00:17:07:312 Consola/(4178:4178): valor registro:32
+[INFO] 00:17:08:079 Consola/(4176:4176): valor registro:25640
+[INFO] 00:17:08:847 Consola/(4178:4178): valor registro:64
+[INFO] 00:17:08:854 Consola/(4162:4162): valor registro:9804
+[INFO] 00:17:09:614 Consola/(4176:4176): valor registro:41664
+[INFO] 00:17:10:376 Consola/(4178:4178): valor registro:128
+[INFO] 00:17:10:890 Consola/(4162:4162): valor registro:15276
+[INFO] 00:17:11:652 Consola/(4176:4176): valor registro:67304
+[INFO] 00:17:12:414 Consola/(4178:4178): valor registro:256
+[INFO] 00:17:12:418 Consola/(4162:4162): Se realizo el envio se desconecto del kernel
+[INFO] 00:17:13:177 Consola/(4176:4176): valor registro:108968
+[INFO] 00:17:13:938 Consola/(4178:4178): valor registro:512
+[INFO] 00:17:14:699 Consola/(4176:4176): valor registro:176272
+[INFO] 00:17:15:461 Consola/(4178:4178): valor registro:1024
+[INFO] 00:17:16:221 Consola/(4176:4176): valor registro:285240
+[INFO] 00:17:16:982 Consola/(4178:4178): valor registro:2048
+[INFO] 00:17:17:742 Consola/(4176:4176): valor registro:461512
+[INFO] 00:17:18:503 Consola/(4178:4178): valor registro:4096
+[INFO] 00:17:19:515 Consola/(4176:4176): valor registro:746752
+[INFO] 00:17:20:276 Consola/(4178:4178): valor registro:8192
+[INFO] 00:17:21:038 Consola/(4176:4176): valor registro:1208264
+[INFO] 00:17:21:798 Consola/(4178:4178): valor registro:16384
+[INFO] 00:17:22:559 Consola/(4176:4176): valor registro:1955016
+[INFO] 00:17:23:320 Consola/(4178:4178): valor registro:32768
+[INFO] 00:17:24:081 Consola/(4176:4176): valor registro:3163280
+[INFO] 00:17:24:841 Consola/(4178:4178): valor registro:65536
+[INFO] 00:17:25:603 Consola/(4176:4176): valor registro:5118296
+[INFO] 00:17:26:364 Consola/(4178:4178): valor registro:131072
+[INFO] 00:17:27:125 Consola/(4176:4176): valor registro:8281576
+[INFO] 00:17:27:887 Consola/(4178:4178): valor registro:262144
+[INFO] 00:17:28:647 Consola/(4176:4176): valor registro:13399872
+[INFO] 00:17:29:409 Consola/(4178:4178): valor registro:524288
+[INFO] 00:17:30:170 Consola/(4176:4176): valor registro:21681448
+[INFO] 00:17:30:930 Consola/(4178:4178): valor registro:1048576
+[INFO] 00:17:31:690 Consola/(4176:4176): valor registro:35081320
+[INFO] 00:17:32:451 Consola/(4178:4178): valor registro:2097152
+[INFO] 00:17:33:212 Consola/(4176:4176): valor registro:56762768
+[INFO] 00:17:33:973 Consola/(4178:4178): valor registro:4194304
+[INFO] 00:17:34:734 Consola/(4176:4176): valor registro:91844088
+[INFO] 00:17:35:495 Consola/(4178:4178): valor registro:8388608
+[INFO] 00:17:36:256 Consola/(4176:4176): valor registro:148606856
+[INFO] 00:17:37:017 Consola/(4178:4178): valor registro:16777216
+[INFO] 00:17:37:778 Consola/(4176:4176): valor registro:240450944
+[INFO] 00:17:38:539 Consola/(4178:4178): valor registro:33554432
+[INFO] 00:17:38:544 Consola/(4176:4176): Se realizo el envio se desconecto del kernel
+[INFO] 00:17:39:796 Consola/(4178:4178): valor registro:67108864
+[INFO] 00:17:41:055 Consola/(4178:4178): valor registro:134217728
+[INFO] 00:17:41:557 Consola/(4178:4178): Se realizo el envio se desconecto del kernel
+[INFO] 00:18:19:551 Consola/(4292:4292): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:19:552 Consola/(4292:4292): SEGMENTO: 1024
+[INFO] 00:18:19:552 Consola/(4292:4292): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:21:535 Consola/(4296:4296): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:21:535 Consola/(4296:4296): SEGMENTO: 1024
+[INFO] 00:18:21:536 Consola/(4296:4296): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:23:312 Consola/(4299:4299): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:23:312 Consola/(4299:4299): SEGMENTO: 512
+[INFO] 00:18:23:313 Consola/(4299:4299): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:25:189 Consola/(4302:4302): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:25:190 Consola/(4302:4302): SEGMENTO: 512
+[INFO] 00:18:25:190 Consola/(4302:4302): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:27:210 Consola/(4306:4306): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:27:210 Consola/(4306:4306): SEGMENTO: 768
+[INFO] 00:18:27:211 Consola/(4306:4306): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:28:990 Consola/(4318:4318): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:18:28:991 Consola/(4318:4318): SEGMENTO: 768
+[INFO] 00:18:28:991 Consola/(4318:4318): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:18:30:654 Consola/(4292:4292): valor registro:912
+[INFO] 00:18:31:735 Consola/(4292:4292): Se realizo el envio se desconecto del kernel
+[INFO] 00:18:32:760 Consola/(4306:4306): valor registro:1
+[INFO] 00:18:34:293 Consola/(4306:4306): valor registro:1
+[INFO] 00:18:35:322 Consola/(4306:4306): valor registro:2
+[INFO] 00:18:36:855 Consola/(4306:4306): valor registro:3
+[INFO] 00:18:37:878 Consola/(4306:4306): valor registro:3
+[INFO] 00:18:38:392 Consola/(4306:4306): valor registro:3
+[INFO] 00:20:35:567 Consola/(4363:4363): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:35:567 Consola/(4363:4363): SEGMENTO: 1024
+[INFO] 00:20:35:567 Consola/(4363:4363): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:37:668 Consola/(4367:4367): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:37:668 Consola/(4367:4367): SEGMENTO: 1024
+[INFO] 00:20:37:668 Consola/(4367:4367): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:38:786 Consola/(4370:4370): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:38:787 Consola/(4370:4370): SEGMENTO: 512
+[INFO] 00:20:38:787 Consola/(4370:4370): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:40:226 Consola/(4373:4373): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:40:226 Consola/(4373:4373): SEGMENTO: 512
+[INFO] 00:20:40:227 Consola/(4373:4373): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:41:426 Consola/(4375:4375): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:41:426 Consola/(4375:4375): SEGMENTO: 768
+[INFO] 00:20:41:426 Consola/(4375:4375): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:42:773 Consola/(4379:4379): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:20:42:773 Consola/(4379:4379): SEGMENTO: 768
+[INFO] 00:20:42:773 Consola/(4379:4379): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:20:46:665 Consola/(4363:4363): valor registro:912
+[INFO] 00:20:47:750 Consola/(4363:4363): Se realizo el envio se desconecto del kernel
+[INFO] 00:20:48:777 Consola/(4375:4375): valor registro:1
+[INFO] 00:20:50:312 Consola/(4375:4375): valor registro:1
+[INFO] 00:20:51:343 Consola/(4375:4375): valor registro:2
+[INFO] 00:20:52:876 Consola/(4375:4375): valor registro:3
+[INFO] 00:20:54:661 Consola/(4375:4375): valor registro:5
+[INFO] 00:20:54:668 Consola/(4370:4370): valor registro:2280
+[INFO] 00:20:54:673 Consola/(4367:4367): valor registro:28
+[INFO] 00:20:54:679 Consola/(4373:4373): valor registro:2280
+[INFO] 00:20:55:920 Consola/(4375:4375): valor registro:8
+[INFO] 00:20:55:929 Consola/(4370:4370): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:21:01:114 Consola/(4379:4379): valor registro:1
+[INFO] 00:21:01:871 Consola/(4375:4375): valor registro:3200
+[INFO] 00:21:04:905 Consola/(4379:4379): valor registro:2
+[INFO] 00:21:05:667 Consola/(4375:4375): valor registro:3208
+[INFO] 00:21:07:182 Consola/(4367:4367): valor registro:37
+[INFO] 00:21:07:965 Consola/(4379:4379): valor registro:4
+[INFO] 00:21:08:726 Consola/(4375:4375): valor registro:6408
+[INFO] 00:21:08:737 Consola/(4367:4367): Se realizo el envio se desconecto del kernel
+[INFO] 00:21:09:495 Consola/(4379:4379): valor registro:8
+[INFO] 00:21:10:269 Consola/(4375:4375): valor registro:9616
+[INFO] 00:21:11:035 Consola/(4379:4379): valor registro:16
+[INFO] 00:21:11:814 Consola/(4375:4375): valor registro:16024
+[INFO] 00:21:12:580 Consola/(4379:4379): valor registro:32
+[INFO] 00:21:13:347 Consola/(4375:4375): valor registro:25640
+[INFO] 00:21:14:114 Consola/(4379:4379): valor registro:64
+[INFO] 00:21:14:120 Consola/(4373:4373): valor registro:9804
+[INFO] 00:21:14:881 Consola/(4375:4375): valor registro:41664
+[INFO] 00:21:15:643 Consola/(4379:4379): valor registro:128
+[INFO] 00:21:16:157 Consola/(4373:4373): valor registro:15276
+[INFO] 00:21:16:917 Consola/(4375:4375): valor registro:67304
+[INFO] 00:21:17:679 Consola/(4379:4379): valor registro:256
+[INFO] 00:21:17:683 Consola/(4373:4373): Se realizo el envio se desconecto del kernel
+[INFO] 00:21:18:450 Consola/(4375:4375): valor registro:108968
+[INFO] 00:21:19:210 Consola/(4379:4379): valor registro:512
+[INFO] 00:21:19:973 Consola/(4375:4375): valor registro:176272
+[INFO] 00:21:20:734 Consola/(4379:4379): valor registro:1024
+[INFO] 00:21:21:494 Consola/(4375:4375): valor registro:285240
+[INFO] 00:21:22:255 Consola/(4379:4379): valor registro:2048
+[INFO] 00:21:23:015 Consola/(4375:4375): valor registro:461512
+[INFO] 00:21:23:777 Consola/(4379:4379): valor registro:4096
+[INFO] 00:21:24:789 Consola/(4375:4375): valor registro:746752
+[INFO] 00:21:25:551 Consola/(4379:4379): valor registro:8192
+[INFO] 00:21:26:311 Consola/(4375:4375): valor registro:1208264
+[INFO] 00:21:27:073 Consola/(4379:4379): valor registro:16384
+[INFO] 00:21:27:834 Consola/(4375:4375): valor registro:1955016
+[INFO] 00:21:28:594 Consola/(4379:4379): valor registro:32768
+[INFO] 00:21:29:355 Consola/(4375:4375): valor registro:3163280
+[INFO] 00:21:30:116 Consola/(4379:4379): valor registro:65536
+[INFO] 00:21:30:877 Consola/(4375:4375): valor registro:5118296
+[INFO] 00:21:31:638 Consola/(4379:4379): valor registro:131072
+[INFO] 00:21:32:399 Consola/(4375:4375): valor registro:8281576
+[INFO] 00:21:33:161 Consola/(4379:4379): valor registro:262144
+[INFO] 00:21:33:923 Consola/(4375:4375): valor registro:13399872
+[INFO] 00:21:34:684 Consola/(4379:4379): valor registro:524288
+[INFO] 00:21:35:445 Consola/(4375:4375): valor registro:21681448
+[INFO] 00:21:36:206 Consola/(4379:4379): valor registro:1048576
+[INFO] 00:21:36:967 Consola/(4375:4375): valor registro:35081320
+[INFO] 00:21:37:728 Consola/(4379:4379): valor registro:2097152
+[INFO] 00:21:38:489 Consola/(4375:4375): valor registro:56762768
+[INFO] 00:21:39:250 Consola/(4379:4379): valor registro:4194304
+[INFO] 00:21:40:010 Consola/(4375:4375): valor registro:91844088
+[INFO] 00:21:40:771 Consola/(4379:4379): valor registro:8388608
+[INFO] 00:21:41:532 Consola/(4375:4375): valor registro:148606856
+[INFO] 00:21:42:293 Consola/(4379:4379): valor registro:16777216
+[INFO] 00:21:43:054 Consola/(4375:4375): valor registro:240450944
+[INFO] 00:21:43:814 Consola/(4379:4379): valor registro:33554432
+[INFO] 00:21:43:818 Consola/(4375:4375): Se realizo el envio se desconecto del kernel
+[INFO] 00:21:45:072 Consola/(4379:4379): valor registro:67108864
+[INFO] 00:21:46:330 Consola/(4379:4379): valor registro:134217728
+[INFO] 00:21:46:832 Consola/(4379:4379): Se realizo el envio se desconecto del kernel
+[INFO] 00:22:43:245 Consola/(4501:4501): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:43:245 Consola/(4501:4501): SEGMENTO: 1024
+[INFO] 00:22:43:245 Consola/(4501:4501): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:43:560 Consola/(4504:4504): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:43:561 Consola/(4504:4504): SEGMENTO: 1024
+[INFO] 00:22:43:561 Consola/(4504:4504): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:44:133 Consola/(4506:4506): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:44:133 Consola/(4506:4506): SEGMENTO: 512
+[INFO] 00:22:44:134 Consola/(4506:4506): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:44:754 Consola/(4509:4509): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:44:754 Consola/(4509:4509): SEGMENTO: 512
+[INFO] 00:22:44:755 Consola/(4509:4509): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:45:358 Consola/(4511:4511): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:45:359 Consola/(4511:4511): SEGMENTO: 768
+[INFO] 00:22:45:359 Consola/(4511:4511): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:45:856 Consola/(4513:4513): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:22:45:856 Consola/(4513:4513): SEGMENTO: 768
+[INFO] 00:22:45:857 Consola/(4513:4513): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:22:55:020 Consola/(4501:4501): valor registro:912
+[INFO] 00:22:56:078 Consola/(4501:4501): Se realizo el envio se desconecto del kernel
+[INFO] 00:22:57:104 Consola/(4511:4511): valor registro:1
+[INFO] 00:22:58:636 Consola/(4511:4511): valor registro:1
+[INFO] 00:22:59:667 Consola/(4511:4511): valor registro:2
+[INFO] 00:23:01:199 Consola/(4511:4511): valor registro:3
+[INFO] 00:23:02:983 Consola/(4511:4511): valor registro:5
+[INFO] 00:23:02:989 Consola/(4506:4506): valor registro:2280
+[INFO] 00:23:02:998 Consola/(4509:4509): valor registro:2280
+[INFO] 00:23:03:005 Consola/(4504:4504): valor registro:28
+[INFO] 00:23:04:241 Consola/(4511:4511): valor registro:8
+[INFO] 00:23:04:252 Consola/(4506:4506): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:23:09:540 Consola/(4511:4511): valor registro:8
+[INFO] 00:23:09:541 Consola/(4509:4509): valor registro:2280
+[INFO] 00:23:09:541 Consola/(4504:4504): valor registro:28
+[INFO] 00:23:10:041 Consola/(4511:4511): valor registro:8
+[INFO] 00:23:10:041 Consola/(4509:4509): valor registro:2280
+[INFO] 00:23:10:042 Consola/(4504:4504): valor registro:28
+[INFO] 00:25:12:655 Consola/(4571:4571): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:25:12:655 Consola/(4571:4571): SEGMENTO: 1024
+[INFO] 00:25:12:656 Consola/(4571:4571): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:25:13:658 Consola/(4575:4575): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:25:13:659 Consola/(4575:4575): SEGMENTO: 1024
+[INFO] 00:25:13:659 Consola/(4575:4575): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:25:14:803 Consola/(4579:4579): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:25:14:803 Consola/(4579:4579): SEGMENTO: 512
+[INFO] 00:25:14:804 Consola/(4579:4579): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:25:15:783 Consola/(4584:4584): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:25:15:783 Consola/(4584:4584): SEGMENTO: 512
+[INFO] 00:25:15:784 Consola/(4584:4584): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:25:17:053 Consola/(4588:4588): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:25:17:056 Consola/(4588:4588): SEGMENTO: 768
+[ERROR] 00:25:17:057 Consola/(4588:4588): Error al conectar (a KERNEL)
+
+[INFO] 00:26:19:883 Consola/(4592:4592): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:26:19:884 Consola/(4592:4592): SEGMENTO: 1024
+[ERROR] 00:26:19:884 Consola/(4592:4592): Error al conectar (a KERNEL)
+
+[INFO] 00:27:27:228 Consola/(4596:4596): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:27:228 Consola/(4596:4596): SEGMENTO: 1024
+[INFO] 00:27:27:228 Consola/(4596:4596): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:28:408 Consola/(4599:4599): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:28:408 Consola/(4599:4599): SEGMENTO: 1024
+[INFO] 00:27:28:409 Consola/(4599:4599): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:29:668 Consola/(4602:4602): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:29:668 Consola/(4602:4602): SEGMENTO: 512
+[INFO] 00:27:29:669 Consola/(4602:4602): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:31:023 Consola/(4605:4605): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:31:023 Consola/(4605:4605): SEGMENTO: 512
+[INFO] 00:27:31:024 Consola/(4605:4605): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:32:465 Consola/(4609:4609): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:32:465 Consola/(4609:4609): SEGMENTO: 768
+[INFO] 00:27:32:466 Consola/(4609:4609): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:33:533 Consola/(4611:4611): 
+IP_KERNEL: 192.168.0.205
+PUERTO_KERNEL: 8000
+[INFO] 00:27:33:533 Consola/(4611:4611): SEGMENTO: 768
+[INFO] 00:27:33:534 Consola/(4611:4611): Cliente conectado en 192.168.0.205:8000 (a KERNEL)
+
+[INFO] 00:27:38:914 Consola/(4596:4596): valor registro:912
+[INFO] 00:27:39:973 Consola/(4596:4596): Se realizo el envio se desconecto del kernel
+[INFO] 00:27:40:998 Consola/(4609:4609): valor registro:1
+[INFO] 00:27:42:531 Consola/(4609:4609): valor registro:1
+[INFO] 00:27:43:567 Consola/(4609:4609): valor registro:2
+[INFO] 00:27:45:101 Consola/(4609:4609): valor registro:3
+[INFO] 00:27:46:888 Consola/(4609:4609): valor registro:5
+[INFO] 00:27:46:894 Consola/(4602:4602): valor registro:2280
+[INFO] 00:27:46:901 Consola/(4599:4599): valor registro:28
+[INFO] 00:27:46:907 Consola/(4605:4605): valor registro:2280
+[INFO] 00:27:48:146 Consola/(4609:4609): valor registro:8
+[INFO] 00:27:48:157 Consola/(4602:4602): Se realizo el envio se desconecto del kernel, el proceso tuvo error SIGSEGV
+[INFO] 00:27:53:447 Consola/(4611:4611): valor registro:1
+[INFO] 00:27:54:204 Consola/(4609:4609): valor registro:3200
+[INFO] 00:27:57:237 Consola/(4611:4611): valor registro:2
+[INFO] 00:27:58:000 Consola/(4609:4609): valor registro:3208
+[INFO] 00:27:59:515 Consola/(4599:4599): valor registro:37
+[INFO] 00:28:00:288 Consola/(4611:4611): valor registro:4
+[INFO] 00:28:01:049 Consola/(4609:4609): valor registro:6408
+[INFO] 00:28:01:060 Consola/(4599:4599): Se realizo el envio se desconecto del kernel
+[INFO] 00:28:01:818 Consola/(4611:4611): valor registro:8
+[INFO] 00:28:02:594 Consola/(4609:4609): valor registro:9616
+[INFO] 00:28:03:360 Consola/(4611:4611): valor registro:16
+[INFO] 00:28:04:128 Consola/(4609:4609): valor registro:16024
+[INFO] 00:28:04:895 Consola/(4611:4611): valor registro:32
+[INFO] 00:28:05:663 Consola/(4609:4609): valor registro:25640
+[INFO] 00:28:06:430 Consola/(4611:4611): valor registro:64
+[INFO] 00:28:06:436 Consola/(4605:4605): valor registro:9804
+[INFO] 00:28:07:198 Consola/(4609:4609): valor registro:41664
+[INFO] 00:28:07:959 Consola/(4611:4611): valor registro:128
+[INFO] 00:28:08:476 Consola/(4605:4605): valor registro:15276
+[INFO] 00:28:09:237 Consola/(4609:4609): valor registro:67304
+[INFO] 00:28:09:999 Consola/(4611:4611): valor registro:256
+[INFO] 00:28:10:003 Consola/(4605:4605): Se realizo el envio se desconecto del kernel
+[INFO] 00:28:10:760 Consola/(4609:4609): valor registro:108968
+[INFO] 00:28:11:520 Consola/(4611:4611): valor registro:512
+[INFO] 00:28:12:281 Consola/(4609:4609): valor registro:176272
+[INFO] 00:28:13:042 Consola/(4611:4611): valor registro:1024
+[INFO] 00:28:13:803 Consola/(4609:4609): valor registro:285240
+[INFO] 00:28:14:563 Consola/(4611:4611): valor registro:2048
+[INFO] 00:28:15:325 Consola/(4609:4609): valor registro:461512
+[INFO] 00:28:16:086 Consola/(4611:4611): valor registro:4096
+[INFO] 00:28:17:100 Consola/(4609:4609): valor registro:746752
+[INFO] 00:28:17:862 Consola/(4611:4611): valor registro:8192
+[INFO] 00:28:18:623 Consola/(4609:4609): valor registro:1208264
+[INFO] 00:28:19:384 Consola/(4611:4611): valor registro:16384
+[INFO] 00:28:20:145 Consola/(4609:4609): valor registro:1955016
+[INFO] 00:28:20:906 Consola/(4611:4611): valor registro:32768
+[INFO] 00:28:21:669 Consola/(4609:4609): valor registro:3163280
+[INFO] 00:28:22:429 Consola/(4611:4611): valor registro:65536
+[INFO] 00:28:23:190 Consola/(4609:4609): valor registro:5118296
+[INFO] 00:28:23:949 Consola/(4611:4611): valor registro:131072
+[INFO] 00:28:24:709 Consola/(4609:4609): valor registro:8281576
+[INFO] 00:28:25:470 Consola/(4611:4611): valor registro:262144
+[INFO] 00:28:26:231 Consola/(4609:4609): valor registro:13399872
+[INFO] 00:28:26:991 Consola/(4611:4611): valor registro:524288
+[INFO] 00:28:27:752 Consola/(4609:4609): valor registro:21681448
+[INFO] 00:28:28:512 Consola/(4611:4611): valor registro:1048576
+[INFO] 00:28:29:272 Consola/(4609:4609): valor registro:35081320
+[INFO] 00:28:30:033 Consola/(4611:4611): valor registro:2097152
+[INFO] 00:28:30:794 Consola/(4609:4609): valor registro:56762768
+[INFO] 00:28:31:554 Consola/(4611:4611): valor registro:4194304
+[INFO] 00:28:32:315 Consola/(4609:4609): valor registro:91844088
+[INFO] 00:28:33:076 Consola/(4611:4611): valor registro:8388608
+[INFO] 00:28:33:836 Consola/(4609:4609): valor registro:148606856
+[INFO] 00:28:34:596 Consola/(4611:4611): valor registro:16777216
+[INFO] 00:28:35:357 Consola/(4609:4609): valor registro:240450944
+[INFO] 00:28:36:118 Consola/(4611:4611): valor registro:33554432
+[INFO] 00:28:36:123 Consola/(4609:4609): Se realizo el envio se desconecto del kernel
+[INFO] 00:28:37:377 Consola/(4611:4611): valor registro:67108864
+[INFO] 00:28:38:635 Consola/(4611:4611): valor registro:134217728
+[INFO] 00:28:39:138 Consola/(4611:4611): Se realizo el envio se desconecto del kernel

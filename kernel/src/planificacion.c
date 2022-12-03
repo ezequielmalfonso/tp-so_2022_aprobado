@@ -159,7 +159,9 @@ void inicializarPlanificacion(){
 	}
 	else if(!strcmp(configuracion->ALGORITMO_PLANIFICACION,"RR")){
 		pthread_create(&corto_plazo, NULL, (void*) rr_ready_execute, NULL);
+		pthread_mutex_lock(&mx_log);
 		log_info(logger,"ALGORITMO_PLANIFICACION RR!!!!");
+		pthread_mutex_unlock(&mx_log);
 	}
 	else if(!strcmp(configuracion->ALGORITMO_PLANIFICACION,"FEEDBACK")){
 		pthread_create(&corto_plazo, NULL, (void*) feedback_ready_execute, NULL);
@@ -251,14 +253,18 @@ void esperar_cpu(){
 				break;
 
 			case INTERRUPT:
+				pthread_mutex_lock(&mx_log);
 				log_info(logger,"PID: %d - Estado Anterior: EXECUTE - Estado Actual: READY", pcb->pid);
+				pthread_mutex_unlock(&mx_log);
 				if(!strcmp(configuracion->ALGORITMO_PLANIFICACION,"RR")){
 					pthread_mutex_lock(&mx_cola_ready);
 					queue_push(cola_ready, pcb);
 					pthread_mutex_unlock(&mx_cola_ready);
 				}
 				else{
+					pthread_mutex_lock(&mx_log);
 					log_info(logger,"A cola secundaria");
+					pthread_mutex_unlock(&mx_log);
 					pthread_mutex_lock(&mx_cola_ready_sec);
 					queue_push(cola_ready_sec, pcb);
 					pthread_mutex_unlock(&mx_cola_ready_sec);
@@ -278,8 +284,9 @@ void esperar_cpu(){
 				sem_post(&s_blocked);
 				pthread_create(&hilo_bloqueado,NULL,(void*)bloqueando,pcb);
 				pthread_detach(hilo_bloqueado);
+				 pthread_mutex_lock(&mx_log);
 				log_info(logger, "PID: %d - Estado Anterior: EXECUTE - Estado Actual: BLOCKED", pcb->pid);
-
+				 pthread_mutex_unlock(&mx_log);
 				sem_post(&s_cpu_desocupado);
 
 			/* 	//Por si la interrupcion se mando cuando se estaba procesando la instruccion IO
@@ -292,7 +299,9 @@ void esperar_cpu(){
 				break;
 			case SIGSEGV:
 				send(pcb->cliente_fd,&cop,sizeof(op_code),0);
+				 pthread_mutex_lock(&mx_log);
 				log_error(logger,"Error: Segmentation Fault (SIGSEGV).");
+				pthread_mutex_unlock(&mx_log);
 				execute_a_exit(pcb);
 				sem_post(&s_cpu_desocupado);
 				sem_post(&s_ready_execute);
