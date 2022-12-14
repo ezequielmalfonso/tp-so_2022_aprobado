@@ -315,6 +315,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		log_info(logger, "a mimir");
 		//sleep(5);
 		log_info(logger,"Ejecutando EXIT");
+		limpiar_tlb();
 		return EXIT;
 	}else{
 		log_error(logger,"Hubo un error en el ciclo de instruccion");
@@ -335,10 +336,13 @@ void inicializar_tlb(){
 
 }
 
+bool pertenece_proceso(TLB_t* entrada){
+	return entrada->pid == pid_actual;
+}
 
 void limpiar_tlb(){
-	list_clean_and_destroy_elements(tlb,free);
-	inicializar_tlb(tlb);
+	list_remove_and_destroy_all_by_condition(tlb,*pertenece_proceso,free);
+
 }
 
 TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco){
@@ -445,7 +449,7 @@ uint32_t presente_en_tlb(uint32_t numero_segmento, uint32_t numero_pagina){
 //		log_info(logger,"Numero pagina: %d",tlb_aux->pagina);
 //		log_info(logger,"Numero marco: %d", tlb_aux->marco);
 //		log_info(logger,"Ciclo cpu: %d",(int)tlb_aux->ultima_referencia);
-		if(tlb_aux->pagina==numero_pagina && tlb_aux->segmento==numero_segmento){
+		if(tlb_aux->pagina==numero_pagina && tlb_aux->segmento==numero_segmento && tlb_aux->pid==pid_actual){
 			tlb_aux->ultima_referencia = clock();
 			log_info(logger,"TLB HIT PID: %d Segmento: %d Pagina: %d", tlb_aux->pid, numero_segmento, numero_pagina);
 			return tlb_aux->marco;
