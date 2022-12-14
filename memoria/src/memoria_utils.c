@@ -162,7 +162,9 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 
 		agregar_pagina_a_estructura_clock(pagina->nro_marco, pagina, nro_marco_en_swap, pid_actual);
 		return pagina->nro_marco;
+		list_destroy_and_destroy_elements(tabla_de_marcos ,free);
 	}
+	//list_destroy_and_destroy_elements(tabla_de_marcos ,free);
 	return -1;
 }
 

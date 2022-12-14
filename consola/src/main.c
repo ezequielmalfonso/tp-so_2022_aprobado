@@ -118,7 +118,6 @@ void parseo_instrucciones(char* path_instrucciones,t_list* listaInstrucciones){
 			}
 
 		list_add(listaInstrucciones,instrucs);
-
+		free(linea);
 		}
-
 }

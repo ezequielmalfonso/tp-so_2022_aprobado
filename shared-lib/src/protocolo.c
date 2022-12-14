@@ -54,7 +54,8 @@ t_instrucciones* recibir_instrucciones(int socket_fd)
 
 	t_instrucciones* mensaje = deserializar_instrucciones(buffer);
 
-	//free(buffer->stream);
+	free(buffer->stream);
+	free(buffer);
 
 
 	return mensaje;
