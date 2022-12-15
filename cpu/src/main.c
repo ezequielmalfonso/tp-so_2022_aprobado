@@ -341,7 +341,27 @@ bool pertenece_proceso(TLB_t* entrada){
 }
 
 void limpiar_tlb(){
-	list_remove_and_destroy_all_by_condition(tlb,*pertenece_proceso,free);//TODO hacerlo a mano
+    int i=0, c=0;
+    while(i<configuracion->ENTRADAS_TLB){
+    	TLB_t *tlb_aux = tlb_aux=list_get(tlb,i);
+    	if(tlb_aux->pid==pid_actual){
+    		c++;
+    	}
+    	i++;
+    }
+    i=0;
+    while (i<c){
+    	TLB_t *tlb_aux =list_remove_by_condition(tlb,*pertenece_proceso);
+    	free(tlb_aux);
+    	i++;
+    }
+    i=list_size(tlb);
+    while(i<configuracion->ENTRADAS_TLB){
+    	TLB_t *tlb_aux = crear_entrada_tlb(-1,-1,-1);
+    	list_add(tlb, tlb_aux);
+    	i++;
+    }
+	//list_remove_by_condition(tlb,*pertenece_proceso,free);//TODO hacerlo a mano
 
 }
 
