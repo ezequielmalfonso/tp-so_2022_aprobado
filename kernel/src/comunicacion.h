@@ -20,6 +20,7 @@
 
 extern int cliente_socket;
 
+extern uint16_t pid_nuevo;
 //SERVIDOR
 int server_escuchar(char* server_name, int server_socket);
 //CLIENTE

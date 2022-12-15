@@ -6,13 +6,13 @@
  */
 
 #include "comunicacion.h"
-
+uint16_t pid_nuevo=0;
 
 typedef struct {
     int fd;
     char* server_name;
 } t_procesar_conexion_args;
-
+pthread_mutex_t pid_xd = PTHREAD_MUTEX_INITIALIZER;
 int cliente_socket;
 
 static void procesar_conexion(void* void_args) {
@@ -45,8 +45,12 @@ static void procesar_conexion(void* void_args) {
 	registros[2]=0;
 	registros[3]=0;
 
-	pcb_set(proceso, process_get_thread_id(), mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos,cliente_socket);
+	pthread_mutex_lock(&pid_xd);
+	pcb_set(proceso, pid_nuevo, mensaje->listaInstrucciones,      0,  registros,  mensaje->listaTamSegmentos,cliente_socket);
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
+	pid_nuevo++;
+	pthread_mutex_unlock(&pid_xd);
+
 
 
 	list_destroy(mensaje->listaInstrucciones);

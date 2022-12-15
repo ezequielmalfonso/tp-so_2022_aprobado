@@ -30,13 +30,16 @@
 
 extern t_list* tabla_de_paginas;
 
-extern t_list* lista_tablas_de_paginas;
+extern t_list* lista_tablas_de_procesos;
+
+extern uint16_t pid_global;
 
 typedef struct {
 	int32_t nro_marco;
 	unsigned char modificado;
 	unsigned char presencia;
 	unsigned char uso;
+	uint16_t pid;
 } fila_de_pagina;
 
 typedef struct {

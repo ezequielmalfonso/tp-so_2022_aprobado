@@ -15,6 +15,7 @@ t_procesar_conexion_args;
 
 pthread_mutex_t mx_kernel= PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mx_cpu = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mx_pagefault = PTHREAD_MUTEX_INITIALIZER;
 
 //KERNEL
 static void procesar_kernel(void * void_args) {
@@ -48,6 +49,8 @@ static void procesar_kernel(void * void_args) {
       recv(cliente_socket, & cantidad_ids, sizeof(uint32_t), 0);
       pthread_mutex_unlock(&mx_kernel);
 
+      t_list* lista_tabla_de_paginas=list_create();
+
       log_info(logger, "[KERNEL] Creando tabla para programa %d", pid);
 
       int i = 0;
@@ -60,10 +63,11 @@ static void procesar_kernel(void * void_args) {
         pthread_mutex_unlock(&mx_kernel);
         t_list* tabla_de_paginas = crear_tabla(pid);
         log_info(logger, "[KERNEL] Tabla creada del Segmento %d con %d entradas ", sid, configuracion->ENTRADAS_POR_TABLA);
-        list_add(lista_tablas_de_paginas, tabla_de_paginas);
+        list_add(lista_tabla_de_paginas, tabla_de_paginas);
 
         i++;
       }
+      list_add(lista_tablas_de_procesos,lista_tabla_de_paginas);
       crear_estructura_clock(pid);
 
 
@@ -85,6 +89,7 @@ static void procesar_kernel(void * void_args) {
 
       break;
     case PAGEFAULT:
+      //pthread_mutex_lock(&mx_pagefault);
       op_code op2 = PAGEFAULT;
 
       uint32_t num_segmento = 0;
@@ -103,6 +108,7 @@ static void procesar_kernel(void * void_args) {
       pthread_mutex_lock(&mx_kernel);
       send(cliente_socket, & op2, sizeof(uint32_t), 0);
       pthread_mutex_unlock(&mx_kernel);
+      //pthread_mutex_unlock(&mx_pagefault);
 
       break;
     // Errores
@@ -185,32 +191,40 @@ pthread_mutex_lock(&mx_cpu);
 pthread_mutex_unlock(&mx_cpu);
       break;
     case MOV_IN:
+  	  //pthread_mutex_lock(&mx_pagefault);
+
       log_info(logger, "[CPU][ACCESO A MEMORIA] Procesando lectura...");
       uint32_t desplazamiento;
+      uint16_t pid_xd=0;
 
-pthread_mutex_lock(&mx_cpu);
+      pthread_mutex_lock(&mx_cpu);
+      recv(cliente_socket, &pid_xd, sizeof(uint16_t), 0);
       recv(cliente_socket, & nro_marco, sizeof(uint32_t), 0);
       recv(cliente_socket, & desplazamiento, sizeof(uint32_t), 0);
-pthread_mutex_unlock(&mx_cpu);
-
-      uint32_t dato = read_en_memoria(nro_marco, desplazamiento, pid_actual);
-
+      pthread_mutex_unlock(&mx_cpu);
+      uint32_t dato = read_en_memoria(nro_marco, desplazamiento, pid_xd);
       usleep(configuracion -> RETARDO_MEMORIA * 1000);
 pthread_mutex_lock(&mx_cpu);
       send(cliente_socket, & dato, sizeof(uint32_t), 0);
 pthread_mutex_unlock(&mx_cpu);
+//pthread_mutex_unlock(&mx_pagefault);
+
       break;
     case MOV_OUT:
+      uint16_t pid_lmao=0;
+      //pthread_mutex_lock(&mx_pagefault);
       log_info(logger, "[CPU][ACCESO A MEMORIA] Procesando escritura...");
 
 pthread_mutex_lock(&mx_cpu);
+	  recv(cliente_socket, &pid_lmao, sizeof(uint16_t), 0);
       recv(cliente_socket, & nro_marco, sizeof(uint32_t), 0);
       recv(cliente_socket, & desplazamiento, sizeof(uint32_t), 0);
       recv(cliente_socket, & dato, sizeof(uint32_t), 0);
 pthread_mutex_unlock(&mx_cpu);
       //leer el valor del registro que se guardaria en dato
 
-      write_en_memoria(nro_marco, desplazamiento, dato, pid_actual);
+
+      write_en_memoria(nro_marco, desplazamiento, dato, pid_lmao);
       log_info(logger, "[CPU] Dato escrito: '%d' en MARCO: %d, DESPLAZAMIENTO: %d", dato, nro_marco, desplazamiento);
 
       op_code resultado = ESCRITURA_OK;
@@ -218,6 +232,8 @@ pthread_mutex_unlock(&mx_cpu);
 pthread_mutex_lock(&mx_cpu);
       send(cliente_socket, & resultado, sizeof(op_code), 0);
 pthread_mutex_unlock(&mx_cpu);
+	  //pthread_mutex_unlock(&mx_pagefault);
+
       break;
 
       // Errores

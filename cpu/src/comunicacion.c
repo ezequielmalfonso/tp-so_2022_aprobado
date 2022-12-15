@@ -45,8 +45,6 @@ static void procesar_conexion(void* void_args) {
 	 //limpiar_tlb();
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
-	 pcb_destroy(proceso);
-	 list_destroy(tam_segmentos_actuales);
 	 if (codigo==IO){usleep(5000);	 }
 	 if(codigo==PAGEFAULT){
 	   log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",proceso->pid,segmento,pagina);
@@ -55,6 +53,8 @@ static void procesar_conexion(void* void_args) {
 	   segmento=0;
 	   pagina=0;
 	 }
+	 pcb_destroy(proceso);
+	 list_destroy(tam_segmentos_actuales);
 	 break;
  }
  // Errores
@@ -94,7 +94,7 @@ int server_escucharI(char* server_name, int server_socket){
 			t_procesar_conexion_args* argsSev = malloc(sizeof(t_procesar_conexion_args));
 			argsSev->fd = cliente_socketI;
 			argsSev->server_name = server_name;
-			procesar_conexion(argsSev);
+			interrupcion();
 	        return 1;
 	       // sem_post(&sem);
 		}

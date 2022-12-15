@@ -21,6 +21,7 @@
 #include "memoria_utils.h"
 #include <semaphore.h>
 
+
 //KERNEL
 int kernel_escuchar(char* server_name, int server_socket);
 //CPU

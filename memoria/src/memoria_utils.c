@@ -8,11 +8,11 @@ pthread_mutex_t mx_fd_swaps = PTHREAD_MUTEX_INITIALIZER;
 
 int cliente_kernel;
 int cliente_cpu;
-
+uint16_t pid_global;
 // Tabla de páginas
 //t_list* tabla_de_paginas;
 
-t_list* lista_tablas_de_paginas;
+t_list* lista_tablas_de_procesos;
 // Estructura clock
 t_dictionary* estructuras_clock;
 
@@ -85,7 +85,7 @@ void inicializar_memoria(){
 
 	memoria = malloc(configuracion->TAM_MEMORIA);
 	//tabla_de_paginas = list_create();
-	lista_tablas_de_paginas = list_create();
+	lista_tablas_de_procesos = list_create();
 	estructuras_clock = dictionary_create();
 
 	bitarray_marcos_ocupados = malloc(tam_memoria / tam_pagina);
@@ -145,8 +145,10 @@ void eliminar_estructuras(uint32_t tabla_paginas, uint16_t pid) {
 //modificar a una sola tabla
 uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){//corregir lo de buscar en swap
 
+	t_list* tabla_de_proceso=list_create();
+	tabla_de_proceso=list_get(lista_tablas_de_procesos,pid_actual);
 	t_list* tabla_de_marcos = list_create();
-	tabla_de_marcos = list_get(lista_tablas_de_paginas, num_segmento);
+	tabla_de_marcos = list_get(tabla_de_proceso, num_segmento);
 
 	fila_de_pagina* pagina = list_get(tabla_de_marcos, num_pagina);
 	if (pagina->presencia == 1){
@@ -169,8 +171,10 @@ uint32_t obtener_nro_marco_memoria(uint32_t num_segmento, uint32_t num_pagina, u
 }
 
 uint32_t tratar_page_fault(uint32_t num_segmento, uint32_t num_pagina, uint16_t pid_actual){
+	t_list* tabla_de_proceso=list_create();
+	tabla_de_proceso=list_get(lista_tablas_de_procesos,pid_actual);
 	t_list* tabla_de_marcos = list_create();
-	tabla_de_marcos = list_get(lista_tablas_de_paginas, num_segmento);
+	tabla_de_marcos = list_get(tabla_de_proceso, num_segmento);
 	fila_de_pagina* pagina = list_get(tabla_de_marcos, num_pagina);
 
 	log_info(logger, "[CPU][ACCESO A DISCO] PAGE FAULT!!!");

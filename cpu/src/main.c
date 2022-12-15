@@ -65,8 +65,8 @@ int main(){
 	pthread_join(dispatch_id,0);
 	pthread_join(interrupt_id,0);
 
-	pthread_create(&hilo_interrupciones,NULL,(void*)interrupcion,NULL);
-	pthread_detach(hilo_interrupciones);
+	//pthread_create(&hilo_interrupciones,NULL,(void*)interrupcion,NULL);
+	//pthread_detach(hilo_interrupciones);
 
 	limpiarConfiguracion();
 	return 0;
@@ -112,7 +112,7 @@ op_code iniciar_ciclo_instruccion(PCB_t* pcb){
 			usleep(configuracion->RETARDO_INSTRUCCION);
 
 		}
-		estado = execute(instruccion_ejecutar,pcb->registro_cpu);
+		estado = execute(instruccion_ejecutar,pcb->registro_cpu,pcb->pid);
 		if(estado == CONTINUE){
 			estado = check_interrupt();
 		}
@@ -145,7 +145,6 @@ int check_interrupt(){
 
 void interrupcion(){
 	//cambia hay_interrupcion a true
-	while(1){
 		op_code opcode;
 		//pthread_mutex_lock(&mx_interrupt);
 		recv(cpuServerInterrupt, &opcode, sizeof(op_code), 0);
@@ -156,13 +155,12 @@ void interrupcion(){
 		hay_interrupcion = true;
 		pthread_mutex_unlock(&mx_hay_interrupcion);
 		}
-	}
 }
 
-int ejecutarMOV_IN(uint32_t dir_logica){
+int ejecutarMOV_IN(uint32_t dir_logica,uint16_t pid){
 	marco_t dir_fisica;
 	uint32_t valor=0;
-	dir_fisica = traducir_direccion(dir_logica,0);
+	dir_fisica = traducir_direccion(dir_logica,0,pid);
 	if(dir_fisica.marco==-1){
 		return -1;
 	}else if(dir_fisica.marco==-2){return -2;}
@@ -170,6 +168,7 @@ int ejecutarMOV_IN(uint32_t dir_logica){
 	pthread_mutex_lock(&mx_mov_in);
 	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
+	send(memoria_fd, &pid, sizeof(uint16_t),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint16_t),0);
 	recv(memoria_fd, &valor, sizeof(uint32_t), 0);
@@ -179,9 +178,9 @@ int ejecutarMOV_IN(uint32_t dir_logica){
 	return valor;
 }
 
-int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
+int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor,uint16_t pid){
 	marco_t dir_fisica;
-	dir_fisica = traducir_direccion(dir_logica,1);
+	dir_fisica = traducir_direccion(dir_logica,1,pid);
 	if(dir_fisica.marco==-1){
 	    return -1;
 	}else if(dir_fisica.marco==-2){return -2;}
@@ -189,6 +188,7 @@ int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
 	op_code cop = MOV_OUT;
 	pthread_mutex_lock(&mx_memoria);
 	send(memoria_fd, &cop, sizeof(op_code),0);
+	send(memoria_fd, &pid, sizeof(uint16_t),0);
 	send(memoria_fd, &dir_fisica.marco, sizeof(uint32_t),0);
 	send(memoria_fd, &dir_fisica.desplazamiento, sizeof(uint32_t),0);
 	send(memoria_fd, &valor, sizeof(uint32_t),0);
@@ -196,7 +196,7 @@ int ejecutarMOV_OUT(uint32_t dir_logica,uint32_t valor){
 	return 1;
 }
 
-int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
+int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4],uint16_t pid){
 
 	if(!strcmp(instruccion_ejecutar->comando,"SET")){
 		log_info(logger,"Ejecutando SET parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
@@ -268,7 +268,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		break;
 		}
 
-		int x=ejecutarMOV_OUT(dir_logica,valor);
+		int x=ejecutarMOV_OUT(dir_logica,valor,pid);
 		if (x==-1){
 			return PAGEFAULT;
 		}else if(x==-2){
@@ -286,7 +286,7 @@ int execute(INSTRUCCION* instruccion_ejecutar,uint32_t registros[4]){
 		log_info(logger,"Ejecutando MOV_IN parametro 1: %s parametro 2: %s",instruccion_ejecutar->parametro,instruccion_ejecutar->parametro2);
 		uint32_t valor;
 		uint32_t dir_logica= atoi(instruccion_ejecutar->parametro2);
-		valor=ejecutarMOV_IN(dir_logica);
+		valor=ejecutarMOV_IN(dir_logica,pid);
 		if (valor==-1){
 			return PAGEFAULT;
 		}else if(valor==-2){
@@ -374,10 +374,10 @@ TLB_t *crear_entrada_tlb(uint32_t segmento, uint32_t pagina, uint32_t marco){
 	tlb_entrada->segmento=segmento;
 	tlb_entrada->ultima_referencia = clock();
 
-	if(segmento>-1){
+	/*if(segmento!=-1){
 		log_info(logger,"Nuevo estado TLB:");
-	}
-	imprimir_tlb();
+	}*/
+
 
 	return tlb_entrada;
 }
@@ -387,14 +387,14 @@ void imprimir_tlb(){
 	int cant_entradas=list_size(tlb);
 	while(i<cant_entradas){
 		TLB_t *tlb_aux = tlb_aux=list_get(tlb,i);
-		if(tlb_aux->segmento>-1){
+		if(tlb_aux->segmento!=-1){
 			log_info(logger,"%d |PID:%d |SEGMENTO:%d |PAGINA:%d |MARCO:%d", i, tlb_aux->pid, tlb_aux->segmento, tlb_aux->pagina, tlb_aux->marco);
 		}
 		i++;
 	}
 }
 
-marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
+marco_t  traducir_direccion(uint32_t dir_logica, int operacion,uint16_t pid){
 	marco_t dire_fisica;
 	uint32_t nro_marco = 145; //supongo que inicializa en 145 para asegurarse que no este presente en TLB
 
@@ -411,20 +411,20 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	uint32_t desplazamiento_pagina = desplazamiento_segmento % tam_pagina;
 	//Aca hay que fijarse si esta en la tlb
 	if(configuracion->ENTRADAS_TLB>0){
-		nro_marco = presente_en_tlb(num_segmento, num_pagina);
+		nro_marco = presente_en_tlb(num_segmento, num_pagina,pid);
 	}else{
 		nro_marco=-1;
 	}
 
 	if(nro_marco==-1){
 
-		log_info(logger, "TLB MISS PID: %d Segmento: %d Pagina: %d", pid_actual, num_segmento, num_pagina);
+		log_info(logger, "TLB MISS PID: %d Segmento: %d Pagina: %d", pid, num_segmento, num_pagina);
 
 
 		op_code cop = SOLICITUD_NRO_MARCO;
 		pthread_mutex_lock(&mx_memoria);
 		send(memoria_fd, &cop, sizeof(op_code),0);
-		send(memoria_fd, &pid_actual, sizeof(uint16_t),0);
+		send(memoria_fd, &pid, sizeof(uint16_t),0);
 		send(memoria_fd, &num_segmento, sizeof(int32_t),0);
 		send(memoria_fd, &num_pagina, sizeof(uint32_t),0);
 		recv(memoria_fd, &nro_marco, sizeof(uint32_t), 0);
@@ -462,14 +462,14 @@ marco_t  traducir_direccion(uint32_t dir_logica, int operacion){
 	return dire_fisica;
 }
 
-uint32_t presente_en_tlb(uint32_t numero_segmento, uint32_t numero_pagina){
+uint32_t presente_en_tlb(uint32_t numero_segmento, uint32_t numero_pagina,uint16_t pid){
 
 	for(int i=0;i< configuracion->ENTRADAS_TLB;i++){
-		TLB_t *tlb_aux = tlb_aux=list_get(tlb,i);
+		TLB_t *tlb_aux = list_get(tlb,i);
 //		log_info(logger,"Numero pagina: %d",tlb_aux->pagina);
 //		log_info(logger,"Numero marco: %d", tlb_aux->marco);
 //		log_info(logger,"Ciclo cpu: %d",(int)tlb_aux->ultima_referencia);
-		if(tlb_aux->pagina==numero_pagina && tlb_aux->segmento==numero_segmento && tlb_aux->pid==pid_actual){
+		if(tlb_aux->pagina==numero_pagina && tlb_aux->segmento==numero_segmento && tlb_aux->pid==pid){
 			tlb_aux->ultima_referencia = clock();
 			log_info(logger,"TLB HIT PID: %d Segmento: %d Pagina: %d", tlb_aux->pid, numero_segmento, numero_pagina);
 			return tlb_aux->marco;
@@ -489,6 +489,7 @@ void reemplazo_tlb_FIFO(uint32_t numero_segmento, uint32_t numero_pagina, uint32
 	list_remove_and_destroy_element(tlb,0,free);
 	TLB_t *tlb_entrada = crear_entrada_tlb(numero_segmento,numero_pagina,marco);
 	list_add(tlb,tlb_entrada);
+	//imprimir_tlb();
 
 }
 
@@ -498,6 +499,7 @@ bool menor(TLB_t* a,TLB_t* b){
 
 void reemplazo_tlb_LRU(uint32_t numero_segmento, uint32_t numero_pagina, uint32_t marco ){
 	list_sort(tlb,*menor); //Preguntar como se supone que funciona esto
+	log_error(logger, "REEMPLAZO");
 	TLB_t* tlb_entrada_0 = list_get(tlb,0);
 	log_info(logger,"Segmento %d pagina %d asignada al marco %d", numero_segmento, numero_pagina, marco);
 	if (tlb_entrada_0->pagina != -1 && tlb_entrada_0->segmento != -1)
@@ -505,12 +507,13 @@ void reemplazo_tlb_LRU(uint32_t numero_segmento, uint32_t numero_pagina, uint32_
 	list_remove_and_destroy_element(tlb,0,free);
 	TLB_t *tlb_entrada = crear_entrada_tlb(numero_segmento, numero_pagina,marco);
 	list_add(tlb,tlb_entrada);
+	//imprimir_tlb();
 }
 
 bool marco_en_tlb(uint32_t marco,uint32_t segmento, uint32_t pagina){//Para encontrar la lista a actualizar
 	for (int i=0;i<configuracion->ENTRADAS_TLB ;i++){
 		TLB_t *tlb_aux = list_get(tlb,i);
-		if(tlb_aux->marco==marco){
+		if(tlb_aux->marco==marco && tlb_aux->pid==pid_actual){
 			list_remove(tlb,i);
 			tlb_aux->pagina = pagina;
 			tlb_aux->segmento=segmento;
