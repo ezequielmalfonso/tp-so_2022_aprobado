@@ -46,7 +46,7 @@ static void procesar_conexion(void* void_args) {
 	 op_code codigo=iniciar_ciclo_instruccion(proceso);
 	 send_proceso(cliente_socket,proceso,codigo);
 	 pcb_destroy(proceso);
-	 list_destroy_and_destroy_elements(tam_segmentos_actuales, free);
+	 list_destroy(tam_segmentos_actuales);
 	 if (codigo==IO){usleep(5000);	 }
 	 if(codigo==PAGEFAULT){
 	   log_error(logger,"Page Fault PID: %d - Segmento: %d - Pagina: %d",proceso->pid,segmento,pagina);

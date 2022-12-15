@@ -341,7 +341,7 @@ bool pertenece_proceso(TLB_t* entrada){
 }
 
 void limpiar_tlb(){
-	list_remove_and_destroy_all_by_condition(tlb,*pertenece_proceso,free);
+	list_remove_and_destroy_all_by_condition(tlb,*pertenece_proceso,free);//TODO hacerlo a mano
 
 }
 

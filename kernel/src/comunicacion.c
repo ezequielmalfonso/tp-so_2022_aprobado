@@ -49,8 +49,8 @@ static void procesar_conexion(void* void_args) {
 	       //( pcb,       pid,  instrucciones,  pc,  registro_cpu,  tabla_segmentos);
 
 
-	list_destroy_and_destroy_elements(mensaje->listaInstrucciones,free);
-	list_destroy_and_destroy_elements(mensaje->listaTamSegmentos,free);
+	list_destroy(mensaje->listaInstrucciones);
+	list_destroy(mensaje->listaTamSegmentos);
 	free(mensaje);
 
 	pthread_mutex_lock(&mx_cola_new);

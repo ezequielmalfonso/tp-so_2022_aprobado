@@ -55,8 +55,7 @@ t_instrucciones* recibir_instrucciones(int socket_fd)
 	t_instrucciones* mensaje = deserializar_instrucciones(buffer);
 
 	free(buffer->stream);
-	free(buffer);
-
+    free(buffer);
 
 	return mensaje;
 }
@@ -146,8 +145,6 @@ t_instrucciones* deserializar_instrucciones(t_buffer* buffer){
     	list_add(mensaje->listaTamSegmentos,aux);
     	c++;
     }
-
-	free(buffer);
 
 	return mensaje;
 }
