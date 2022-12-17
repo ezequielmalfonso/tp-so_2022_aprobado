@@ -109,7 +109,7 @@ op_code iniciar_ciclo_instruccion(PCB_t* pcb){
 
 		if(decode(instruccion_ejecutar)){
 			log_info(logger,"En CPU");
-			usleep(configuracion->RETARDO_INSTRUCCION);
+			usleep(configuracion->RETARDO_INSTRUCCION*1000);
 
 		}
 		estado = execute(instruccion_ejecutar,pcb->registro_cpu,pcb->pid);
